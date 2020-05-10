@@ -9,9 +9,8 @@ export const IdeaList = (props) => (
         <Datagrid>
             <TextField source="id" />
             <TextField source="title" />
-            <DateField source="published_at" />
-            <TextField source="average_note" />
-            <TextField source="views" />
+            <TextField source="summary" />
+            <DateField source="createdAt" />
             <EditButton basePath="/idea" />
         </Datagrid>
     </List>

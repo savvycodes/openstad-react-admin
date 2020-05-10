@@ -34,9 +34,14 @@ ReactDOM.render(
         order: {
           active: true
         },
-        settings: {
+        vote: {
           active: true
-        }
+        },
+        argument: {
+          active: true
+        },
+
+
       }}
     />
   </React.StrictMode>,

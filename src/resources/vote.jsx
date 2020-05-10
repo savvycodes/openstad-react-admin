@@ -9,9 +9,9 @@ export const VoteIcon = ListAltIcon;
 export const VoteList = (props) => (
     <List {...props}  title="Voteen">
         <Datagrid>
-            <TextField source="sku" />
-            <TextField source="name" />
-            <TextField source="regular_price" />
+            <TextField source="id" />
+            <TextField source="userId" />
+            <DateField source="createdAt" />
             <EditButton basePath="/Vote" />
         </Datagrid>
     </List>
@@ -34,9 +34,6 @@ export const VoteEdit = (props) => (
 );
 
 export const VoteCreate = (props) => {
-  console.log('props.options.imageApiUrl', props.options.imageApiUrl);
-
-
   return <Create title="Vote toevoegen" {...props}>
         <SimpleForm>
             <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl} />

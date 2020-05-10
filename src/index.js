@@ -29,10 +29,10 @@ ReactDOM.render(
           active: true
         },
         product: {
-          active: true
+          active: false
         },
         order: {
-          active: true
+          active: false
         },
         vote: {
           active: true
@@ -40,8 +40,6 @@ ReactDOM.render(
         argument: {
           active: true
         },
-
-
       }}
     />
   </React.StrictMode>,

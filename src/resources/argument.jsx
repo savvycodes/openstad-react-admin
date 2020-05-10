@@ -1,6 +1,6 @@
 // in posts.js
 import React from 'react';
-import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField } from 'react-admin';
+import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import FileUpload from '../fileUpload.jsx';
 
@@ -9,9 +9,10 @@ export const ArgumentIcon = ListAltIcon;
 export const ArgumentList = (props) => (
     <List {...props}  title="Argumenten">
         <Datagrid>
-            <TextField source="sku" />
-            <TextField source="name" />
-            <TextField source="regular_price" />
+            <TextField source="id" />
+            <TextField source="description" />
+            <FunctionField label="Author" render={record => `${record.user.firstName} ${record.user.lastName}`} />
+            <DateField source="createdAt" />
             <EditButton basePath="/Argument" />
         </Datagrid>
     </List>

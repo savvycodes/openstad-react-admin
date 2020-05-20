@@ -4,7 +4,7 @@ import { AppBar, UserMenu, MenuItemLink } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeDisplayAppBar } from './configuration/actions';
+import { changeDisplayAppBar } from '../configuration/actions';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 
@@ -39,10 +39,17 @@ const MyUserMenu = props => (
 );
 
 
-const MyAppBar = props => {
+const appBarStyles = {
+  backgroundColor: 'white',
+  color: 'rgb(63, 80, 182)',
+  'box-shadow': 'none',
+  padding: '3px 0'
+}
+
+const AdminAppBar = props => {
     const classes = useStyles();
     return (
-        <AppBar {...props} style={{backgroundColor: 'black', color: 'white'}} userMenu={<MyUserMenu />} >
+        <AppBar {...props} style={appBarStyles} userMenu={<MyUserMenu />} >
             <Typography
                 variant="h6"
                 color="inherit"
@@ -55,4 +62,4 @@ const MyAppBar = props => {
     );
 };
 
-export default MyAppBar;
+export default AdminAppBar;

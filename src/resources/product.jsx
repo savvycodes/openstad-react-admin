@@ -2,7 +2,7 @@
 import React from 'react';
 import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import FileUpload from '../fileUpload.jsx';
+import FileUpload from '../form-fields/FileUpload.jsx';
 
 export const ProductIcon = ListAltIcon;
 

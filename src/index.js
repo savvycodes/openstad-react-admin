@@ -4,7 +4,6 @@ import './index.css';
 import OpenstadReactAdmin from './App';
 import * as serviceWorker from './serviceWorker';
 
-
 ReactDOM.render(
   <React.StrictMode>
     <OpenstadReactAdmin
@@ -18,9 +17,10 @@ ReactDOM.render(
         url: '/image'
       }}
       restApi={{
-        url: 'http://localhost:8111/api/site/148'
+        url: '/api/site/149'
       }}
-      jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1ODEwLCJpYXQiOjE1ODY5OTMwMDAsImV4cCI6MTYwMjcxNzgwMH0.QpbmwbOm1qEcogshurgpwr4VlXDOJqo1Wqytex3AcGc"
+      jwt=""
+      siteKey="xxxxxxx"
       resources={{
         idea: {
           active: true

@@ -6,6 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
+//dummy demo for
 const data01 = [
   { day: '05-01', weather: 'sunny' },
   { day: '05-02', weather: 'sunny' },

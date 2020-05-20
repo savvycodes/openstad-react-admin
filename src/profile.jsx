@@ -2,8 +2,6 @@ import React from 'react';
 import { ImageInput, ImageField, List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
 import { FormGroup } from '@material-ui/core';
 
-
-
 const UserTitle = ({ record }) => {
     return <span>User {record ? `"${record.title}"` : ''}</span>;
 };
@@ -19,7 +17,7 @@ const UserEdit = (props) => (
             <ImageInput source="images" label="Related pictures" accept="image/*">
               <ImageField source="src" title="title" />
             </ImageInput>
-            
+
           </FormGroup>
           <FormGroup>
 
@@ -32,7 +30,5 @@ const UserEdit = (props) => (
         </SimpleForm>
     </Edit>
 );
-
-
 
 export const SettingsForm = UserEdit;

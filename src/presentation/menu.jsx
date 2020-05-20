@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import DefaultIcon from '@material-ui/icons/ViewList';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeDisplayAppBar } from './configuration/actions';
 
 const styles = {
     root: {}, // Style applied to the MenuItem from material-ui
@@ -17,7 +16,6 @@ const styles = {
 const Menu = ({ classes, resources, onMenuClick, logout, dense, open }) => {
   const translate = useTranslate();
   const userResource = resources.find(resource => resource.name === 'user');
-
     return <div>
         {resources.map(resource => {
             if (!resource.options.hideMenulink) {
@@ -48,8 +46,6 @@ const Menu = ({ classes, resources, onMenuClick, logout, dense, open }) => {
 
 
 const mapStateToProps = (state) => {
-  console.log('=>>> state', state);
-
   return {
     resources: getResources(state),
   }

@@ -1,18 +1,62 @@
 // in Ideas.js
 import React from 'react';
-import { List, Datagrid, Edit, Create, ReferenceInput, SelectInput,SimpleForm, ImageField, DateField, TextField, EditButton, TextInput, DateInput, ArrayField } from 'react-admin';
+import {
+  List,
+  Datagrid,
+  Edit,
+  Create,
+  Pagination,
+  ReferenceInput,
+  SelectInput,
+  SimpleForm,
+  ImageField,
+  DateField,
+  TextField,
+  EditButton,
+  TextInput,
+  DateInput,
+  ArrayField,
+  TabbedForm,
+  FunctionField,
+  FormTab,
+  ReferenceManyField
+} from 'react-admin';
+import { makeStyles } from '@material-ui/core/styles';
 import BookIcon from '@material-ui/icons/Book';
+import JsonInput from '../form-fields/JsonInput.jsx';
+
 export const IdeaIcon = BookIcon;
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        paddingTop: 40,
+    },
+    title: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: '1em',
+    },
+    form: {
+        [theme.breakpoints.up('xs')]: {
+            width: 400,
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '100vw',
+            marginTop: -30,
+        },
+    },
+    inlineField: {
+        display: 'inline-block',
+        width: '50%',
+    },
+}));
 
 export const IdeaList = (props) => (
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
-            <ArrayField source="extraData.images" label="Image">
-              <Datagrid>
-                <ImageField source="url"  label="" sort="false" />
-              </Datagrid>
-            </ArrayField>
+            <ImageField source="extraData.images[0]" label="Image" />
             <TextField source="title" />
             <TextField source="summary" />
             <DateField source="createdAt" />
@@ -27,15 +71,54 @@ const IdeaTitle = ({ record }) => {
 
 export const IdeaEdit = (props) => (
     <Edit title={<IdeaTitle />} {...props}>
-        <SimpleForm>
-            <TextInput disabled source="id" />
-            <ReferenceInput label="User" source="userId" reference="user">
-                <SelectInput optionText="email" />
-            </ReferenceInput>
-            <TextInput source="title" />
-            <TextInput source="summary" options={{ multiLine: true }} />
-            <TextInput multiline source="description" />
-        </SimpleForm>
+        <TabbedForm>
+            <FormTab label="Info">
+              <TextInput disabled source="id" />
+              <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
+                  <SelectInput optionText="email" />
+              </ReferenceInput>
+              <TextInput source="title" />
+              <TextInput source="summary" options={{ multiLine: true }} />
+              <TextInput multiline source="description" />
+            </FormTab>
+            <FormTab label="Extradata">
+              <TextInput disabled source="id" />
+              <JsonInput source="extraData" />
+            </FormTab>
+            <FormTab label="Comments">
+              <ReferenceManyField
+                   reference="argument"
+                   target="ideaId"
+                   addLabel={false}
+                   pagination={<Pagination />}
+                   fullWidth
+                >
+                   <Datagrid>
+                       <TextField source="id" />
+                       <TextField source="description" />
+                       <FunctionField label="Author" render={record => `${record.user.firstName} ${record.user.lastName}`} />
+                       <DateField source="createdAt" />
+                       <EditButton basePath="/Argument" />
+                   </Datagrid>
+               </ReferenceManyField>
+            </FormTab>
+            <FormTab label="Votes">
+              <ReferenceManyField
+                   reference="vote"
+                   target="ideaId"
+                   addLabel={false}
+                   pagination={<Pagination />}
+                   fullWidth
+                >
+                   <Datagrid>
+                     <TextField source="id" />
+                     <TextField source="userId" />
+                     <DateField source="createdAt" />
+                     <EditButton basePath="/Vote" />
+                   </Datagrid>
+               </ReferenceManyField>
+            </FormTab>
+        </TabbedForm>
     </Edit>
 );
 

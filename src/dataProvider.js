@@ -1,26 +1,30 @@
 import simpleRestProvider from './simpleRestProvider';
 import {fetchUtils} from 'react-admin';
 
-const createHttpClient = (jwt) => {
+const createHttpClient = (jwt, siteKey) => {
   return (url, options = {}) => {
       if (!options.headers) {
           options.headers = new Headers({ Accept: 'application/json' });
       }
-      // add your own headers here
-      options.headers.set("X-Authorization", `Bearer ${jwt}`);
+
+      // add JWT for authenticating with API
+      if (jwt) {
+        options.headers.set("X-Authorization", `Bearer ${jwt}`);
+      } else if (siteKey) {
+        options.headers.set("X-Authorization", `${siteKey}`);    
+      }
+
       return fetchUtils.fetchJson(url, options);
   }
 }
 
-const myDataProvider = (api, jwt) => {
-    const dataProvider = simpleRestProvider(api, createHttpClient(jwt));
+const myDataProvider = (api, jwt, siteKey) => {
+    return simpleRestProvider(api, createHttpClient(jwt, siteKey));
 
+/*
     return {
       ...dataProvider,
       update: (resource, params) => {
-        console.log('params', params);
-        console.log('params.data', params.data);
-
           if (!params.data.images) {
               // fallback to the default implementation
               return dataProvider.update(resource, params);
@@ -30,12 +34,7 @@ const myDataProvider = (api, jwt) => {
             params.data.images = [params.data.images];
           }
 
-          console.log('params.data.images', params.data.images);
-
-          /**
-           * For posts update only, convert uploaded image in base 64 and attach it to
-           * the `picture` sent property, with `src` and `title` attributes.
-           */
+          //
           // Freshly dropped images are File objects and must be converted to base64 strings
           const newimages = params.data.images.filter(
               p => p.rawFile instanceof File
@@ -65,14 +64,15 @@ const myDataProvider = (api, jwt) => {
                   })
               );
       },
-  }
+    }
+    */
 };
 
 /**
  * Convert a `File` object returned by the upload input into a base 64 string.
  * That's not the most optimized way to store images in production, but it's
  * enough to illustrate the idea of data provider decoration.
- */
+
 const convertFileToBase64 = file =>
     new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -81,5 +81,5 @@ const convertFileToBase64 = file =>
 
         reader.readAsDataURL(file.rawFile);
     });
-
+ */
 export default myDataProvider;

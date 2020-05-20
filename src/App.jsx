@@ -1,5 +1,4 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.less';
 import { Admin, Resource, fetchUtils} from 'react-admin';
 import { Route } from 'react-router-dom';
@@ -13,7 +12,11 @@ import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
 
 import { SettingsForm } from './profile.jsx';
-import { MyLayout } from './layout.jsx';
+
+/* presentation elements */
+import { MyLayout } from './presentation/layout.jsx';
+import logo from './presentation/logo.svg';
+
 import Dashboard from './Dashboard.jsx';
 import dataProvider from './dataProvider';
 import { connect } from 'react-redux';
@@ -39,7 +42,7 @@ function OpenstadReactAdmin(props) {
     <Admin
         dashboard={Dashboard}
         theme={theme}
-        dataProvider={dataProvider(props.restApi.url, props.jwt)}
+        dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey)}
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
     >

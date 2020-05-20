@@ -2,7 +2,6 @@
 import React from 'react';
 import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import FileUpload from '../fileUpload.jsx';
 
 export const ArgumentIcon = ListAltIcon;
 
@@ -25,7 +24,6 @@ const ArgumentTitle = ({ record }) => {
 export const ArgumentEdit = (props) => (
     <Edit title={<ArgumentTitle />} {...props}>
         <SimpleForm>
-        <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl} />
           <TextInput source="sku" />
           <TextInput source="name" />
           <TextInput multiline source="description" />
@@ -40,7 +38,6 @@ export const ArgumentCreate = (props) => {
 
   return <Create title="Argument toevoegen" {...props}>
         <SimpleForm>
-            <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl} />
             <TextInput source="sku" />
             <TextInput source="name" />
             <TextInput multiline source="description" />

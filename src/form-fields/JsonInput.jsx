@@ -15,8 +15,10 @@ class JsonInput extends Component {
     console.log('JSONInput',JSONInput)
 
     return (
-      <Field name="extraData">
+      <Field name={this.props.source}>
       {(fieldProps) => {
+        console.log('fieldProps',fieldProps)
+
         return (
           <JSONInput
             id          = 'ideaExtraData'
@@ -25,7 +27,9 @@ class JsonInput extends Component {
             height      = '550px'
             width       = '100%'
             onChange={(value)=>{
-             fieldProps.input.onChange( value.jsObject );
+              if (value.jsObject) {
+                fieldProps.input.onChange( value.jsObject );
+              }
             }}
         />
       )}}

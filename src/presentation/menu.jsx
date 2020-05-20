@@ -16,31 +16,44 @@ const styles = {
 const Menu = ({ classes, resources, onMenuClick, logout, dense, open }) => {
   const translate = useTranslate();
   const userResource = resources.find(resource => resource.name === 'user');
-    return <div>
-        {resources.map(resource => {
-            if (!resource.options.hideMenulink) {
-              return <MenuItemLink
-                to={`/${resource.name}`}
-                primaryText={resource.options.menuTitle ? resource.options.menuTitle : resource.name}
-                leftIcon={
-                    resource.icon ? <resource.icon /> : <DefaultIcon />
-                }
-                onClick={onMenuClick}
-                sidebarIsOpen={open}
-                dense={dense}
-            />
-          }
-        })}
-        {userResource ?
-        <MenuItemLink
-          classes={classes}
-          to={userResource.options.userPath}
-          primaryText="Mijn gegevens"
-          leftIcon={<DefaultIcon />}
-          onClick={onMenuClick}
-        /> : <span />}
-    </div>
+  const siteResource = resources.find(resource => resource.name === 'site');
 
+  return (
+    <div>
+      {siteResource ?
+      <MenuItemLink
+        classes={classes}
+        to={'/site/' + siteResource.options.siteId}
+        primaryText="Site settings"
+        leftIcon={<DefaultIcon />}
+        onClick={onMenuClick}
+      />: <span />}
+
+      {resources.map(resource => {
+        if (!resource.options.hideMenulink) {
+          return <MenuItemLink
+              to={`/${resource.name}`}
+              primaryText={resource.options.menuTitle ? resource.options.menuTitle : resource.name}
+              leftIcon={
+                  resource.icon ? <resource.icon /> : <DefaultIcon />
+              }
+              onClick={onMenuClick}
+              sidebarIsOpen={open}
+              dense={dense}
+            />
+        }
+      })}
+
+      {userResource ?
+      <MenuItemLink
+        classes={classes}
+        to={userResource.options.userPath}
+        primaryText="Mijn gegevens"
+        leftIcon={<DefaultIcon />}
+        onClick={onMenuClick}
+      /> : <span />}
+    </div>
+  );
 };
 
 

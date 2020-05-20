@@ -8,6 +8,9 @@ ReactDOM.render(
   <React.StrictMode>
     <OpenstadReactAdmin
       displayAppBar={true}
+      site={{
+        id: 149
+      }}
       user={{
         id: 26
       }}
@@ -38,6 +41,9 @@ ReactDOM.render(
           active: true
         },
         argument: {
+          active: true
+        },
+        site: {
           active: true
         },
       }}

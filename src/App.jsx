@@ -10,6 +10,9 @@ import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea.jsx';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
 import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
+import { SiteEdit } from './resources/site.jsx';
+
+
 
 import { SettingsForm } from './profile.jsx';
 
@@ -28,7 +31,6 @@ import theme from './theme';
 
 /*
 customRoutes={[
-    <Route exact path={userPath} render={() => <SettingsForm />} />,
 ]}
  */
 
@@ -45,10 +47,12 @@ function OpenstadReactAdmin(props) {
         dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey)}
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
+
     >
+      {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={ProductIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
-      {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={IdeaIcon} options={{menuTitle: 'Plannen'}} />  : <div />}
+      {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={IdeaIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
       {resources.article && resources.article.active ?  <Resource name="article" list={ArticleList} edit={ArticleEdit} create={ArticleCreate} icon={ArticleIcon} />  : <div />}
       {resources.argument && resources.argument.active ? <Resource name="argument" list={ArgumentList} edit={ArgumentEdit} create={ArgumentCreate} icon={ArgumentIcon} options={{menuTitle: 'Argumenten'}} /> : <div />}
       {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} edit={VoteEdit} create={VoteCreate} icon={VoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}

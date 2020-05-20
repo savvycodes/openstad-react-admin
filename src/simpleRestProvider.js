@@ -32,35 +32,51 @@ import { fetchUtils } from 'ra-core';
  *
  * export default App;
  */
+
+const formatResourceUrl = (resource,) => {
+
+}
+
 export default (apiUrl, httpClient = fetchUtils.fetchJson) => ({
     getList: (resource, params) => {
+
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
-            sort: JSON.stringify([field, order]),
-            page: (page -1),
-            pageSize: perPage,
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify(params.filter),
+          sort: JSON.stringify([field, order]),
+          page: (page -1),
+          pageSize: perPage,
+          range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+          filter: JSON.stringify(params.filter),
         };
-
 
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
         return httpClient(url).then(({ headers, json }) => {
 
-/*            if (!headers.has('content-range')) {
-                throw new Error('The Content-Range header is WADDUP missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?');
-            }*/
-            return {
-                data: json.records,
-                total: json.metadata.totalCount
-            };
+          return {
+            data: json.records,
+            total: json.metadata.totalCount
+          };
         });
     },
-    getOne: (resource, params) => httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-        data: json,
-    })),
+      getOne: (resource, params) => {
+        let url;
+
+        console.log('===??? resource', resource);
+        console.log('===??? resource', resource);
+
+        // In case of current request make a call to the root that's where the siteData is found
+        // All other resources are children of the site
+        if (resource === 'site') {
+          url = apiUrl;
+        } else {
+          url = `${apiUrl}/${resource}/${params.id}`;
+        }
+
+        return httpClient(url)
+          .then(({ json }) => ({ data: json }));
+    },
     getMany: (resource, params) => {
         const query = {
             filter: JSON.stringify({ id: params.ids }),
@@ -94,10 +110,21 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => ({
             };
         });
     },
-    update: (resource, params) => httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    update: (resource, params) => {
+      let url;
+      // In case of current request make a call to the root that's where the siteData is found
+      // All other resources are children of the site
+      if (resource === 'site') {
+        url = apiUrl;
+      } else {
+        url = `${apiUrl}/${resource}/${params.id}`;
+      }
+
+      return httpClient(url, {
         method: 'PUT',
         body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+      }).then(({ json }) => ({ data: json }))
+    },
     // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
     updateMany: (resource, params) => Promise.all(params.ids.map(id => httpClient(`${apiUrl}/${resource}/${id}`, {
         method: 'PUT',

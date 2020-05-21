@@ -7,7 +7,7 @@ import FileUpload from '../form-fields/FileUpload.jsx';
 export const TagIcon = ListAltIcon;
 
 export const TagList = (props) => (
-    <List {...props}  title="Tagen">
+    <List {...props} title="Tags">
         <Datagrid>
             <TextField source="name" />
             <EditButton basePath="/tag" />

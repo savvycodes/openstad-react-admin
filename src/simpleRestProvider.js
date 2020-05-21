@@ -128,16 +128,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => ({
             filter: JSON.stringify(Object.assign(Object.assign({}, params.filter), { [params.target]: params.id })),
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
+        console.log('urlurlurl', url)
         return httpClient(url).then(({ headers, json }) => {
 /*            if (!headers.has('content-range')) {
                 throw new Error('The Content-Range header WADDDUP is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?');
             }*/
+
             return {
                 data: json.records,
-                total: parseInt(headers
-                    .get('content-range')
-                    .split('/')
-                    .pop(), 10),
+                total: json.metadata ? json.metadata.totalCount : 0
             };
         });
     },

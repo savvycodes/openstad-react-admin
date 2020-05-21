@@ -40,6 +40,9 @@ ReactDOM.render(
         vote: {
           active: true
         },
+        article: {
+          active: false
+        },
         argument: {
           active: true
         },
@@ -47,6 +50,9 @@ ReactDOM.render(
           active: true
         },
         newsletterSignup: {
+          active: true
+        },
+        tag: {
           active: true
         },
       }}

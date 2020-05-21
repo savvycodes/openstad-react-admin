@@ -19,11 +19,15 @@ import {
   TabbedForm,
   FunctionField,
   FormTab,
-  ReferenceManyField
+  ReferenceManyField,
+  ReferenceArrayInput,
+  SelectArrayInput
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import BookIcon from '@material-ui/icons/Book';
 import JsonInput from '../form-fields/JsonInput.jsx';
+import FileUpload from '../form-fields/FileUpload.jsx';
+
 
 export const IdeaIcon = BookIcon;
 
@@ -80,6 +84,12 @@ export const IdeaEdit = (props) => (
               <TextInput source="title"  variant="outlined" fullWidth />
               <TextInput source="summary" options={{ multiLine: true }}  variant="outlined" fullWidth />
               <TextInput multiline source="description"  variant="outlined" fullWidth />
+              <ReferenceArrayInput label="tags" source="tags" reference="tag" variant="outlined">
+                <SelectArrayInput optionText="name" />
+              </ReferenceArrayInput>
+
+              <h3>Image (TODO)</h3>
+              <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl} />
             </FormTab>
             <FormTab label="Extradata">
               <TextInput disabled source="id" />

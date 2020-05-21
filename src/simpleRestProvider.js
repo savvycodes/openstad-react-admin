@@ -71,20 +71,51 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => ({
         if (resource === 'site') {
           url = apiUrl;
         } else {
-          url = `${apiUrl}/${resource}/${params.id}`;
+          // add include tags always
+          url = `${apiUrl}/${resource}/${params.id}?includeTags=1`;
         }
 
         return httpClient(url)
-          .then(({ json }) => ({ data: json }));
+          .then(({ json }) => {
+            console.log('json', json);
+
+            // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
+            //here only solution so editing tags works
+            json = {
+              ...json,
+              tags: json.tags ? json.tags.map(tag => tag.id) : [],
+            }
+
+            console.log('json single', json);
+
+
+            return { data: json }
+          });
     },
     getMany: (resource, params) => {
+      const { page, perPage } = params.pagination ? params.pagination : {};
+
         const query = {
             filter: JSON.stringify({ id: params.ids }),
+            page: page || 0,
+            pageSize: perPage|| 100,
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
         return httpClient(url).then(({ json }) => {
           console.log('json', json);
+
+          // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
+          //here only solution so editing tags works
+          json.record = json.records ? json.records.map((record) => {
+            return {
+              tags: record.tags ? record.tags.map(tag => tag.id) : [],
+              ...record
+            }
+          }) : [];
+
+          console.log('json.records', json.records)
+
           return { data: json.records }
         });
     },

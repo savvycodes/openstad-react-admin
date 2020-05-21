@@ -20,9 +20,10 @@ const data01 = [
 ];
 
 export default () => (
-    <Card>
-        <CardHeader title="Welcome to the administration" />
+    <Card style={{marginTop:'28px'}}>
+        <CardHeader title="Welcome to the administration board" />
         <CardContent>
+          {/*
           <div className="line-chart-wrapper">
             <LineChart
               width={400} height={400} data={data01}
@@ -33,6 +34,7 @@ export default () => (
               <Line type="stepAfter" dataKey="weather" stroke="#ff7300" />
             </LineChart>
           </div>
+          */}
         </CardContent>
     </Card>
 );

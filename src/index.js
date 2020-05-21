@@ -46,6 +46,9 @@ ReactDOM.render(
         site: {
           active: true
         },
+        newsletterSignup: {
+          active: true
+        },
       }}
     />
   </React.StrictMode>,

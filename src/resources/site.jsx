@@ -86,27 +86,27 @@ export const SiteEdit = (props) => {
 
 
     return (<Edit title="Edit site" {...props}>
-        <TabbedForm>
-            <FormTab label="Info">
+        <TabbedForm redirect="edit">
+            <FormTab label="Info" >
               <TextInput disabled source="id" fullWidth variant="outlined" />
               <TextInput source="title" fullWidth variant="outlined" />
               <TextInput source="domain" fullWidth variant="outlined" />
             </FormTab>
             <FormTab label="Ideas">
-              <BooleanInput source="config.idea.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />
-              <NumberInput source="config.idea.minimumYesVotes" label="Minimum votes needed for idea?" fullWidth initialValue="100"variant="outlined"  />
-              <NumberInput source="config.idea.titleMinLength" label="Minimum length of title" fullWidth initialValue="10" variant="outlined" />
-              <NumberInput source="config.idea.titleMaxLength" label="Maximum length of title" fullWidth initialValue="55" variant="outlined"  />
-              <NumberInput source="config.idea.summaryMinLength" label="Minimum length of summary" fullWidth initialValue="20" variant="outlined"  />
-              <NumberInput source="config.idea.summaryMaxLength" label="Maximum length of summary" fullWidth initialValue="140" variant="outlined"  />
-              <NumberInput source="config.idea.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="140" variant="outlined"  />
-              <NumberInput source="config.idea.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
+              <BooleanInput source="config.ideas.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />
+              <NumberInput source="config.ideas.minimumYesVotes" label="Minimum votes needed for idea?" fullWidth initialValue="100"variant="outlined"  />
+              <NumberInput source="config.ideas.titleMinLength" label="Minimum length of title" fullWidth initialValue="10" variant="outlined" />
+              <NumberInput source="config.ideas.titleMaxLength" label="Maximum length of title" fullWidth initialValue="55" variant="outlined"  />
+              <NumberInput source="config.ideas.summaryMinLength" label="Minimum length of summary" fullWidth initialValue="20" variant="outlined"  />
+              <NumberInput source="config.ideas.summaryMaxLength" label="Maximum length of summary" fullWidth initialValue="140" variant="outlined"  />
+              <NumberInput source="config.ideas.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="140" variant="outlined"  />
+              <NumberInput source="config.ideas.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
             </FormTab>
             <FormTab label="Voting">
-              <BooleanInput source="config.vote.isViewable" label="Is the vote count publicly available?" fullWidth variant="outlined" />
-              <BooleanInput source="config.vote.isActive" label="Is voting active?" fullWidth variant="outlined"  />
+              <BooleanInput source="config.votes.isViewable" label="Is the vote count publicly available?" fullWidth variant="outlined" />
+              <BooleanInput source="config.votes.isActive" label="Is voting active?" fullWidth variant="outlined"  />
               <SelectInput
-                source="config.vote.withExisting"
+                source="config.votes.withExisting"
                 label="Should voting again replace previous vote? Or give an error?"
                 fullWidth
                 variant="outlined"
@@ -116,7 +116,7 @@ export const SiteEdit = (props) => {
                 ]}
               />
               <SelectInput
-                source="config.vote.voteType"
+                source="config.votes.voteType"
                 label="What type of voting is available?"
                 fullWidth
                 variant="outlined"
@@ -135,20 +135,18 @@ export const SiteEdit = (props) => {
                   }
                 ]}
               />
-              <NumberInput source="config.vote.maxIdeas" label='What is max amount of ideas users can vote for?' fullWidth variant="outlined" />
-              <NumberInput source="config.vote.minIdeas" label='What is min amount of ideas users can vote for?' fullWidth variant="outlined" />
-              <NumberInput source="config.vote.minBudget" label='What is min budget users can vote for?' fullWidth variant="outlined" />
-              <NumberInput source="config.vote.maxBudget" label='What is max budget users can vote for?' fullWidth variant="outlined" />
+              <NumberInput source="config.votes.maxIdeas" label='What is max amount of ideas users can vote for?' fullWidth variant="outlined" />
+              <NumberInput source="config.votes.minIdeas" label='What is min amount of ideas users can vote for?' fullWidth variant="outlined" />
+              <NumberInput source="config.votes.minBudget" label='What is min budget users can vote for?' fullWidth variant="outlined" />
+              <NumberInput source="config.votes.maxBudget" label='What is max budget users can vote for?' fullWidth variant="outlined" />
             </FormTab>
-            <FormTab label="Password Protection">
+            <FormTab label="Notifications">
               <h4>Where to send adminstrator notifications?</h4>
               <TextInput label="Email To" source="config.notifications.to" variant="outlined" />
               <TextInput label="Email Address" source="config.notifications.from" variant="outlined" />
             </FormTab>
-            <FormTab label="Notifications">
-              <h4>Where to send adminstrator notifications?</h4>
+            <FormTab label="Password Protection">
               <BooleanInput source="config.basicAuth.active" label="Is active?" fullWidth variant="outlined" />
-
               <TextInput label="Email To" source="config.basicAuth.user" variant="outlined" />
               <TextInput label="Email Address" source="config.basicAuth.password" variant="outlined"  />
             </FormTab>

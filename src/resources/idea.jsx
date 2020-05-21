@@ -75,11 +75,11 @@ export const IdeaEdit = (props) => (
             <FormTab label="Info">
               <TextInput disabled source="id" />
               <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
-                  <SelectInput optionText="email" />
+                <SelectInput optionText="email" />
               </ReferenceInput>
-              <TextInput source="title" />
-              <TextInput source="summary" options={{ multiLine: true }} />
-              <TextInput multiline source="description" />
+              <TextInput source="title"  variant="outlined" fullWidth />
+              <TextInput source="summary" options={{ multiLine: true }}  variant="outlined" fullWidth />
+              <TextInput multiline source="description"  variant="outlined" fullWidth />
             </FormTab>
             <FormTab label="Extradata">
               <TextInput disabled source="id" />
@@ -87,35 +87,35 @@ export const IdeaEdit = (props) => (
             </FormTab>
             <FormTab label="Comments">
               <ReferenceManyField
-                   reference="argument"
-                   target="ideaId"
-                   addLabel={false}
-                   pagination={<Pagination />}
-                   fullWidth
+                 reference="argument"
+                 target="ideaId"
+                 addLabel={false}
+                 pagination={<Pagination />}
+                 fullWidth
                 >
-                   <Datagrid>
-                       <TextField source="id" />
-                       <TextField source="description" />
-                       <FunctionField label="Author" render={record => `${record.user.firstName} ${record.user.lastName}`} />
-                       <DateField source="createdAt" />
-                       <EditButton basePath="/Argument" />
-                   </Datagrid>
+                  <Datagrid>
+                     <TextField source="id" />
+                     <TextField source="description" />
+                     <FunctionField label="Author" render={record => `${record.user.firstName} ${record.user.lastName}`} />
+                     <DateField source="createdAt" />
+                     <EditButton basePath="/Argument" />
+                  </Datagrid>
                </ReferenceManyField>
             </FormTab>
             <FormTab label="Votes">
               <ReferenceManyField
-                   reference="vote"
-                   target="ideaId"
-                   addLabel={false}
-                   pagination={<Pagination />}
-                   fullWidth
-                >
-                   <Datagrid>
-                     <TextField source="id" />
-                     <TextField source="userId" />
-                     <DateField source="createdAt" />
-                     <EditButton basePath="/Vote" />
-                   </Datagrid>
+                 reference="vote"
+                 target="ideaId"
+                 addLabel={false}
+                 pagination={<Pagination />}
+                 fullWidth
+              >
+                 <Datagrid>
+                   <TextField source="id" />
+                   <TextField source="userId" />
+                   <DateField source="createdAt" />
+                   <EditButton basePath="/Vote" />
+                 </Datagrid>
                </ReferenceManyField>
             </FormTab>
         </TabbedForm>

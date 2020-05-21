@@ -6,8 +6,6 @@ import PersonIcon from '@material-ui/icons/Person';
 
 export const UserIcon = PersonIcon;
 
-
-
 export const UserList = (props) => (
     <List {...props}>
         <Datagrid>
@@ -26,13 +24,13 @@ const UserTitle = ({ record }) => {
 };
 
 export const UserEdit = (props) => (
-    <Edit title={<UserTitle />} {...props}>
-        <SimpleForm>
-            <TextInput disabled source="id" />
-            <TextInput disabled source="role" />
-            <TextInput source="firstName" />
-            <TextInput source="lastName" />
-            <TextInput multiline source="body" />
+    <Edit title={<UserTitle />}  {...props}>
+        <SimpleForm redirect="edit" >
+            <TextInput disabled source="id" variant="outlined" fullWidth />
+            <TextInput disabled source="role" variant="outlined" fullWidth  />
+            <TextInput source="firstName" variant="outlined" fullWidth  />
+            <TextInput source="lastName" variant="outlined" fullWidth  />
+            <TextInput source="email" variant="outlined" fullWidth  />
         </SimpleForm>
     </Edit>
 );
@@ -40,11 +38,10 @@ export const UserEdit = (props) => (
 export const UserCreate = (props) => (
     <Create title="Create a User" {...props}>
         <SimpleForm>
-            <TextInput source="title" />
-            <TextInput source="teaser" options={{ multiLine: true }} />
-            <TextInput multiline source="body" />
-            <TextInput label="Publication date" source="published_at" />
-            <TextInput source="average_note" />
+            <TextInput source="title" variant="outlined" fullWidth  />
+            <TextInput source="teaser" options={{ multiLine: true }}  variant="outlined" fullWidth />
+            <TextInput source="teaser" options={{ multiLine: true }}  variant="outlined" fullWidth />
+
         </SimpleForm>
     </Create>
 );

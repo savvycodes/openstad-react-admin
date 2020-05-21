@@ -11,7 +11,7 @@ import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resource
 import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
 import { SiteEdit } from './resources/site.jsx';
-
+import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
 
 
 import { SettingsForm } from './profile.jsx';
@@ -57,6 +57,8 @@ function OpenstadReactAdmin(props) {
       {resources.argument && resources.argument.active ? <Resource name="argument" list={ArgumentList} edit={ArgumentEdit} create={ArgumentCreate} icon={ArgumentIcon} options={{menuTitle: 'Argumenten'}} /> : <div />}
       {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} edit={VoteEdit} create={VoteCreate} icon={VoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
       {resources.user && resources.user.active ? <Resource name="user" list={UserList} edit={UserEdit} create={UserCreate} icon={UserIcon} options={{menuTitle: 'Gebruikers',userPath: userPath}} /> : <div />}
+      {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={NewsletterSignupIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
+
     </Admin>
   );
 }

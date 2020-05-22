@@ -20,8 +20,6 @@ import { SettingsForm } from './profile.jsx';
 
 /* presentation elements */
 import { MyLayout } from './presentation/layout.jsx';
-import logo from './presentation/logo.svg';
-
 import Dashboard from './Dashboard.jsx';
 import dataProvider from './dataProvider';
 import { connect } from 'react-redux';
@@ -36,7 +34,7 @@ customRoutes={[
 ]}
  */
 
-function OpenstadReactAdmin(props) {
+export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
   const user = props.user;
   const userPath = "/user/" + user.id;
@@ -49,7 +47,6 @@ function OpenstadReactAdmin(props) {
         dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey)}
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
-
     >
       {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={ProductIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
@@ -61,9 +58,6 @@ function OpenstadReactAdmin(props) {
       {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} edit={VoteEdit} create={VoteCreate} icon={VoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
       {resources.user && resources.user.active ? <Resource name="user" list={UserList} edit={UserEdit} create={UserCreate} icon={UserIcon} options={{menuTitle: 'Gebruikers',userPath: userPath}} /> : <div />}
       {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={NewsletterSignupIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
-
     </Admin>
   );
 }
-
-export default OpenstadReactAdmin;

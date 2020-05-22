@@ -5,13 +5,13 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
 
 	devtool: 'eval-source-map',
-	// mode: 'production',
+// mode: 'production',
 	mode: 'development',
 
 	entry: './src/index.jsx',
 
 	output: {
-		path: __dirname + '/../frontend/lib/modules/admin-editor-widgets/public/', //
+		path: __dirname + '/../../openstad-landing/lib/modules/admin-widgets/public/', //
 	//	path: __dirname + '/dist',
 		filename: 'js/index.js',
 	//	filename: 'js/openstad-component.js',

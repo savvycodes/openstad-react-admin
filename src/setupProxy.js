@@ -1,5 +1,5 @@
 /**
- * These proxy's are set up for dev
+ * These proxy's are set up for dev to prevent issues
  * @type {[type]}
  */
 
@@ -33,12 +33,12 @@ module.exports = function(app) {
   app.use(
     '/images',
     createProxyMiddleware({
-      target: 'https://image-server2.openstadsdeel.nl',
+      target: 'http://localhost:3333',
       changeOrigin: true,
       onProxyReq : (proxyReq, req, res) => {
 
          // add custom header to request
-         proxyReq.setHeader('Authorization', `Bearer MHhfb5U0m8vquAR81p`);
+         proxyReq.setHeader('Authorization', `Bearer 27834y23874`);
       }
     })
   );

@@ -44,7 +44,7 @@ export const OpenstadReactAdmin = (props) => {
     <Admin
         dashboard={Dashboard}
         theme={theme}
-        dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey)}
+        dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey, props.csrf)}
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
     >

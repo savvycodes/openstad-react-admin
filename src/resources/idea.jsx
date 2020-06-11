@@ -31,6 +31,7 @@ import { ImportButton } from "react-admin-import-csv";
 import { CreateButton, ExportButton } from "ra-ui-materialui";
 import { downloadCSV } from 'react-admin';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min';
+import { isObject } from '../utils/isObject';
 
 
 export const IdeaIcon = BookIcon;
@@ -67,12 +68,18 @@ const exporter = ideas => {
   //   return ideaForExport;
   // });
   console.log(ideas);
-  const csv = convertToCSV({
-    data: {},
-    // select and order fields in the export
-    fields: ['id', 'title', 'author_name', 'body']
-  });
-  downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
+  if(ideas && ideas.length > 0) {
+    const fields = ideas[0];
+
+    if(isObject(fields)) {
+      const csv = convertToCSV({
+        data: fields,
+        fields: Object.getOwnPropertyNames(fields),
+      });
+
+      downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
+    }
+  }
 };
 
 export const ListActions = props => {

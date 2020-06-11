@@ -62,16 +62,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const exporter = ideas => {
-  const ideasForExport = ideas.map(idea => {
-    let ideaExport = {};
-    // ideaExport.author_name = idea.author.name;
-
-    return ideaExport;
-  });
+  // const ideasForExport = ideas.map(idea => {
+  //   let ideaExport = {};
+  //   // ideaExport.author_name = idea.author.name;
+  //
+  //   return ideaExport;
+  // });
 
   if (ideas.length > 0) {
     const csv = convertToCSV({
-      data: ideasForExport,
+      data: ideas,
       fields: Object.getOwnPropertyNames(ideas[0]),
     });
 

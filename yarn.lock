@@ -9079,6 +9079,11 @@ pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
 
+papaparse@4.x:
+  version "4.6.3"
+  resolved "http://178.62.216.191:4873/papaparse/-/papaparse-4.6.3.tgz#742e5eaaa97fa6c7e1358d2934d8f18f44aee781"
+  integrity sha512-LRq7BrHC2kHPBYSD50aKuw/B/dGcg29omyJbKWY3KsYUZU69RKwaBHu13jGmCYBtOc4odsLCrFyk6imfyNubJQ==
+
 parallel-transform@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/parallel-transform/-/parallel-transform-1.2.0.tgz#9049ca37d6cb2182c3b1d2c720be94d14a5814fc"
@@ -10464,6 +10469,11 @@ ra-language-english@^3.4.1:
   dependencies:
     ra-core "^3.4.1"
 
+ra-language-spanish@1.x:
+  version "1.0.0"
+  resolved "http://178.62.216.191:4873/ra-language-spanish/-/ra-language-spanish-1.0.0.tgz#7b0575d07a5434bea219b7f3c1e7667e0c3b8dff"
+  integrity sha512-hdsW0DtE9foDVMkct3kyLdm8sKgwFFKeqBJ9bxOz3T7qtPAXljxOIgSmvSEjx3bKS0xfUkHX8kt3wvB+Q7fyIg==
+
 ra-ui-materialui@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-3.4.1.tgz#72a08cfc3fade7bc244438ae96a31c33fb0b3fa0"
@@ -10489,6 +10499,11 @@ raf@^3.4.0, raf@^3.4.1:
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
   dependencies:
     performance-now "^2.1.0"
+
+ramda@^0.27.0:
+  version "0.27.0"
+  resolved "http://178.62.216.191:4873/ramda/-/ramda-0.27.0.tgz#915dc29865c0800bf3f69b8fd6c279898b59de43"
+  integrity sha512-pVzZdDpWwWqEVVLshWUHjNwuVP7SfcmPraYuqocJp1yo2U1R7P+5QAfDhdItkuoGqIBnBYrtPp7rEPqDn9HlZA==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
@@ -10519,6 +10534,15 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-admin-import-csv@^0.2.16:
+  version "0.2.16"
+  resolved "http://178.62.216.191:4873/react-admin-import-csv/-/react-admin-import-csv-0.2.16.tgz#58223b5acebccc1e2b897c81b885fa54f27185d5"
+  integrity sha512-25+6bfnLJ/1An2LFkZvBYXYvbFtktpWDEofqnQl0as1ARnWqkCE80m5IgYKrCynBNN93Phi8HVUQ9MEQxSVKDA==
+  dependencies:
+    papaparse "4.x"
+    ra-language-spanish "1.x"
+    ramda "^0.27.0"
 
 react-admin@^3.4.1:
   version "3.4.1"

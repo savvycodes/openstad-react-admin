@@ -67,7 +67,6 @@ const exporter = ideas => {
   //   idea.author_name = idea.author.name;
   //   return ideaForExport;
   // });
-  console.log(ideas);
   if(ideas && ideas.length > 0) {
     const fields = ideas[0];
 

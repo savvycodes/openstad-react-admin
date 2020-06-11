@@ -20,7 +20,8 @@ ReactDOM.render(
         url: '/image'
       }}
       restApi={{
-        url: '/api/site/149'
+             url: 'http://localhost:4000/api/site/1',
+        // url: '/api/site/149'
       }}
       jwt=""
       siteKey="xxxxxxx"

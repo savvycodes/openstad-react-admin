@@ -42,7 +42,7 @@ const MyUserMenu = props => (
 const appBarStyles = {
   backgroundColor: 'white',
   color: 'rgb(63, 80, 182)',
-  'box-shadow': 'none',
+  boxShadow: 'none',
   padding: '3px 0'
 }
 

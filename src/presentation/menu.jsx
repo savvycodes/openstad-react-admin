@@ -29,9 +29,10 @@ const Menu = ({ classes, resources, onMenuClick, logout, dense, open }) => {
         onClick={onMenuClick}
       />: <span />}
 
-      {resources.map(resource => {
+      {resources.map((resource, index) => {
         if (!resource.options.hideMenulink) {
           return <MenuItemLink
+              key={index}
               to={`/${resource.name}`}
               primaryText={resource.options.menuTitle ? resource.options.menuTitle : resource.name}
               leftIcon={

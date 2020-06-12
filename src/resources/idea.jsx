@@ -93,7 +93,7 @@ export const ListActions = props => {
 
   return (
     <TopToolbar className={className}>
-      <CreateButton basePath={basePath}/>
+      <CreateButton basePath={basePath}  />
       <ExportButton
         disabled={total === 0}
         resource={'idea'}
@@ -188,9 +188,9 @@ export const IdeaCreate = (props) => (
     <SimpleForm>
       <TextInput source="title"/>
       <TextInput source="teaser" options={{ multiLine: true }}/>
-      <TextInput multiline source="body"/>
-      <TextInput label="Publication date" source="published_at"/>
-      <TextInput source="average_note"/>
+      <TextInput multiline source="description"/>
+      {/*<TextInput label="Publication date" source="published_at"/>*/}
+      {/*<TextInput source="average_note"/>*/}
     </SimpleForm>
   </Create>
 );

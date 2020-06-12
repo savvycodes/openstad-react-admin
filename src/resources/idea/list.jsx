@@ -16,7 +16,7 @@ const exporter = ideas => {
   if (ideas.length > 0) {
     const csv = convertToCSV({
       data: ideas,
-      fields: ['title', 'summary'],
+      fields: ['title', 'summary', 'description'],
     });
 
     downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file

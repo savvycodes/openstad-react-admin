@@ -12,6 +12,7 @@ import {
   DialogTitle,
   CircularProgress,
 } from '@material-ui/core';
+import { ideaSchema } from '../../resources/idea/schema';
 
 export const ImportButton = (props) => {
   const { resource, parseConfig, logging, preCommitCallback } = props;
@@ -40,6 +41,7 @@ export const ImportButton = (props) => {
   const [importing, setImporting] = React.useState(false);
   const [fileName, setFileName] = React.useState('');
   const [values, setValues] = React.useState([]);
+  const [csvValidationErrors, setCsvValidationErrors] = React.useState([]);
   const [errorTxt, setErrorTxt] = React.useState('');
   const refresh = useRefresh();
 
@@ -52,6 +54,7 @@ export const ImportButton = (props) => {
     setImporting(false);
     setFileName('');
     setValues([]);
+    setCsvValidationErrors([]);
   };
 
   const handleComplete = (error = false) => {
@@ -87,7 +90,7 @@ export const ImportButton = (props) => {
       }
       if (preCommitCallback) setValues(preCommitCallback('overwrite', values));
       Promise.all(
-        values.map((value) => dataProvider.update(resource, { id: value.id, data: value }))
+        values.map((value) => dataProvider.update(resource, { id: value.id, data: value })),
       ).then(() => {
         handleComplete();
       });
@@ -99,15 +102,61 @@ export const ImportButton = (props) => {
   const notify = useNotify();
   const dataProvider = useDataProvider();
 
+  const validateCsv = async (csvRows, schema) => {
+    let validationErrors = [];
+
+    if(!csvRows.length > 0){
+      return {
+        errorType: 'schemaError',
+        message: `There are no rows in the file`,
+      };
+    }
+
+    Object.keys(schema).forEach((key) => {
+      if (csvRows[0].hasOwnProperty(key))
+        validationErrors.push({
+          errorType: 'schemaError',
+          message: `There was a validation error for the key: ${key}`,
+        });
+    });
+
+    return validationErrors;
+
+    // const values = Object.keys(csvRows).map((row) => {
+    //   let cvsValidationErrors = [];
+    //
+    //   Object.keys(schema).forEach((key) => {
+    //     if (row.hasOwnProperty(key))
+    //       cvsValidationErrors.push({
+    //         key,
+    //         errorType: 'schemaError',
+    //         message: 'There was a validation error',
+    //       });
+    //   });
+    //
+    //   return {
+    //     cvsValidationErrors,
+    //     ...row,
+    //   }
+    // })
+    //
+    // setValues(values);
+  };
+
   const onFileAdded = async (e) => {
     const file = e.target.files && e.target.files[0];
     setFileName(file.name);
     try {
       const values = await processCsvFile(file, parseConfig);
+      const validationErrors = await validateCsv(values, ideaSchema);
+
+      console.log(values);
       if (logging) {
-        console.log({ values });
+        console.log({ values, validationErrors });
       }
       setValues(values);
+      setCsvValidationErrors(validationErrors);
+
       setErrorTxt(null);
     } catch (error) {
       console.error(error);
@@ -125,7 +174,7 @@ export const ImportButton = (props) => {
         label={label}
         onClick={openImportDialog}
       >
-        <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }} />
+        <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }}/>
       </RAButton>
       <Dialog
         open={open}
@@ -140,13 +189,13 @@ export const ImportButton = (props) => {
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
             <ol>
-              <li>{"Must be a '.csv' or '.tsv' file"}</li>
-              <li>{"Must not contain an 'id' column for new"}</li>
-              <li>{"Must contain an 'id' column for overwrite"}</li>
+              <li>{'Must be a \'.csv\' or \'.tsv\' file'}</li>
+              <li>{'Must not contain an \'id\' column for new'}</li>
+              <li>{'Must contain an \'id\' column for overwrite'}</li>
             </ol>
             <Button variant='contained' component='label'>
               <span>{'chooseFile'}</span>
-              <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }} />
+              <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }}/>
               <input
                 type='file'
                 style={{ display: 'none' }}
@@ -161,7 +210,12 @@ export const ImportButton = (props) => {
             )}
             {!!values && (
               <p style={{ marginBottom: '0px' }}>
-                {'rowCount'}: <strong>{values.length}</strong>
+                {'Row count'}: <strong>{values.length}</strong>
+              </p>
+            )}
+            {!!csvValidationErrors && (
+              <p style={{ marginBottom: '0px' }}>
+                {'Import validation errors'}: <strong>{csvValidationErrors.length}</strong>
               </p>
             )}
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
@@ -177,7 +231,7 @@ export const ImportButton = (props) => {
             color='secondary'
             variant='contained'
           >
-            {importing && <CircularProgress size={18} thickness={2} />}
+            {importing && <CircularProgress size={18} thickness={2}/>}
             <span>{'Import New'}</span>
           </Button>
           <Button
@@ -186,7 +240,7 @@ export const ImportButton = (props) => {
             color='primary'
             variant='contained'
           >
-            {importing && <CircularProgress size={18} thickness={2} />}
+            {importing && <CircularProgress size={18} thickness={2}/>}
             <span>{'importOverride'}</span>
           </Button>
         </DialogActions>

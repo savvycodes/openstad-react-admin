@@ -3,6 +3,7 @@ import { Button as RAButton, resolveBrowserLocale, useRefresh } from 'react-admi
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csv-extractor';
+import Typography from '@material-ui/core/Typography';
 
 import {
   Button,
@@ -11,8 +12,21 @@ import {
   DialogContent,
   DialogTitle,
   CircularProgress,
+  Tooltip,
+  withStyles,
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
+import Zoom from '@material-ui/core/Zoom';
+
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(232,61,61,0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+    padding: '200px 280px',
+  },
+}))(Tooltip);
 
 export const ImportButton = (props) => {
   const { resource, parseConfig, logging, preCommitCallback } = props;
@@ -105,7 +119,7 @@ export const ImportButton = (props) => {
   const validateCsv = async (csvRows, schema) => {
     let validationErrors = [];
 
-    if(!csvRows.length > 0){
+    if (!csvRows.length > 0) {
       return {
         errorType: 'schemaError',
         message: `There are no rows in the file`,
@@ -214,9 +228,17 @@ export const ImportButton = (props) => {
               </p>
             )}
             {!!csvValidationErrors && (
-              <p style={{ marginBottom: '0px' }}>
-                {'Import validation errors'}: <strong>{csvValidationErrors.length}</strong>
-              </p>
+              <LightTooltip title={
+                <React.Fragment>
+                  <Typography color="inherit">Tooltip with HTML</Typography>
+                  <em>{'And here\'s'}</em> <b>{'some'}</b> <u>{'amazing content'}</u>.{' '}
+                  {'It\'s very engaging. Right?'}
+                </React.Fragment>
+              } TransitionComponent={Zoom} interactive arrow placement="top">
+                <p style={{ marginBottom: '0px' }}>
+                  {'Import validation errors'}: <strong>{csvValidationErrors.length}</strong>
+                </p>
+              </LightTooltip>
             )}
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>

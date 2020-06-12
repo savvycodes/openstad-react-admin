@@ -140,9 +140,9 @@ export const ImportButton = (props) => {
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
             <ol>
-              <li>{'extension'}</li>
-              <li>{'idColumnCreate'}</li>
-              <li>{'idColumnUpdate'}</li>
+              <li>{"Must be a '.csv' or '.tsv' file"}</li>
+              <li>{"Must not contain an 'id' column for new"}</li>
+              <li>{"Must contain an 'id' column for overwrite"}</li>
             </ol>
             <Button variant='contained' component='label'>
               <span>{'chooseFile'}</span>
@@ -178,7 +178,7 @@ export const ImportButton = (props) => {
             variant='contained'
           >
             {importing && <CircularProgress size={18} thickness={2} />}
-            <span>{'importNew'}</span>
+            <span>{'Import New'}</span>
           </Button>
           <Button
             disabled={!values || importing}

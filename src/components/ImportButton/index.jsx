@@ -3,7 +3,6 @@ import { Button as RAButton, resolveBrowserLocale, useRefresh } from 'react-admi
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csv-extractor';
-import Typography from '@material-ui/core/Typography';
 
 import {
   Button,
@@ -12,22 +11,10 @@ import {
   DialogContent,
   DialogTitle,
   CircularProgress,
-  Tooltip,
-  withStyles,
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
-import Zoom from '@material-ui/core/Zoom';
 import validateCsv from './validateCsv';
-
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(232,61,61,0.87)',
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
-    padding: '20px 20px',
-  },
-}))(Tooltip);
+import Tooltip from './Tooltip';
 
 export const ImportButton = (props) => {
   const { resource, parseConfig, logging, preCommitCallback } = props;
@@ -186,24 +173,8 @@ export const ImportButton = (props) => {
                 {'Row count'}: <strong>{values.length}</strong>
               </p>
             )}
-            {!!csvValidationErrors && (
-              <LightTooltip title={
-                <React.Fragment>
-                  <Typography color="inherit">
-                    {
-                      console.log(csvValidationErrors)}
-                    {
-                      csvValidationErrors.map((validationError) => {
-                        return (<p>{`${validationError.message}`}</p>);
-                      })
-                    }
-                  </Typography>
-                </React.Fragment>
-              } TransitionComponent={Zoom} interactive arrow placement="top">
-                <p style={{ marginBottom: '0px', color: 'red' }}>
-                  {'Import validation errors'}: <strong>{csvValidationErrors.length}</strong>
-                </p>
-              </LightTooltip>
+            {!!csvValidationErrors && csvValidationErrors.length > 0 && (
+              <Tooltip csvValidationErrors={csvValidationErrors} />
             )}
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>

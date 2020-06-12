@@ -1,35 +1,10 @@
-// in Ideas.js
 import React from 'react';
-import {
-  List,
-  Datagrid,
-  Edit,
-  Create,
-  Pagination,
-  ReferenceInput,
-  SelectInput,
-  SimpleForm,
-  ImageField,
-  DateField,
-  TextField,
-  EditButton,
-  TextInput,
-  TopToolbar,
-  ArrayField,
-  TabbedForm,
-  FunctionField,
-  FormTab,
-  ReferenceManyField,
-  ReferenceArrayInput,
-  SelectArrayInput,
-} from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import BookIcon from '@material-ui/icons/Book';
-import JsonInput from '../../form-fields/JsonInput.jsx';
-import FileUpload from '../../form-fields/FileUpload.jsx';
 
 export const IdeaIcon = BookIcon;
 export { IdeaList } from './list';
+export { IdeaEdit, IdeaCreate } from './create-edit';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,78 +30,3 @@ const useStyles = makeStyles(theme => ({
     width: '50%',
   },
 }));
-
-const IdeaTitle = ({ record }) => {
-  return <span>Idea {record ? `"${record.title}"` : ''}</span>;
-};
-
-export const IdeaEdit = (props) => (
-  <Edit title={<IdeaTitle/>} {...props}>
-    <TabbedForm>
-      <FormTab label="Info">
-        <TextInput disabled source="id"/>
-        <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
-          <SelectInput optionText="email"/>
-        </ReferenceInput>
-        <TextInput source="title" variant="outlined" fullWidth/>
-        <TextInput source="summary" options={{ multiLine: true }} variant="outlined" fullWidth/>
-        <TextInput multiline source="description" variant="outlined" fullWidth/>
-        <ReferenceArrayInput label="tags" source="tags" reference="tag" variant="outlined">
-          <SelectArrayInput optionText="name"/>
-        </ReferenceArrayInput>
-
-        <h3>Image (TODO)</h3>
-        <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl}/>
-      </FormTab>
-      <FormTab label="Extradata">
-        <TextInput disabled source="id"/>
-        <JsonInput source="extraData"/>
-      </FormTab>
-      <FormTab label="Comments">
-        <ReferenceManyField
-          reference="argument"
-          target="ideaId"
-          addLabel={false}
-          pagination={<Pagination/>}
-          fullWidth
-        >
-          <Datagrid>
-            <TextField source="id"/>
-            <TextField source="description"/>
-            <FunctionField label="Author" render={record => `${record.user.firstName} ${record.user.lastName}`}/>
-            <DateField source="createdAt"/>
-            <EditButton basePath="/Argument"/>
-          </Datagrid>
-        </ReferenceManyField>
-      </FormTab>
-      <FormTab label="Votes">
-        <ReferenceManyField
-          reference="vote"
-          target="ideaId"
-          addLabel={false}
-          pagination={<Pagination/>}
-          fullWidth
-        >
-          <Datagrid>
-            <TextField source="id"/>
-            <TextField source="userId"/>
-            <DateField source="createdAt"/>
-            <EditButton basePath="/Vote"/>
-          </Datagrid>
-        </ReferenceManyField>
-      </FormTab>
-    </TabbedForm>
-  </Edit>
-);
-
-export const IdeaCreate = (props) => (
-  <Create title="Create a Idea" {...props}>
-    <SimpleForm>
-      <TextInput source="title"/>
-      <TextInput source="teaser" options={{ multiLine: true }}/>
-      <TextInput multiline source="description"/>
-      {/*<TextInput label="Publication date" source="published_at"/>*/}
-      {/*<TextInput source="average_note"/>*/}
-    </SimpleForm>
-  </Create>
-);

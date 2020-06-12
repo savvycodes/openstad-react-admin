@@ -16,7 +16,7 @@ const exporter = ideas => {
   if (ideas.length > 0) {
     const csv = convertToCSV({
       data: ideas,
-      fields: ['title', 'teaser', 'body', 'publicationDate', 'averageNode'],
+      fields: ['title', 'summary'],
     });
 
     downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
@@ -57,6 +57,7 @@ export const IdeaList = (props) => (
       <ImageField source="extraData.images[0]" label="Image"/>
       <TextField source="title"/>
       <TextField source="summary"/>
+      <TextField source="description"/>
       <DateField source="createdAt"/>
       <EditButton basePath="/idea"/>
     </Datagrid>

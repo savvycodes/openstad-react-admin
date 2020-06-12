@@ -134,11 +134,11 @@ export const ImportButton = (props) => {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>
-          {'importTo'} "{resourceName}"
+          {'Import to'} "{resourceName}"
         </DialogTitle>
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
-            <p style={{ margin: '0px' }}>{"i18nProvider.translate('csv.dialog.dataFileReq')"}</p>
+            <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
             <ol>
               <li>{'extension'}</li>
               <li>{'idColumnCreate'}</li>

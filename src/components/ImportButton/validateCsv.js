@@ -9,7 +9,7 @@ export default async (csvRows, schema) => {
   }
 
   Object.keys(schema).forEach((key) => {
-    if (csvRows[0].hasOwnProperty(key))
+    if (!csvRows[0].hasOwnProperty(key))
       validationErrors.push({
         errorType: 'schemaError',
         message: `There was a validation error for the key: ${key}`,

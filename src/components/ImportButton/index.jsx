@@ -25,7 +25,7 @@ const LightTooltip = withStyles((theme) => ({
     color: 'rgba(232,61,61,0.87)',
     boxShadow: theme.shadows[1],
     fontSize: 11,
-    padding: '200px 220px',
+    padding: '20px 20px',
   },
 }))(Tooltip);
 
@@ -194,10 +194,10 @@ export const ImportButton = (props) => {
                       console.log(csvValidationErrors)}
                     {
                       csvValidationErrors.map((validationError) => {
-                        return `DD${validationError.message}: ${validationError.message}`;
+                        return (<p>{`${validationError.message}: ${validationError.message}`}</p>);
                       })
                     }
-                    Tooltip with HTML</Typography>
+                  </Typography>
                 </React.Fragment>
               } TransitionComponent={Zoom} interactive arrow placement="top">
                 <p style={{ marginBottom: '0px' }}>

@@ -1,5 +1,5 @@
 import { Datagrid, DateField, downloadCSV, EditButton, ImageField, List, TextField, TopToolbar } from 'react-admin';
-import { ImportButton } from 'react-admin-import-csv';
+import { ImportButton } from '../../components/ImportButton'
 import React from 'react';
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min';

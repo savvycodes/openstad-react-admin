@@ -8,7 +8,7 @@ import { TagList, TagEdit, TagCreate, TagIcon } from './resources/tag.jsx';
 
 import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.jsx';
 import { UserList, UserEdit, UserCreate, UserIcon } from './resources/user.jsx';
-import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea.jsx';
+import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
 import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';

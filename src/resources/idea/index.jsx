@@ -25,16 +25,11 @@ import {
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import BookIcon from '@material-ui/icons/Book';
-import JsonInput from '../form-fields/JsonInput.jsx';
-import FileUpload from '../form-fields/FileUpload.jsx';
-import { ImportButton } from 'react-admin-import-csv';
-import { CreateButton, ExportButton } from 'ra-ui-materialui';
-import { downloadCSV } from 'react-admin';
-import { unparse as convertToCSV } from 'papaparse/papaparse.min';
-import { isObject } from '../utils/isObject';
-
+import JsonInput from '../../form-fields/JsonInput.jsx';
+import FileUpload from '../../form-fields/FileUpload.jsx';
 
 export const IdeaIcon = BookIcon;
+export { IdeaList } from './list';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -60,65 +55,6 @@ const useStyles = makeStyles(theme => ({
     width: '50%',
   },
 }));
-
-const exporter = ideas => {
-  // const ideasForExport = ideas.map(idea => {
-  //   let ideaExport = {};
-  //   // ideaExport.author_name = idea.author.name;
-  //
-  //   return ideaExport;
-  // });
-  console.log(ideas)
-
-  if (ideas.length > 0) {
-    const csv = convertToCSV({
-      data: ideas,
-      fields: ['title', 'teaser', 'body', 'publicationDate', 'averageNode'],
-    });
-
-    downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
-  }
-};
-
-export const ListActions = props => {
-  const { className, basePath, total, currentSort, filterValues, permanentFilter, maxResults } = props;
-
-  // All configurations are optional
-  const importConfig = {
-    logging: true,
-    // parseConfig?: {
-    //   // Any option from papaparse
-    // }
-  }
-
-  return (
-    <TopToolbar className={className}>
-      <CreateButton basePath={basePath}  />
-      <ExportButton
-        disabled={total === 0}
-        resource={'idea'}
-        sort={currentSort}
-        filter={{ ...filterValues, ...permanentFilter }}
-        exporter={exporter}
-        maxResults={maxResults}
-      />
-      <ImportButton {...props} {...importConfig} />
-    </TopToolbar>
-  );
-};
-
-export const IdeaList = (props) => (
-  <List {...props} actions={<ListActions/>} exporter={exporter}>
-    <Datagrid>
-      <TextField source="id"/>
-      <ImageField source="extraData.images[0]" label="Image"/>
-      <TextField source="title"/>
-      <TextField source="summary"/>
-      <DateField source="createdAt"/>
-      <EditButton basePath="/idea"/>
-    </Datagrid>
-  </List>
-);
 
 const IdeaTitle = ({ record }) => {
   return <span>Idea {record ? `"${record.title}"` : ''}</span>;

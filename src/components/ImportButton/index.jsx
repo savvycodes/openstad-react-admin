@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
 import Zoom from '@material-ui/core/Zoom';
+import validateCsv from './validateCsv';
 
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -24,7 +25,7 @@ const LightTooltip = withStyles((theme) => ({
     color: 'rgba(232,61,61,0.87)',
     boxShadow: theme.shadows[1],
     fontSize: 11,
-    padding: '200px 280px',
+    padding: '200px 220px',
   },
 }))(Tooltip);
 
@@ -116,47 +117,6 @@ export const ImportButton = (props) => {
   const notify = useNotify();
   const dataProvider = useDataProvider();
 
-  const validateCsv = async (csvRows, schema) => {
-    let validationErrors = [];
-
-    if (!csvRows.length > 0) {
-      return {
-        errorType: 'schemaError',
-        message: `There are no rows in the file`,
-      };
-    }
-
-    Object.keys(schema).forEach((key) => {
-      if (csvRows[0].hasOwnProperty(key))
-        validationErrors.push({
-          errorType: 'schemaError',
-          message: `There was a validation error for the key: ${key}`,
-        });
-    });
-
-    return validationErrors;
-
-    // const values = Object.keys(csvRows).map((row) => {
-    //   let cvsValidationErrors = [];
-    //
-    //   Object.keys(schema).forEach((key) => {
-    //     if (row.hasOwnProperty(key))
-    //       cvsValidationErrors.push({
-    //         key,
-    //         errorType: 'schemaError',
-    //         message: 'There was a validation error',
-    //       });
-    //   });
-    //
-    //   return {
-    //     cvsValidationErrors,
-    //     ...row,
-    //   }
-    // })
-    //
-    // setValues(values);
-  };
-
   const onFileAdded = async (e) => {
     const file = e.target.files && e.target.files[0];
     setFileName(file.name);
@@ -164,7 +124,6 @@ export const ImportButton = (props) => {
       const values = await processCsvFile(file, parseConfig);
       const validationErrors = await validateCsv(values, ideaSchema);
 
-      console.log(values);
       if (logging) {
         console.log({ values, validationErrors });
       }
@@ -230,9 +189,15 @@ export const ImportButton = (props) => {
             {!!csvValidationErrors && (
               <LightTooltip title={
                 <React.Fragment>
-                  <Typography color="inherit">Tooltip with HTML</Typography>
-                  <em>{'And here\'s'}</em> <b>{'some'}</b> <u>{'amazing content'}</u>.{' '}
-                  {'It\'s very engaging. Right?'}
+                  <Typography color="inherit">
+                    {
+                      console.log(csvValidationErrors)}
+                    {
+                      csvValidationErrors.map((validationError) => {
+                        return `DD${validationError.message}: ${validationError.message}`;
+                      })
+                    }
+                    Tooltip with HTML</Typography>
                 </React.Fragment>
               } TransitionComponent={Zoom} interactive arrow placement="top">
                 <p style={{ marginBottom: '0px' }}>

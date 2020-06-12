@@ -68,11 +68,12 @@ const exporter = ideas => {
   //
   //   return ideaExport;
   // });
+  console.log(ideas)
 
   if (ideas.length > 0) {
     const csv = convertToCSV({
       data: ideas,
-      fields: Object.getOwnPropertyNames(ideas[0]),
+      fields: ['title', 'teaser', 'body', 'publicationDate', 'averageNode'],
     });
 
     downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
@@ -81,6 +82,14 @@ const exporter = ideas => {
 
 export const ListActions = props => {
   const { className, basePath, total, currentSort, filterValues, permanentFilter, maxResults } = props;
+
+  // All configurations are optional
+  const importConfig = {
+    logging: true,
+    // parseConfig?: {
+    //   // Any option from papaparse
+    // }
+  }
 
   return (
     <TopToolbar className={className}>
@@ -93,7 +102,7 @@ export const ListActions = props => {
         exporter={exporter}
         maxResults={maxResults}
       />
-      <ImportButton {...props} />
+      <ImportButton {...props} {...importConfig} />
     </TopToolbar>
   );
 };

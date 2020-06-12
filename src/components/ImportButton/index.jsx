@@ -194,13 +194,13 @@ export const ImportButton = (props) => {
                       console.log(csvValidationErrors)}
                     {
                       csvValidationErrors.map((validationError) => {
-                        return (<p>{`${validationError.message}: ${validationError.message}`}</p>);
+                        return (<p>{`${validationError.message}`}</p>);
                       })
                     }
                   </Typography>
                 </React.Fragment>
               } TransitionComponent={Zoom} interactive arrow placement="top">
-                <p style={{ marginBottom: '0px' }}>
+                <p style={{ marginBottom: '0px', color: 'red' }}>
                   {'Import validation errors'}: <strong>{csvValidationErrors.length}</strong>
                 </p>
               </LightTooltip>

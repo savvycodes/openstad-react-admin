@@ -160,7 +160,7 @@ export const ImportButton = (props) => {
               </p>
             )}
             {!!values && (
-              <p style={{ margin: '0px' }}>
+              <p style={{ marginBottom: '0px' }}>
                 {'rowCount'}: <strong>{values.length}</strong>
               </p>
             )}

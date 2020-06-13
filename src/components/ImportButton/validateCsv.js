@@ -34,15 +34,14 @@ export default async (csvRows, schema) => {
       });
   });
 
-  console.log(csvRows[0])
   /**
    * Check if parsing went correctly
    */
-  if(schemaValidationMessages.length >= Object.keys(schema)) {
+  if(schemaValidationMessages.length > 2 && schemaValidationMessages.length >= Object.keys(schema).length) {
     return [{
       messageType: 'faultyImport',
       color: 'red',
-      message: 'It seems the import provided garbled results. Are you sure you used the right delimiter for your csv?',
+      message: 'It seems the import provided scrambled results. Are you sure you used the right delimiter for your csv?',
     }];
   }
 

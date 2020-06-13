@@ -3,7 +3,8 @@ import { Button as RAButton, resolveBrowserLocale, useRefresh } from 'react-admi
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csv-extractor';
-
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import {
   Button,
   Dialog,
@@ -17,11 +18,8 @@ import validateCsv from './validateCsv';
 import Tooltip from './Tooltip';
 
 export const ImportButton = (props) => {
-  const { resource, parseConfig, logging, preCommitCallback } = props;
+  const { resource, preCommitCallback } = props;
 
-  if (logging) {
-    console.log({ props });
-  }
   if (!resource) {
     throw new Error('emptyResource');
   }
@@ -43,6 +41,7 @@ export const ImportButton = (props) => {
   const [importing, setImporting] = React.useState(false);
   const [fileName, setFileName] = React.useState('');
   const [values, setValues] = React.useState([]);
+  const [delimiter, setDelimiter] = React.useState(',');
   const [csvValidationErrors, setCsvValidationErrors] = React.useState([]);
   const [errorTxt, setErrorTxt] = React.useState('');
   const refresh = useRefresh();
@@ -106,20 +105,21 @@ export const ImportButton = (props) => {
 
   const onFileAdded = async (e) => {
     const file = e.target.files && e.target.files[0];
+
     setFileName(file.name);
+
     try {
-      const values = await processCsvFile(file, parseConfig);
+      console.log(delimiter)
+      const values = await processCsvFile(file, {delimiter});
       const validationErrors = await validateCsv(values, ideaSchema);
 
-      if (logging) {
-        console.log({ values, validationErrors });
-      }
       setValues(values);
       setCsvValidationErrors(validationErrors);
 
       setErrorTxt(null);
     } catch (error) {
       console.error(error);
+
       setValues(null);
       setErrorTxt(error.toString());
     }
@@ -153,6 +153,18 @@ export const ImportButton = (props) => {
               <li>{'Must not contain an \'id\' column for new'}</li>
               <li>{'Must contain an \'id\' column for overwrite'}</li>
             </ol>
+            <div style={{ margin: '20px 0' }}>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={delimiter}
+                onChange={(e) => setDelimiter(e.target.value)}
+              >
+                <MenuItem value={','}>,</MenuItem>
+                <MenuItem value={';'}>;</MenuItem>
+                <MenuItem value={' '}>Space</MenuItem>
+              </Select>
+            </div>
             <Button variant='contained' component='label'>
               <span>{'chooseFile'}</span>
               <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }}/>

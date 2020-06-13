@@ -26,14 +26,6 @@ const exporter = ideas => {
 export const ListActions = props => {
   const { className, basePath, total, currentSort, filterValues, permanentFilter, maxResults } = props;
 
-  // All configurations are optional
-  const importConfig = {
-    logging: true,
-    // parseConfig?: {
-    //   // Any option from papaparse
-    // }
-  }
-
   return (
     <TopToolbar className={className}>
       <CreateButton basePath={basePath}  />
@@ -45,7 +37,7 @@ export const ListActions = props => {
         exporter={exporter}
         maxResults={maxResults}
       />
-      <ImportButton {...props} {...importConfig} />
+      <ImportButton {...props} />
     </TopToolbar>
   );
 };

@@ -9,10 +9,11 @@ export default async (csvRows, schema) => {
   }
 
   Object.keys(schema).forEach((key) => {
+    console.log(csvRows);
     if (!csvRows[0].hasOwnProperty(key))
       validationErrors.push({
         errorType: 'schemaError',
-        message: `There was a validation error for the key: ${key}`,
+        message: `Import is missing the following column: ${key}`,
       });
   });
 

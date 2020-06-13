@@ -5,13 +5,13 @@ import { Tooltip, withStyles } from '@material-ui/core';
 
 export default (props) => {
   const { csvValidationErrors } = props;
-  console.log(props);
 
   const LightTooltip = withStyles((theme) => ({
     tooltip: {
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: 'white',
       color: 'rgba(232,61,61,0.87)',
       boxShadow: theme.shadows[1],
+      border: 'black',
       fontSize: 11,
       padding: '20px 20px',
     },
@@ -20,8 +20,6 @@ export default (props) => {
   return (<LightTooltip title={
     <React.Fragment>
       <Typography color="inherit">
-        {
-          console.log(csvValidationErrors)}
         {
           csvValidationErrors.map((validationError) => {
             return (<p>{`${validationError.message}`}</p>);

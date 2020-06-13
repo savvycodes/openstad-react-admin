@@ -5,6 +5,7 @@ import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {
   Button,
   Dialog,
@@ -160,6 +161,14 @@ export const ImportButton = (props) => {
                 accept='.csv,.tsv,.txt'
               />
             </Button>
+            <span style={{
+              verticalAlign: 'middle',
+              padding: '8px',
+              cursor: 'pointer',
+              color: 'red',
+            }}>
+              <DeleteForeverIcon color={'red'} />
+            </span>
             {!!fileName && (
               <p style={{ marginBottom: '0px' }}>
                 {'processed'}: <strong>{fileName}</strong>

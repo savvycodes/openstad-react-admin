@@ -29,7 +29,7 @@ export const ImportButton = (props) => {
   const [fileName, setFileName] = React.useState('');
   const [values, setValues] = React.useState([]);
   const [delimiter, setDelimiter] = React.useState(',');
-  const [csvValidationErrors, setCsvValidationErrors] = React.useState([]);
+  const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
   const [errorTxt, setErrorTxt] = React.useState('');
   const refresh = useRefresh();
 
@@ -42,7 +42,7 @@ export const ImportButton = (props) => {
     setImporting(false);
     setFileName('');
     setValues([]);
-    setCsvValidationErrors([]);
+    setCsvValidationNotifications([]);
   };
 
   const handleComplete = (error = false) => {
@@ -100,7 +100,7 @@ export const ImportButton = (props) => {
       const validationErrors = await validateCsv(values, ideaSchema);
 
       setValues(values);
-      setCsvValidationErrors(validationErrors);
+      setCsvValidationNotifications(validationErrors);
 
       setErrorTxt(null);
     } catch (error) {
@@ -171,8 +171,8 @@ export const ImportButton = (props) => {
                 {'Row count'}: <strong>{values.length}</strong>
               </p>
             )}
-            {!!csvValidationErrors && csvValidationErrors.length > 0 && (
-              <Tooltip csvValidationErrors={csvValidationErrors} />
+            {!!csvValidationNotifications && csvValidationNotifications.length > 0 && (
+              <Tooltip csvValidationNotifications={csvValidationNotifications} />
             )}
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>

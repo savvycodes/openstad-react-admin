@@ -4,12 +4,11 @@ import Zoom from '@material-ui/core/Zoom';
 import { Tooltip, withStyles } from '@material-ui/core';
 
 export default (props) => {
-  const { csvValidationErrors } = props;
+  const { csvValidationNotifications } = props;
 
   const LightTooltip = withStyles((theme) => ({
     tooltip: {
       backgroundColor: 'white',
-      color: 'rgba(232,61,61,0.87)',
       boxShadow: theme.shadows[1],
       border: 'black',
       fontSize: 11,
@@ -21,15 +20,15 @@ export default (props) => {
     <React.Fragment>
       <Typography color="inherit">
         {
-          csvValidationErrors.map((validationError) => {
-            return (<p>{`${validationError.message}`}</p>);
+          csvValidationNotifications.map((validationError) => {
+            return (<p style={{ color: validationError.color }}>{`${validationError.message}`}</p>);
           })
         }
       </Typography>
     </React.Fragment>
   } TransitionComponent={Zoom} interactive arrow placement="top">
-    <p style={{ marginBottom: '0px', color: 'red' }}>
-      {'Import validation errors'}: <strong>{csvValidationErrors.length}</strong>
+    <p style={{ marginBottom: '0px', color: 'blue' }}>
+      {'Import validation notifications'}: <strong>{csvValidationNotifications.length}</strong>
     </p>
   </LightTooltip>);
 }

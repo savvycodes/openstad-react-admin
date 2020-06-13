@@ -4,8 +4,19 @@ export default async (csvRows, schema) => {
   if (!csvRows.length > 0) {
     return {
       messageType: 'zeroRows',
-      color: 'black',
+      color: 'blue',
       message: `There are no rows in the file`,
+    };
+  }
+
+  /**
+   * Check if parsing went correctly
+   */
+  if(csvRows[0].hasOwnProperty('id')) {
+    return {
+      messageType: 'faultyImport',
+      color: 'red',
+      message: 'It seems the import provided garbled results. Are you sure you used the right delimiter for your csv?',
     };
   }
 
@@ -15,18 +26,7 @@ export default async (csvRows, schema) => {
   if(csvRows[0].hasOwnProperty('id')) {
     validationMessages.push({
       messageType: 'idColumn',
-      color: 'black',
-      message: 'Id column is present in file; saving will only work with overwrite',
-    });
-  }
-
-  /**
-   * Check for id
-   */
-  if(csvRows[0].hasOwnProperty('id')) {
-    validationMessages.push({
-      messageType: 'idColumn',
-      color: 'black',
+      color: 'blue',
       message: 'Id column is present in file; saving will only work with overwrite',
     });
   }

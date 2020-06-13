@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as RAButton, resolveBrowserLocale, useRefresh } from 'react-admin';
+import { Button as RAButton, useRefresh } from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csv-extractor';

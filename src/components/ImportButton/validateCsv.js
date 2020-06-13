@@ -9,7 +9,6 @@ export default async (csvRows, schema) => {
   }
 
   Object.keys(schema).forEach((key) => {
-    console.log(csvRows);
     if (!csvRows[0].hasOwnProperty(key))
       validationErrors.push({
         errorType: 'schemaError',

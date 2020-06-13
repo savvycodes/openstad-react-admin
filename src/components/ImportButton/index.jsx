@@ -161,13 +161,20 @@ export const ImportButton = (props) => {
                 accept='.csv,.tsv,.txt'
               />
             </Button>
-            <span style={{
+            <span
+              style={{
               verticalAlign: 'middle',
               padding: '8px',
               cursor: 'pointer',
               color: 'red',
-            }}>
-              <DeleteForeverIcon color={'red'} />
+            }}
+              onClick={() => {
+                setFileName('');
+                setValues([]);
+                setCsvValidationNotifications([]);
+              }}>
+
+              <DeleteForeverIcon color={'red'}/>
             </span>
             {!!fileName && (
               <p style={{ marginBottom: '0px' }}>

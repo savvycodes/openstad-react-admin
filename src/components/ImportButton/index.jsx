@@ -2,7 +2,7 @@ import React from 'react';
 import { Button as RAButton, useRefresh } from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
-import { processCsvFile } from './csv-extractor';
+import { processCsvFile } from './csvExtractor';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import {

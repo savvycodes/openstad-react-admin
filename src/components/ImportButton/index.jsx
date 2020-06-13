@@ -109,9 +109,6 @@ export const ImportButton = (props) => {
       setErrorTxt(error.toString());
     }
   };
-  console.log('csvValidationNotifications')
-  console.log(csvValidationNotifications)
-
   return (
     <>
       <RAButton

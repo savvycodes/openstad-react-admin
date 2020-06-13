@@ -24,19 +24,6 @@ export const ImportButton = (props) => {
     throw new Error('emptyResource');
   }
 
-  let { variant, label, resourceName } = props;
-  if (!label) {
-    label = 'import';
-  }
-
-  if (!variant) {
-    variant = 'text';
-  }
-
-  if (!resourceName) {
-    resourceName = resource;
-  }
-
   const [open, setOpen] = React.useState(false);
   const [importing, setImporting] = React.useState(false);
   const [fileName, setFileName] = React.useState('');
@@ -130,8 +117,8 @@ export const ImportButton = (props) => {
       <RAButton
         color='primary'
         component='span'
-        variant={variant}
-        label={label}
+        variant={'text'}
+        label={'import'}
         onClick={openImportDialog}
       >
         <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }}/>
@@ -143,7 +130,7 @@ export const ImportButton = (props) => {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>
-          {'Import to'} "{resourceName}"
+          {'Import to'} "{resource}"
         </DialogTitle>
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>

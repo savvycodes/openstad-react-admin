@@ -38,12 +38,16 @@ export const ImportButton = (props) => {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const clear = () => {
     setImporting(false);
     setFileName('');
     setValues([]);
     setCsvValidationNotifications([]);
+  };
+
+  const handleClose = () => {
+    clear();
+    setOpen(false);
   };
 
   const handleComplete = (error = false) => {
@@ -168,11 +172,7 @@ export const ImportButton = (props) => {
               cursor: 'pointer',
               color: 'red',
             }}
-              onClick={() => {
-                setFileName('');
-                setValues([]);
-                setCsvValidationNotifications([]);
-              }}>
+              onClick={clear}>
 
               <DeleteForeverIcon color={'red'}/>
             </span>

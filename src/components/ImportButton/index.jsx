@@ -96,7 +96,6 @@ export const ImportButton = (props) => {
     setFileName(file.name);
 
     try {
-      console.log(delimiter)
       const values = await processCsvFile(file, {delimiter});
       const validationErrors = await validateCsv(values, ideaSchema);
 

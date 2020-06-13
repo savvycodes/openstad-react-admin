@@ -96,11 +96,10 @@ export const ImportButton = (props) => {
     setFileName(file.name);
 
     try {
-      const values = await processCsvFile(file, {delimiter});
-      const validationErrors = await validateCsv(values, ideaSchema);
+      const values = await processCsvFile(file, { delimiter });
 
       setValues(values);
-      setCsvValidationNotifications(validationErrors);
+      setCsvValidationNotifications(await validateCsv(values, ideaSchema));
 
       setErrorTxt(null);
     } catch (error) {
@@ -110,6 +109,8 @@ export const ImportButton = (props) => {
       setErrorTxt(error.toString());
     }
   };
+  console.log('csvValidationNotifications')
+  console.log(csvValidationNotifications)
 
   return (
     <>
@@ -172,7 +173,7 @@ export const ImportButton = (props) => {
               </p>
             )}
             {!!csvValidationNotifications && csvValidationNotifications.length > 0 && (
-              <Tooltip csvValidationNotifications={csvValidationNotifications} />
+              <Tooltip csvValidationNotifications={csvValidationNotifications}/>
             )}
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>

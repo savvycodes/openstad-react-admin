@@ -1,24 +1,13 @@
 export default async (csvRows, schema) => {
-  let validationMessages = [];
-
   if (!csvRows.length > 0) {
-    return {
+    return [{
       messageType: 'zeroRows',
       color: 'blue',
       message: `There are no rows in the file`,
-    };
+    }];
   }
 
-  /**
-   * Check if parsing went correctly
-   */
-  if(csvRows[0].hasOwnProperty('id')) {
-    return {
-      messageType: 'faultyImport',
-      color: 'red',
-      message: 'It seems the import provided garbled results. Are you sure you used the right delimiter for your csv?',
-    };
-  }
+  let validationMessages = [];
 
   /**
    * Check for id
@@ -31,17 +20,31 @@ export default async (csvRows, schema) => {
     });
   }
 
+  let schemaValidationMessages = [];
+
   /**
    * Validate schema
    */
   Object.keys(schema).forEach((key) => {
     if (!csvRows[0].hasOwnProperty(key))
-      validationMessages.push({
+      schemaValidationMessages.push({
         messageType: 'schemaError',
         color: 'red',
         message: `Import is missing the following column: ${key}`,
       });
   });
 
-  return validationMessages;
+  console.log(csvRows[0])
+  /**
+   * Check if parsing went correctly
+   */
+  if(schemaValidationMessages.length >= Object.keys(schema)) {
+    return [{
+      messageType: 'faultyImport',
+      color: 'red',
+      message: 'It seems the import provided garbled results. Are you sure you used the right delimiter for your csv?',
+    }];
+  }
+
+  return schemaValidationMessages.concat(validationMessages);
 };

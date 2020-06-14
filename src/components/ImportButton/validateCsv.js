@@ -16,7 +16,13 @@ export default async (csvRows, schema) => {
     validationMessages.push({
       messageType: 'idColumn',
       color: 'blue',
-      message: 'Id column is present in file; saving will only work with overwrite',
+      message: 'Id column is present in file; Import override enabled',
+    });
+  } else {
+    validationMessages.push({
+      messageType: 'idColumn',
+      color: 'blue',
+      message: 'NO Id column is present in file; Import new enabled',
     });
   }
 
@@ -38,11 +44,11 @@ export default async (csvRows, schema) => {
    * Check if parsing went correctly
    */
   if(schemaValidationMessages.length > 2 && schemaValidationMessages.length >= Object.keys(schema).length) {
-    return [{
+    schemaValidationMessages.push({
       messageType: 'faultyImport',
       color: 'red',
       message: 'It seems the import provided scrambled results. Are you sure you used the right delimiter for your csv?',
-    }];
+    });
   }
 
   return schemaValidationMessages.concat(validationMessages);

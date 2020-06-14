@@ -13,7 +13,14 @@ export default (props) => {
           <Typography color="inherit">
             {
               csvValidationNotifications.map((validationError, index) => {
-                return (<span key={index} style={{ color: validationError.color }}>{`${validationError.message}`}</span>);
+                return (
+                    <span
+                      key={index}
+                      style={{ color: validationError.color, display: 'block' }}
+                    >
+                      {`${validationError.message}`}
+                    </span>
+                );
               })
             }
           </Typography>

@@ -12,8 +12,13 @@ export default (props) => {
         <React.Fragment>
           <Typography color="inherit">
             {
-              values.map((value, index) => {
-                return (<span key={index} >{`${value}`}</span>);
+              values.map((row, rIndex) => {
+                return (<span key={rIndex} style={{ color: 'black', display: 'block'}}>
+                  {Object.keys(row).map((key, cIndex) => {
+                    return (<span key={cIndex} >{`${row[key]}`}</span>);
+                  })}
+                  <hr/>
+                </span>)
               })
             }
           </Typography>

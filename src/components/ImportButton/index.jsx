@@ -13,9 +13,9 @@ import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
 import ActionButtonsLine from './ActionButtonsLine';
 import FileUpload from './FileUpload';
-import ImportNotifications from './ImportNotifications';
-import ImportRowCount from './ImportRowCount';
-import ImportDelimiter from './ImportDelimiter';
+import ImportNotifications from './ImportNotificationsLine';
+import ImportRowCount from './ImportRowCountLine';
+import ImportDelimiter from './ImportDelimiterLine';
 
 export const ImportButton = (props) => {
   const { resource, preCommitCallback } = props;

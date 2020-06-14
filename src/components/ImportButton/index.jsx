@@ -3,8 +3,6 @@ import { Button as RAButton, useRefresh } from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import {
   Dialog,
   DialogContent,
@@ -17,6 +15,7 @@ import ActionButtonsLine from './ActionButtonsLine';
 import FileUpload from './FileUpload';
 import ImportNotificationsLine from './ImportNotificationsLine';
 import ImportRowCountLine from './ImportRowCountLine';
+import ImportDelimiter from './ImportDelimiter';
 
 export const ImportButton = (props) => {
   const { resource, preCommitCallback } = props;
@@ -48,6 +47,10 @@ export const ImportButton = (props) => {
   const handleClose = () => {
     clear();
     setOpen(false);
+  };
+
+  const handleImportDelimiterChange = (e) => {
+    setDelimiter(e.target.value)
   };
 
   const handleComplete = (error = false) => {
@@ -143,19 +146,7 @@ export const ImportButton = (props) => {
               <li>{'Must not contain an \'id\' column for new'}</li>
               <li>{'Must contain an \'id\' column for overwrite'}</li>
             </ol>
-            <div style={{ margin: '20px 0' }}>
-              <span>Delimiter: </span>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={delimiter}
-                onChange={(e) => setDelimiter(e.target.value)}
-              >
-                <MenuItem value={','}>,</MenuItem>
-                <MenuItem value={';'}>;</MenuItem>
-                <MenuItem value={' '}>Space</MenuItem>
-              </Select>
-            </div>
+            <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
             <FileUpload  {...{ onFileAdded, clear }} />
             <ImportNotificationsLine {...{ csvValidationNotifications }} />
             <ImportRowCountLine {...{ values }} />

@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
-import Tooltip from './Tooltip';
+import ImportValidationAlertLine from './ImportValidationAlertLine';
 
 export const ImportButton = (props) => {
   const { resource, preCommitCallback } = props;
@@ -186,7 +186,7 @@ export const ImportButton = (props) => {
               </p>
             )}
             {!!csvValidationNotifications && csvValidationNotifications.length > 0 && (
-              <Tooltip csvValidationNotifications={csvValidationNotifications}/>
+              <ImportValidationAlertLine csvValidationNotifications={csvValidationNotifications}/>
             )}
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>

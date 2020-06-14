@@ -9,14 +9,13 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
-  CircularProgress,
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
 import ImportValidationAlertLine from './ImportValidationAlertLine';
+import ActionButtonsLine from './ActionButtonsLine';
 
 export const ImportButton = (props) => {
   const { resource, preCommitCallback } = props;
@@ -191,29 +190,7 @@ export const ImportButton = (props) => {
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>
-            <span>{'cancel'}</span>
-          </Button>
-          <Button
-            disabled={!values || importing}
-            onClick={handleSubmitCreate}
-            color='secondary'
-            variant='contained'
-          >
-            {importing && <CircularProgress size={18} thickness={2}/>}
-            <span>{'Import New'}</span>
-          </Button>
-          <Button
-            disabled={!values || importing}
-            onClick={handleSubmitOverwrite}
-            color='primary'
-            variant='contained'
-          >
-            {importing && <CircularProgress size={18} thickness={2}/>}
-            <span>{'importOverride'}</span>
-          </Button>
-        </DialogActions>
+        <ActionButtonsLine {...{ handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing }} />
       </Dialog>
     </>
   );

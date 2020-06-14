@@ -14,9 +14,9 @@ export default (props) => {
         value={delimiter}
         onChange={handleImportDelimiterChange}
       >
-        <MenuItem value={','}>,</MenuItem>
-        <MenuItem value={';'}>;</MenuItem>
-        <MenuItem value={' '}>Space</MenuItem>
+        <MenuItem value={','}>Comma (,)</MenuItem>
+        <MenuItem value={';'}>Semicolon (;)</MenuItem>
+        <MenuItem value={' '}>Space ( )</MenuItem>
       </Select>
     </div>);
 }

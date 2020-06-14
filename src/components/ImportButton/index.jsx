@@ -13,8 +13,8 @@ import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
 import ActionButtonsLine from './ActionButtonsLine';
 import FileUpload from './FileUpload';
-import ImportNotificationsLine from './ImportNotificationsLine';
-import ImportRowCountLine from './ImportRowCountLine';
+import ImportNotifications from './ImportNotifications';
+import ImportRowCount from './ImportRowCount';
 import ImportDelimiter from './ImportDelimiter';
 
 export const ImportButton = (props) => {
@@ -148,8 +148,8 @@ export const ImportButton = (props) => {
             </ol>
             <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
             <FileUpload  {...{ onFileAdded, clear }} />
-            <ImportNotificationsLine {...{ csvValidationNotifications }} />
-            <ImportRowCountLine {...{ values }} />
+            <ImportNotifications {...{ csvValidationNotifications }} />
+            <ImportRowCount {...{ values }} />
           </div>
         </DialogContent>
         <DialogActions>

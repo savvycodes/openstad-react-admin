@@ -1,20 +1,10 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
-import { Tooltip, withStyles } from '@material-ui/core';
+import LightTooltip from '../LightTooltip';
 
 export default (props) => {
   const { values } = props;
-
-  const LightTooltip = withStyles((theme) => ({
-    tooltip: {
-      backgroundColor: 'white',
-      boxShadow: theme.shadows[1],
-      border: 'black',
-      fontSize: 11,
-      padding: '20px 20px',
-    },
-  }))(Tooltip);
 
   return (<>
     {!!values && (

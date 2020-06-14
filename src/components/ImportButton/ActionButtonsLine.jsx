@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 
 export default (props) => {
-  const { handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing } = props;
+  const { handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing, idPresent } = props;
 
   return (
     <>
@@ -13,7 +13,7 @@ export default (props) => {
         <span>{'cancel'}</span>
       </Button>
       <Button
-        disabled={!values || importing}
+        disabled={!values || values.length < 1 || importing || idPresent}
         onClick={handleSubmitCreate}
         color='secondary'
         variant='contained'
@@ -22,7 +22,7 @@ export default (props) => {
         <span>{'Import New'}</span>
       </Button>
       <Button
-        disabled={!values || importing}
+        disabled={!values || values.length < 1 || importing || !idPresent}
         onClick={handleSubmitOverwrite}
         color='primary'
         variant='contained'

@@ -144,6 +144,7 @@ export const ImportButton = (props) => {
               <li>{'Must contain an \'id\' column for overwrite'}</li>
             </ol>
             <div style={{ margin: '20px 0' }}>
+              <span>Delimiter: </span>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"

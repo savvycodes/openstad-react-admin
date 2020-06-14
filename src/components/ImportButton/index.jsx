@@ -15,8 +15,8 @@ import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
 import ActionButtonsLine from './ActionButtonsLine';
 import FileUpload from './FileUpload';
-import NotificationsLine from './NotificationsLine';
-import RowCountLine from './RowCountLine';
+import ImportNotificationsLine from './ImportNotificationsLine';
+import ImportRowCountLine from './ImportRowCountLine';
 
 export const ImportButton = (props) => {
   const { resource, preCommitCallback } = props;
@@ -156,8 +156,8 @@ export const ImportButton = (props) => {
               </Select>
             </div>
             <FileUpload  {...{ onFileAdded, clear }} />
-            <NotificationsLine {...{ csvValidationNotifications }} />
-            <RowCountLine {...{ values }} />
+            <ImportNotificationsLine {...{ csvValidationNotifications }} />
+            <ImportRowCountLine {...{ values }} />
           </div>
         </DialogContent>
         <DialogActions>

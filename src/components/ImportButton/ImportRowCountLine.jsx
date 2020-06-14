@@ -19,9 +19,9 @@ export default (props) => {
           </Typography>
         </React.Fragment>
       } TransitionComponent={Zoom} interactive arrow placement="top">
-        <span style={{ marginBottom: '0px' }}>
+        <p style={{ marginBottom: '0px' }}>
           {'Import row count'}: <strong>{values.length}</strong>
-        </span>
+        </p>
       </LightTooltip>
     )}
   </>);

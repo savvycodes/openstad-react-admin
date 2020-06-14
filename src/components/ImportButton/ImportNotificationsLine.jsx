@@ -19,9 +19,9 @@ export default (props) => {
           </Typography>
         </React.Fragment>
       } TransitionComponent={Zoom} interactive arrow placement="top">
-        <span style={{ marginBottom: '0px', color: 'blue' }}>
+        <p style={{ marginBottom: '0px', color: 'blue' }}>
           {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
-        </span>
+        </p>
       </LightTooltip>
     )}
   </>);

@@ -167,13 +167,12 @@ export const ImportButton = (props) => {
             </Button>
             <span
               style={{
-              verticalAlign: 'middle',
-              padding: '8px',
-              cursor: 'pointer',
-              color: 'red',
-            }}
+                verticalAlign: 'middle',
+                padding: '8px',
+                cursor: 'pointer',
+                color: 'red',
+              }}
               onClick={clear}>
-
               <DeleteForeverIcon color={'red'}/>
             </span>
             {!!fileName && (

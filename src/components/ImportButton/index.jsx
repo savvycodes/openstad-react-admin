@@ -17,6 +17,9 @@ import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
 import ImportValidationAlertLine from './ImportValidationAlertLine';
 import ActionButtonsLine from './ActionButtonsLine';
+import FileUpload from './FileUpload';
+import NotificationsLine from './NotificationsLine';
+import RowCountLine from './RowCountLine';
 
 export const ImportButton = (props) => {
   const { resource, preCommitCallback } = props;
@@ -154,41 +157,10 @@ export const ImportButton = (props) => {
                 <MenuItem value={';'}>;</MenuItem>
                 <MenuItem value={' '}>Space</MenuItem>
               </Select>
+              <FileUpload  {...{ onFileAdded, clear }} />
+              <NotificationsLine {...{ csvValidationNotifications }} />
+              <RowCountLine {...{ values }} />
             </div>
-            <Button variant='contained' component='label'>
-              <span>{'chooseFile'}</span>
-              <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }}/>
-              <input
-                type='file'
-                style={{ display: 'none' }}
-                onChange={onFileAdded}
-                accept='.csv,.tsv,.txt'
-              />
-            </Button>
-            <span
-              style={{
-                verticalAlign: 'middle',
-                padding: '8px',
-                cursor: 'pointer',
-                color: 'red',
-              }}
-              onClick={clear}>
-              <DeleteForeverIcon color={'red'}/>
-            </span>
-            {!!fileName && (
-              <p style={{ marginBottom: '0px' }}>
-                {'processed'}: <strong>{fileName}</strong>
-              </p>
-            )}
-            {!!values && (
-              <p style={{ marginBottom: '0px' }}>
-                {'Row count'}: <strong>{values.length}</strong>
-              </p>
-            )}
-            {!!csvValidationNotifications && csvValidationNotifications.length > 0 && (
-              <ImportValidationAlertLine csvValidationNotifications={csvValidationNotifications}/>
-            )}
-            {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>
         </DialogContent>
         <DialogActions>

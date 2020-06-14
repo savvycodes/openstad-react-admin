@@ -157,10 +157,10 @@ export const ImportButton = (props) => {
                 <MenuItem value={';'}>;</MenuItem>
                 <MenuItem value={' '}>Space</MenuItem>
               </Select>
-              <FileUpload  {...{ onFileAdded, clear }} />
-              <NotificationsLine {...{ csvValidationNotifications }} />
-              <RowCountLine {...{ values }} />
             </div>
+            <FileUpload  {...{ onFileAdded, clear }} />
+            <NotificationsLine {...{ csvValidationNotifications }} />
+            <RowCountLine {...{ values }} />
           </div>
         </DialogContent>
         <DialogActions>

@@ -5,9 +5,7 @@ import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -15,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
-import ImportValidationAlertLine from './ImportValidationAlertLine';
 import ActionButtonsLine from './ActionButtonsLine';
 import FileUpload from './FileUpload';
 import NotificationsLine from './NotificationsLine';

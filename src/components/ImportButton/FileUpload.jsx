@@ -26,7 +26,7 @@ export default (props) => {
       }}
       onClick={clear}
     >
-      <DeleteForeverIcon color={'red'}/>
+      <DeleteForeverIcon />
     </span>
   </div>);
 }

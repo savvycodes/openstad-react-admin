@@ -11,6 +11,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  DialogActions,
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
@@ -190,7 +191,9 @@ export const ImportButton = (props) => {
             {!!errorTxt && <p style={{ margin: '0px', color: 'red' }}>{errorTxt}</p>}
           </div>
         </DialogContent>
-        <ActionButtonsLine {...{ handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing }} />
+        <DialogActions>
+          <ActionButtonsLine {...{ handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing }} />
+        </DialogActions>
       </Dialog>
     </>
   );

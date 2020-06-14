@@ -12,16 +12,16 @@ export default (props) => {
         <React.Fragment>
           <Typography color="inherit">
             {
-              values.map((value) => {
-                return (<p>{`${value}`}</p>);
+              values.map((value, index) => {
+                return (<span key={index} >{`${value}`}</span>);
               })
             }
           </Typography>
         </React.Fragment>
       } TransitionComponent={Zoom} interactive arrow placement="top">
-        <p style={{ marginBottom: '0px' }}>
+        <span style={{ marginBottom: '0px' }}>
           {'Import row count'}: <strong>{values.length}</strong>
-        </p>
+        </span>
       </LightTooltip>
     )}
   </>);

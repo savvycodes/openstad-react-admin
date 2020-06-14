@@ -12,16 +12,16 @@ export default (props) => {
         <React.Fragment>
           <Typography color="inherit">
             {
-              csvValidationNotifications.map((validationError) => {
-                return (<p style={{ color: validationError.color }}>{`${validationError.message}`}</p>);
+              csvValidationNotifications.map((validationError, index) => {
+                return (<span key={index} style={{ color: validationError.color }}>{`${validationError.message}`}</span>);
               })
             }
           </Typography>
         </React.Fragment>
       } TransitionComponent={Zoom} interactive arrow placement="top">
-        <p style={{ marginBottom: '0px', color: 'blue' }}>
+        <span style={{ marginBottom: '0px', color: 'blue' }}>
           {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
-        </p>
+        </span>
       </LightTooltip>
     )}
   </>);

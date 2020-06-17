@@ -50,7 +50,9 @@ export const ImportButton = (props) => {
   };
 
   const handleImportDelimiterChange = (e) => {
-    setDelimiter(e.target.value)
+    setDelimiter(e.target.value);
+
+    clear();
   };
 
   const handleComplete = (error = false) => {
@@ -98,24 +100,16 @@ export const ImportButton = (props) => {
   const notify = useNotify();
   const dataProvider = useDataProvider();
 
+
   const onFileAdded = async (e) => {
     const file = e.target.files && e.target.files[0];
 
     setFileName(file.name);
 
-    try {
-      const values = await processCsvFile(file, { delimiter });
+    const values = await processCsvFile(file, { delimiter });
 
-      setValues(values);
-      setCsvValidationNotifications(await validateCsv(values, ideaSchema));
-
-      setErrorTxt(null);
-    } catch (error) {
-      console.error(error);
-
-      setValues(null);
-      setErrorTxt(error.toString());
-    }
+    setValues(values);
+    setCsvValidationNotifications(await validateCsv(values, ideaSchema));
   };
 
   return (

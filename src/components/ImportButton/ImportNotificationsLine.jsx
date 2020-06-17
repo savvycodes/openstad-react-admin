@@ -14,12 +14,12 @@ export default (props) => {
             {
               csvValidationNotifications.map((validationError, index) => {
                 return (
-                    <span
-                      key={index}
-                      style={{ color: validationError.color, display: 'block' }}
-                    >
-                      {`${validationError.message}`}
-                    </span>
+                  <span
+                    key={index}
+                    style={{ color: validationError.color, display: 'block' }}
+                  >
+                    {`${validationError.message}`}
+                  </span>
                 );
               })
             }

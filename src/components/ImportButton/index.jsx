@@ -118,6 +118,7 @@ export const ImportButton = (props) => {
     target.value = '';
   };
 
+
   return (
     <>
       <RAButton
@@ -153,7 +154,14 @@ export const ImportButton = (props) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <ActionButtonsLine {...{ handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing, idPresent }} />
+          <ActionButtonsLine {...{
+            handleClose,
+            handleSubmitCreate,
+            handleSubmitOverwrite,
+            values,
+            importing,
+            idPresent: csvValidationNotifications.some( notification => notification['messageType'] === 'idColumn' ) }
+          } />
         </DialogActions>
       </Dialog>
     </>

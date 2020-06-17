@@ -28,7 +28,7 @@ export default (props) => {
         variant='contained'
       >
         {importing && <CircularProgress size={18} thickness={2}/>}
-        <span>{'importOverride'}</span>
+        <span>{'Import Override'}</span>
       </Button>
     </>
   );

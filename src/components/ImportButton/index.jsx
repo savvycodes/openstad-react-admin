@@ -30,7 +30,6 @@ export const ImportButton = (props) => {
   const [values, setValues] = React.useState([]);
   const [delimiter, setDelimiter] = React.useState(',');
   const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
-  const [errorTxt, setErrorTxt] = React.useState('');
   const refresh = useRefresh();
 
   const openImportDialog = () => {
@@ -46,6 +45,7 @@ export const ImportButton = (props) => {
 
   const handleClose = () => {
     clear();
+
     setOpen(false);
   };
 
@@ -57,6 +57,7 @@ export const ImportButton = (props) => {
 
   const handleComplete = (error = false) => {
     handleClose();
+
     if (!error) {
       notify(`imported ${fileName}`);
       refresh();
@@ -68,6 +69,7 @@ export const ImportButton = (props) => {
 
   const handleSubmitCreate = async () => {
     setImporting(true);
+
     try {
       if (values.some((v) => v.id)) {
         throw new Error('hasId');
@@ -82,6 +84,7 @@ export const ImportButton = (props) => {
 
   const handleSubmitOverwrite = async () => {
     setImporting(true);
+
     try {
       if (values.some((v) => !v.id)) {
         throw new Error('noId');
@@ -99,7 +102,6 @@ export const ImportButton = (props) => {
 
   const notify = useNotify();
   const dataProvider = useDataProvider();
-
 
   const onFileAdded = async (e) => {
     const { target } = e;
@@ -151,7 +153,7 @@ export const ImportButton = (props) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <ActionButtonsLine {...{ handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing }} />
+          <ActionButtonsLine {...{ handleClose, handleSubmitCreate, handleSubmitOverwrite, values, importing, idPresent }} />
         </DialogActions>
       </Dialog>
     </>

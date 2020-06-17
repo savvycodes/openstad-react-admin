@@ -141,6 +141,13 @@ export const ImportButton = (props) => {
         </DialogTitle>
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
+            <p>Here you can upload a csv or tsv file for bulk editing or creation.
+              For creating: use a file without 'id' column.
+              For editing: use a file with 'id' column.
+              If you would like to edit the records from the index as a csv file, use the 'export' button in the top
+              right corner to export as a csv including the id column. After editing the csv in your editor of choice,
+              use this import function to upload the file.
+            </p>
             <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
             <ol>
               <li>{'Must be a \'.csv\' or \'.tsv\' file'}</li>

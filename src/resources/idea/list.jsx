@@ -11,12 +11,11 @@ const exporter = ideas => {
   //
   //   return ideaExport;
   // });
-  console.log(ideas)
 
   if (ideas.length > 0) {
     const csv = convertToCSV({
       data: ideas,
-      fields: ['title', 'summary', 'description'],
+      fields: ['id', 'title', 'summary', 'description'],
     });
 
     downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file

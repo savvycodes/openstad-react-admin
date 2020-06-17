@@ -102,7 +102,9 @@ export const ImportButton = (props) => {
 
 
   const onFileAdded = async (e) => {
-    const file = e.target.files && e.target.files[0];
+    const { target } = e;
+
+    const file = target.files && target.files[0];
 
     setFileName(file.name);
 
@@ -110,6 +112,8 @@ export const ImportButton = (props) => {
 
     setValues(values);
     setCsvValidationNotifications(await validateCsv(values, ideaSchema));
+
+    target.value = '';
   };
 
   return (

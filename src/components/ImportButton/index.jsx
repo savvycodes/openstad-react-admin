@@ -16,6 +16,7 @@ import FileUpload from './FileUpload';
 import ImportNotifications from './ImportNotificationsLine';
 import ImportRowCount from './ImportRowCountLine';
 import ImportDelimiter from './ImportDelimiterLine';
+import countFailedImportRows from './countFailedImportRows';
 
 export const ImportButton = (props) => {
   const { resource } = props;
@@ -29,9 +30,8 @@ export const ImportButton = (props) => {
   const [fileName, setFileName] = React.useState('');
   const [values, setValues] = React.useState([]);
   const [delimiter, setDelimiter] = React.useState(',');
+  const [dialogStatus, setDialogStatus] = React.useState('base');
   const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
-  const refresh = useRefresh();
-  const notify = useNotify();
   const dataProvider = useDataProvider();
 
   const openImportDialog = () => {
@@ -73,7 +73,7 @@ export const ImportButton = (props) => {
     ).then(() => {
       setCsvValidationNotifications(apiValidationErrors);
 
-      handleClose();
+      setDialogStatus('importFinished');
 
       // notify(`imported ${fileName}`);
       // refresh();
@@ -130,23 +130,37 @@ export const ImportButton = (props) => {
         </DialogTitle>
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
-            <p>Here you can upload a csv or tsv file for bulk editing or creation.
-              For creating: use a file without 'id' column.
-              For editing: use a file with 'id' column.
-              If you would like to edit the records from the index as a csv file, use the 'export' button in the top
-              right corner to export as a csv including the id column. After editing the csv in your editor of choice,
-              use this import function to upload the file.
-            </p>
-            <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
-            <ol>
-              <li>{'Must be a \'.csv\' or \'.tsv\' file'}</li>
-              <li>{'Must not contain an \'id\' column for new'}</li>
-              <li>{'Must contain an \'id\' column for overwrite'}</li>
-            </ol>
-            <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
-            <FileUpload  {...{ onFileAdded, clear }} />
-            <ImportNotifications {...{ csvValidationNotifications }} />
-            <ImportRowCount {...{ values }} />
+            {dialogStatus === 'importFinished' ?
+                <>
+                  <h3>Import complete!</h3>
+                  {/*<p>*/}
+                  {/*  {'Imported '}*/}
+                  {/*  {countFailedImportRows(csvValidationNotifications)}*/}
+                  {/*  {'from total ' + values ? values.length : 0 + ' lines'}*/}
+                  {/*</p>*/}
+                  <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
+                </>
+              :
+              <>
+                <p>Here you can upload a csv or tsv file for bulk editing or creation.
+                  For creating: use a file without 'id' column.
+                  For editing: use a file with 'id' column.
+                  If you would like to edit the records from the index as a csv file, use the 'export' button in the top
+                  right corner to export as a csv including the id column. After editing the csv in your editor of choice,
+                  use this import function to upload the file.
+                </p>
+                <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
+                <ol>
+                  <li>{'Must be a \'.csv\' or \'.tsv\' file'}</li>
+                  <li>{'Must not contain an \'id\' column for new'}</li>
+                  <li>{'Must contain an \'id\' column for overwrite'}</li>
+                </ol>
+                <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
+                <FileUpload  {...{ onFileAdded, clear }} />
+                <ImportNotifications {...{ csvValidationNotifications }} />
+                <ImportRowCount {...{ values }} />
+              </>
+            }
           </div>
         </DialogContent>
         <DialogActions>

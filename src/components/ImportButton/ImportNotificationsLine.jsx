@@ -4,7 +4,27 @@ import Zoom from '@material-ui/core/Zoom';
 import LightTooltip from '../LightTooltip';
 
 export default (props) => {
-  const { csvValidationNotifications } = props;
+  const { csvValidationNotifications, dialogStatus } = props;
+
+  if (dialogStatus === 'importFinished') {
+    return (
+      <React.Fragment>
+        <Typography color="inherit">
+          {
+            csvValidationNotifications.map((validationError, index) => {
+              return (
+                <span
+                  key={index}
+                  style={{ color: validationError.color, display: 'block' }}
+                >
+                    {`${validationError.message}`}
+                  </span>
+              );
+            })
+          }
+        </Typography>
+      </React.Fragment>);
+  }
 
   return (<>
     {!!csvValidationNotifications && csvValidationNotifications.length > 0 && (

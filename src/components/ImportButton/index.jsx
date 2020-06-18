@@ -18,7 +18,7 @@ import ImportRowCount from './ImportRowCountLine';
 import ImportDelimiter from './ImportDelimiterLine';
 
 export const ImportButton = (props) => {
-  const { resource, preCommitCallback } = props;
+  const { resource } = props;
 
   if (!resource) {
     throw new Error('emptyResource');
@@ -71,11 +71,8 @@ export const ImportButton = (props) => {
     setImporting(true);
 
     try {
-      if (values.some((v) => v.id)) {
-        throw new Error('hasId');
-      }
-      if (preCommitCallback) setValues(preCommitCallback('create', values));
       await Promise.all(values.map((value) => dataProvider.create(resource, { data: value })));
+
       handleComplete();
     } catch (error) {
       handleComplete(error);
@@ -89,7 +86,7 @@ export const ImportButton = (props) => {
       if (values.some((v) => !v.id)) {
         throw new Error('noId');
       }
-      if (preCommitCallback) setValues(preCommitCallback('overwrite', values));
+
       Promise.all(
         values.map((value) => dataProvider.update(resource, { id: value.id, data: value })),
       ).then(() => {

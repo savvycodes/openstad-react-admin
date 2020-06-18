@@ -10,7 +10,7 @@ export default (props) => {
   return (
     <>
       <Button onClick={handleClose}>
-        <span>{'cancel'}</span>
+        <span>{'close'}</span>
       </Button>
       <Button
         disabled={!values || values.length < 1 || importing || idPresent}

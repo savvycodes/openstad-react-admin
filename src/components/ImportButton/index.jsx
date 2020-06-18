@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as RAButton, useRefresh } from 'react-admin';
+import { Button as RAButton } from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useNotify, useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
@@ -105,6 +105,7 @@ export const ImportButton = (props) => {
     target.value = '';
   };
 
+  const totalRows = values ? values.length : 0;
 
   return (
     <>
@@ -129,15 +130,14 @@ export const ImportButton = (props) => {
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             {dialogStatus === 'importFinished' ?
-                <>
+                (<>
                   <h3>Import complete!</h3>
-                  {/*<p>*/}
-                  {/*  {'Imported '}*/}
-                  {/*  {countFailedImportRows(csvValidationNotifications)}*/}
-                  {/*  {'from total ' + values ? values.length : 0 + ' lines'}*/}
-                  {/*</p>*/}
+                  <p>
+                    Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total of <b>{totalRows}</b> rows
+                  </p>
+                  <h5 style={{color: 'red'}}>{countFailedImportRows(csvValidationNotifications)} failed rows:</h5>
                   <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
-                </>
+                </>)
               :
               <>
                 <p>Here you can upload a csv or tsv file for bulk editing or creation.

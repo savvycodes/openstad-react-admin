@@ -19,7 +19,7 @@ export default (props) => {
         variant='contained'
       >
         {importing && <CircularProgress size={18} thickness={2}/>}
-        <span>{'Import New'}</span>
+        <span>{'Create rows'}</span>
       </Button>
       <Button
         disabled={!values || values.length < 1 || importing || !idPresent}
@@ -28,7 +28,7 @@ export default (props) => {
         variant='contained'
       >
         {importing && <CircularProgress size={18} thickness={2}/>}
-        <span>{'Import Override'}</span>
+        <span>{'Update rows'}</span>
       </Button>
     </>
   );

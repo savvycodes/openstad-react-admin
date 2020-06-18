@@ -40,7 +40,7 @@ export const ImportButton = (props) => {
 
   const clear = () => {
     setImporting(false);
-    setFileName('');
+    setImporting(false);
     setValues([]);
     setCsvValidationNotifications([]);
   };
@@ -89,6 +89,11 @@ export const ImportButton = (props) => {
 
     handleSubmit(callback);
   };
+
+  const handleReload = async () => {
+    clear();
+    setDialogStatus('base');
+  }
 
   const onFileAdded = async (e) => {
     const { target } = e;
@@ -168,8 +173,10 @@ export const ImportButton = (props) => {
             handleClose,
             handleSubmitCreate,
             handleSubmitOverwrite,
+            handleReload,
             values,
             importing,
+            dialogStatus,
             idPresent: csvValidationNotifications.some(notification => notification['messageType'] === 'idColumn'),
           }} />
         </DialogActions>

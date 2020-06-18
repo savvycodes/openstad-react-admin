@@ -31,6 +31,8 @@ export const ImportButton = (props) => {
   const [delimiter, setDelimiter] = React.useState(',');
   const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
   const refresh = useRefresh();
+  const notify = useNotify();
+  const dataProvider = useDataProvider();
 
   const openImportDialog = () => {
     setOpen(true);
@@ -55,48 +57,40 @@ export const ImportButton = (props) => {
     clear();
   };
 
-  const handleComplete = (error = false) => {
-    handleClose();
-
-    if (!error) {
-      notify(`imported ${fileName}`);
-      refresh();
-    }
-    if (error) {
-      notify(`importing ${fileName}, ${error}`, 'error');
-    }
-  };
-
-  const handleSubmitCreate = async () => {
+  const handleSubmit = (callback) => {
     setImporting(true);
 
-    try {
-      await Promise.all(values.map((value) => dataProvider.create(resource, { data: value })));
+    let apiValidationErrors = [];
 
-      handleComplete();
-    } catch (error) {
-      handleComplete(error);
-    }
+    Promise.all(
+      values.map((value) => callback(value).catch((error) => {
+        apiValidationErrors.push({
+          messageType: 'apiValidationError',
+          color: 'red',
+          message: error.message,
+        });
+      })),
+    ).then(() => {
+      setCsvValidationNotifications(apiValidationErrors);
+
+      handleClose();
+
+      // notify(`imported ${fileName}`);
+      // refresh();
+    });
+  }
+
+  const handleSubmitCreate = async () => {
+    const callback = (value) => dataProvider.create(resource, { data: value });
+
+    handleSubmit(callback);
   };
 
   const handleSubmitOverwrite = async () => {
-    setImporting(true);
+    const callback = (value) => dataProvider.update(resource, { id: value.id, data: value });
 
-    try {
-      Promise.all(
-        values.map((value) => dataProvider.update(resource, { id: value.id, data: value })),
-      ).then(() => {
-        handleComplete();
-      });
-    } catch (error) {
-      console.log('error')
-      console.log(error)
-      handleComplete(error);
-    }
+    handleSubmit(callback);
   };
-
-  const notify = useNotify();
-  const dataProvider = useDataProvider();
 
   const onFileAdded = async (e) => {
     const { target } = e;
@@ -162,8 +156,9 @@ export const ImportButton = (props) => {
             handleSubmitOverwrite,
             values,
             importing,
-            idPresent: csvValidationNotifications.some( notification => notification['messageType'] === 'idColumn' ) }
-          } />
+            idPresent: csvValidationNotifications.some(notification => notification['messageType'] === 'idColumn'),
+          }
+                             } />
         </DialogActions>
       </Dialog>
     </>

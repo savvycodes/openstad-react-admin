@@ -5,17 +5,12 @@ import { CreateButton, ExportButton } from 'ra-ui-materialui';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min';
 
 const exporter = ideas => {
-  // const ideasForExport = ideas.map(idea => {
-  //   let ideaExport = {};
-  //   // ideaExport.author_name = idea.author.name;
-  //
-  //   return ideaExport;
-  // });
-
   if (ideas.length > 0) {
+    const [firstRow] = ideas;
+
     const csv = convertToCSV({
       data: ideas,
-      fields: ['id', 'title', 'summary', 'description'],
+      fields: Object.keys(firstRow),
     });
 
     downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file

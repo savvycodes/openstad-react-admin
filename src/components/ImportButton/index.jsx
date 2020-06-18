@@ -83,16 +83,14 @@ export const ImportButton = (props) => {
     setImporting(true);
 
     try {
-      if (values.some((v) => !v.id)) {
-        throw new Error('noId');
-      }
-
       Promise.all(
         values.map((value) => dataProvider.update(resource, { id: value.id, data: value })),
       ).then(() => {
         handleComplete();
       });
     } catch (error) {
+      console.log('error')
+      console.log(error)
       handleComplete(error);
     }
   };

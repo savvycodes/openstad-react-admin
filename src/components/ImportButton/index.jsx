@@ -76,7 +76,7 @@ export const ImportButton = (props) => {
       setImporting(false);
       setDialogStatus('importFinished');
     });
-  }
+  };
 
   const handleSubmitCreate = async () => {
     const callback = (value) => dataProvider.create(resource, { data: value });
@@ -130,21 +130,23 @@ export const ImportButton = (props) => {
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             {dialogStatus === 'importFinished' ?
-                (<>
-                  <h3>Import complete!</h3>
-                  <p>
-                    Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total of <b>{totalRows}</b> rows
-                  </p>
-                  <h5 style={{color: 'red'}}>{countFailedImportRows(csvValidationNotifications)} failed rows:</h5>
-                  <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
-                </>)
+              (<>
+                <h3>Import complete!</h3>
+                <p>
+                  Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total
+                  of <b>{totalRows}</b> rows
+                </p>
+                <h5 style={{ color: 'red' }}>{countFailedImportRows(csvValidationNotifications)} failed rows:</h5>
+                <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
+              </>)
               :
               <>
                 <p>Here you can upload a csv or tsv file for bulk editing or creation.
                   For creating: use a file without 'id' column.
                   For editing: use a file with 'id' column.
                   If you would like to edit the records from the index as a csv file, use the 'export' button in the top
-                  right corner to export as a csv including the id column. After editing the csv in your editor of choice,
+                  right corner to export as a csv including the id column. After editing the csv in your editor of
+                  choice,
                   use this import function to upload the file.
                 </p>
                 <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
@@ -169,8 +171,7 @@ export const ImportButton = (props) => {
             values,
             importing,
             idPresent: csvValidationNotifications.some(notification => notification['messageType'] === 'idColumn'),
-          }
-                             } />
+          }} />
         </DialogActions>
       </Dialog>
     </>

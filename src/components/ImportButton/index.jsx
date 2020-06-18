@@ -73,10 +73,8 @@ export const ImportButton = (props) => {
     ).then(() => {
       setCsvValidationNotifications(apiValidationErrors);
 
+      setImporting(false);
       setDialogStatus('importFinished');
-
-      // notify(`imported ${fileName}`);
-      // refresh();
     });
   }
 

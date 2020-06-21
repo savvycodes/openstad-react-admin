@@ -53,7 +53,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
       {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={IdeaIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
-      {resources.area && resources.area.active ?  <Resource name="area" list={AreaList} edit={AreaEdit} create={AreaCreate} icon={AreaIcon} options={{menuTitle: 'Polygonen', imageApiUrl: props.imageApi.url}} />  : <div />}
+      {resources.area && resources.area.active ?  <Resource name="area" list={AreaList} edit={AreaEdit} create={AreaCreate} icon={AreaIcon} options={{menuTitle: 'Polygonen'}} />  : <div />}
       {resources.article && resources.article.active ?  <Resource name="article" list={ArticleList} edit={ArticleEdit} create={ArticleCreate} icon={ArticleIcon} options={{menuTitle: 'Artikelen'}} />  : <div />}
       {resources.tag && resources.tag.active ?  <Resource name="tag" list={TagList} edit={TagEdit} create={TagCreate} icon={TagIcon} options={{menuTitle: 'Tags'}}  />  : <div />}
       {resources.argument && resources.argument.active ? <Resource name="argument" list={ArgumentList} edit={ArgumentEdit} create={ArgumentCreate} icon={ArgumentIcon} options={{menuTitle: 'Argumenten'}} /> : <div />}

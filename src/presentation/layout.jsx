@@ -8,6 +8,5 @@ import AdminAppBar from './appBar.jsx';
 const AdminSideBar = props => <Sidebar {...props} size={500} />;
 
 export const MyLayout = (props) => {
-  console.log('props', props)
   return <Layout {...props} menu={menu} sidebar={AdminSideBar} appBar={AdminAppBar} />;
 }

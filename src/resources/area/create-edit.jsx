@@ -23,7 +23,7 @@ export const CreateEditActions = props => {
 };
 
 const Form = (props) => (
-  <SimpleForm>
+  <SimpleForm {...props}>
     <TextInput source="name"/>
     {/*<TextInput label="Publication date" source="published_at"/>*/}
     {/*<TextInput source="average_note"/>*/}

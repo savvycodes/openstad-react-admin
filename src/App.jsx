@@ -38,7 +38,6 @@ export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
   const user = props.user;
   const userPath = "/user/" + user.id;
-  console.log('props', props.displayAppBar)
 
   return (
     <Admin

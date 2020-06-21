@@ -47,6 +47,9 @@ ReactDOM.render(
         argument: {
           active: true
         },
+        area: {
+          active: true
+        },
         site: {
           active: true
         },

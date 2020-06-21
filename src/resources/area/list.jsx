@@ -12,7 +12,7 @@ export const ListActions = props => {
   );
 };
 
-export const IdeaList = (props) => (
+export const AreaList = (props) => (
   <List {...props} actions={<ListActions/>}>
     <Datagrid>
       <TextField source="id"/>
@@ -21,7 +21,7 @@ export const IdeaList = (props) => (
       <TextField source="summary"/>
       <TextField source="description"/>
       <DateField source="createdAt"/>
-      <EditButton basePath="/idea"/>
+      <EditButton basePath="/area"/>
     </Datagrid>
   </List>
 );

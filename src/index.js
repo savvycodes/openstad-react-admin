@@ -1,3 +1,6 @@
+/*
+  This is demo start file for developing, real application import the library and fill in the right settings
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

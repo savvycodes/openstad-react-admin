@@ -78,14 +78,42 @@ export const ImportButton = (props) => {
     });
   };
 
+  const prepareData = (value) => {
+    // certain columns should be send
+    // They are currently also present in export
+    // should probably not be send by api
+    const removeKeys = ['deletedAt'];
+
+    Object.keys(value).forEach((key) => {
+      // in case value is empty ont send it, many values will fail on empty string
+      // for instance int types
+      // this might cause issue when wanting to empty a field
+      if (!value[key] || removeKeys.includes(key)) {
+        delete value[key];
+      }
+      //@todo split by point . extraData.phone should be
+      // extraData: {"phone" : extraData.phone, "theme": extraData.phone}
+
+    });
+
+    return value;
+  }
+
   const handleSubmitCreate = async () => {
-    const callback = (value) => dataProvider.create(resource, { data: value });
+    const callback = (value) => {
+      value = prepareData(value);
+      return dataProvider.create(resource, { data: value })
+    };
 
     handleSubmit(callback);
   };
 
   const handleSubmitOverwrite = async () => {
-    const callback = (value) => dataProvider.update(resource, { id: value.id, data: value });
+
+    const callback = (value) => {
+      value = prepareData(value);
+      return dataProvider.update(resource, { id: value.id, data: value });
+    }
 
     handleSubmit(callback);
   };
@@ -177,7 +205,7 @@ export const ImportButton = (props) => {
             values,
             importing,
             dialogStatus,
-            idPresent: csvValidationNotifications.some(notification => notification['messageType'] === 'idColumn'),
+            idPresent: csvValidationNotifications.some(notification => notification['messageType'] === 'idColumnPresent'),
           }} />
         </DialogActions>
       </Dialog>

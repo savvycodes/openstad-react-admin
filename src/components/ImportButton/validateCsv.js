@@ -14,7 +14,7 @@ export default async (csvRows, schema) => {
    */
   if(csvRows[0].hasOwnProperty('id')) {
     validationMessages.push({
-      messageType: 'idColumn',
+      messageType: 'idColumnPresent',
       color: 'blue',
       message: 'Id column is present in file; Import override enabled',
     });

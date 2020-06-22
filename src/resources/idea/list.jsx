@@ -4,6 +4,7 @@ import React from 'react';
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min';
 
+/*
 const exporter = ideas => {
   if (ideas.length > 0) {
     const [firstRow] = ideas;
@@ -16,28 +17,27 @@ const exporter = ideas => {
     downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
   }
 };
+*/
 
 export const ListActions = props => {
-  const { className, basePath, total, currentSort, filterValues, permanentFilter, maxResults } = props;
+  const { className, basePath, total, currentSort, filterValues, permanentFilter, maxResults, resource } = props;
 
   return (
     <TopToolbar className={className}>
       <CreateButton basePath={basePath}  />
       <ExportButton
-        disabled={total === 0}
-        resource={'idea'}
-        sort={currentSort}
-        filter={{ ...filterValues, ...permanentFilter }}
-        exporter={exporter}
-        maxResults={maxResults}
-      />
+         disabled={total === 0}
+         resource={resource}
+         sort={currentSort}
+         filter={{ ...filterValues, ...permanentFilter }}
+       />
       <ImportButton {...props} />
     </TopToolbar>
   );
 };
 
 export const IdeaList = (props) => (
-  <List {...props} actions={<ListActions/>} exporter={exporter}>
+  <List {...props} actions={<ListActions/>} >
     <Datagrid>
       <TextField source="id"/>
       <ImageField source="extraData.images[0]" label="Image"/>

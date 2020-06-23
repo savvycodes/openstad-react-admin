@@ -39,7 +39,6 @@ export default (props) => {
               cursor: 'pointer',
               color: 'blue',
             }}
-            onClick={() => console.log('sss')}
           >
           <InfoOutlined/>
           </span>

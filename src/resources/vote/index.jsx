@@ -37,7 +37,7 @@ export const VoteList = (props) => (
         <TextField source="ip"/>
       </ReferenceField>
       <DateField source="createdAt"/>
-      <ApproveField label="OK" source="confirmed"/>
+      <ApproveField label="Approved" source="confirmed"/>
       <EditButton basePath="/Vote"/>
     </Datagrid>
   </List>

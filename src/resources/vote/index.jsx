@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   List,
-  NumberField,
   NumberInput,
   ReferenceField,
   Datagrid,
@@ -12,9 +11,6 @@ import {
   TextField,
   EditButton,
   TextInput,
-  DateInput,
-  ImageInput,
-  ImageField,
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 

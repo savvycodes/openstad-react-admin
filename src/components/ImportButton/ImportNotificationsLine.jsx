@@ -31,8 +31,11 @@ export default (props) => {
     return <></>;
   }
 
+  const color = csvValidationNotifications.filter(notification => notification['color'] === 'red').length > 0 ?
+    'red' : 'blue';
+
   return (
-    <p style={{ marginBottom: '0px', color: 'blue' }}>
+    <p style={{ marginBottom: '0px', color }}>
       <span>
         {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
       </span>

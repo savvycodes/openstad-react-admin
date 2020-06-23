@@ -1,23 +1,7 @@
-import { Datagrid, DateField, downloadCSV, EditButton, ImageField, List, TextField, TopToolbar } from 'react-admin';
+import { Datagrid, DateField, EditButton, ImageField, List, TextField, TopToolbar } from 'react-admin';
 import { ImportButton } from '../../components/ImportButton'
 import React from 'react';
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
-import { unparse as convertToCSV } from 'papaparse/papaparse.min';
-
-/*
-const exporter = ideas => {
-  if (ideas.length > 0) {
-    const [firstRow] = ideas;
-
-    const csv = convertToCSV({
-      data: ideas,
-      fields: Object.keys(firstRow),
-    });
-
-    downloadCSV(csv, 'ideas'); // download as 'ideas.csv` file
-  }
-};
-*/
 
 export const ListActions = props => {
   const { className, basePath, total, currentSort, filterValues, permanentFilter, resource } = props;

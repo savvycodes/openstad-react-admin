@@ -12,8 +12,8 @@ export default (props) => {
   }
 
   return (
-    <p>
-      <span style={{ marginBottom: '0px', color: 'blue' }}>
+    <p style={{ marginBottom: '0px', color: 'blue' }}>
+      <span>
         {'Import row count'}: <strong>{values.length}</strong>
       </span>
       <LightTooltip title={
@@ -37,7 +37,6 @@ export default (props) => {
               verticalAlign: 'middle',
               padding: '8px',
               cursor: 'pointer',
-              color: 'blue',
             }}
           >
           <InfoOutlined/>

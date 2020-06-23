@@ -32,8 +32,8 @@ export default (props) => {
   }
 
   return (
-    <p>
-      <span style={{ marginBottom: '0px', color: 'blue', display: 'inline-block' }}>
+    <p style={{ marginBottom: '0px', color: 'blue' }}>
+      <span>
         {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
       </span>
       <LightTooltip title={
@@ -59,7 +59,6 @@ export default (props) => {
               verticalAlign: 'middle',
               padding: '8px',
               cursor: 'pointer',
-              color: 'blue',
             }}
           >
           <InfoOutlined/>

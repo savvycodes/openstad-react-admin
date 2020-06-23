@@ -27,30 +27,33 @@ export default (props) => {
       </React.Fragment>);
   }
 
-  return (<>
-    {!!csvValidationNotifications && csvValidationNotifications.length > 0 && (
-      <>
-        <p style={{ marginBottom: '0px', color: 'blue', display: 'inline-block' }}>
-          {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
-        </p>
-        <LightTooltip title={
-          <React.Fragment>
-            <Typography color="inherit">
-              {
-                csvValidationNotifications.map((validationError, index) => {
-                  return (
-                    <span
-                      key={index}
-                      style={{ color: validationError.color, display: 'block' }}
-                    >
+  if (!csvValidationNotifications && csvValidationNotifications.length > 0) {
+    return <></>;
+  }
+
+  return (
+    <p>
+      <span style={{ marginBottom: '0px', color: 'blue', display: 'inline-block' }}>
+        {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
+      </span>
+      <LightTooltip title={
+        <React.Fragment>
+          <Typography color="inherit">
+            {
+              csvValidationNotifications.map((validationError, index) => {
+                return (
+                  <span
+                    key={index}
+                    style={{ color: validationError.color, display: 'block' }}
+                  >
                       {`${validationError.message}`}
                     </span>
-                  );
-                })
-              }
-            </Typography>
-          </React.Fragment>
-        } TransitionComponent={Zoom} interactive arrow placement="top">
+                );
+              })
+            }
+          </Typography>
+        </React.Fragment>
+      } TransitionComponent={Zoom} interactive arrow placement="top">
           <span
             style={{
               verticalAlign: 'middle',
@@ -62,8 +65,7 @@ export default (props) => {
           >
           <InfoOutlined/>
           </span>
-        </LightTooltip>
-      </>
-    )}
-  </>);
+      </LightTooltip>
+    </p>
+  );
 }

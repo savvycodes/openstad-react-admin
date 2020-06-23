@@ -27,7 +27,7 @@ export default (props) => {
       </React.Fragment>);
   }
 
-  if (!csvValidationNotifications && csvValidationNotifications.length > 0) {
+  if (!csvValidationNotifications || csvValidationNotifications.length < 1) {
     return <></>;
   }
 

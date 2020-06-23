@@ -7,7 +7,7 @@ import InfoOutlined from '@material-ui/icons/InfoOutlined';
 export default (props) => {
   const { values } = props;
 
-  if (!values) {
+  if (!values || values < 1) {
     return <></>;
   }
 

@@ -8,6 +8,7 @@ import {
   Create,
   SimpleForm,
   DateField,
+  BooleanField,
   TextField,
   EditButton,
   TextInput,
@@ -19,14 +20,25 @@ export const VoteIcon = ListAltIcon;
 export const VoteList = (props) => (
   <List {...props} title="Vote">
     <Datagrid>
+      {console.log('props')}
+      {console.log(props)}
       <TextField source="id"/>
       <ReferenceField label="User ID" source="userId" reference="user">
         <TextField source="userId"/>
       </ReferenceField>
-      <ReferenceField label="Idea" source="ideaId" reference="idea">
-        <TextField source="title"/>
+      <ReferenceField label="Opinion" source="opinion" reference="opinion">
+        <BooleanField source="opinion"/>
+      </ReferenceField>
+      <ReferenceField label="Zip Code" source="zipCode" reference="zipCode">
+        <TextField source="zipCode"/>
+      </ReferenceField>
+      <ReferenceField label="IP" source="ip" reference="ip">
+        <TextField source="ip"/>
       </ReferenceField>
       <DateField source="createdAt"/>
+      <ReferenceField label="OK" source="ok" reference="ok">
+        <ApproveField source="ok"/>
+      </ReferenceField>
       <EditButton basePath="/Vote"/>
     </Datagrid>
   </List>

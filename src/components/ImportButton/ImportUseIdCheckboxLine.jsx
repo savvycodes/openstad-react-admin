@@ -10,7 +10,7 @@ export default (props) => {
       <FormControlLabel
         control={
           <Checkbox
-            checked={checked}
+            checked={!!checked}
             onChange={handleCheckBoxChange}
             name="useId"
             color="primary"

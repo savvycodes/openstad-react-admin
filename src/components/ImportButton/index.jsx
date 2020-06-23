@@ -194,7 +194,7 @@ export const ImportButton = (props) => {
                   <li>{'Must contain an \'id\' column for overwrite'}</li>
                 </ol>
                 <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
-                <ImportUseIdCheckboxLine {...{ useId, handleCheckBoxChange }}/>
+                <ImportUseIdCheckboxLine {...{ checked: useId, handleCheckBoxChange }}/>
                 <FileUpload  {...{ onFileAdded, clear }} />
                 <ImportNotifications {...{ csvValidationNotifications }} />
                 <ImportRowCount {...{ values }} />

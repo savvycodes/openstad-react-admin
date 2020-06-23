@@ -20,7 +20,7 @@ const exporter = ideas => {
 */
 
 export const ListActions = props => {
-  const { className, basePath, total, currentSort, filterValues, permanentFilter, maxResults, resource } = props;
+  const { className, basePath, total, currentSort, filterValues, permanentFilter, resource } = props;
 
   return (
     <TopToolbar className={className}>

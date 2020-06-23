@@ -12,10 +12,10 @@ export default (props) => {
   }
 
   return (
-    <>
-      <p style={{ marginBottom: '0px', color: 'blue', display: 'inline-block' }}>
+    <p>
+      <span style={{ marginBottom: '0px', color: 'blue' }}>
         {'Import row count'}: <strong>{values.length}</strong>
-      </p>
+      </span>
       <LightTooltip title={
         <React.Fragment>
           <Typography color="inherit">
@@ -44,6 +44,6 @@ export default (props) => {
           <InfoOutlined/>
           </span>
       </LightTooltip>
-    </>
+    </p>
   );
 }

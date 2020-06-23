@@ -14,6 +14,7 @@ import {
   TextInput,
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import ApproveField from '../../components/ApproveField';
 
 export const VoteIcon = ListAltIcon;
 
@@ -36,9 +37,7 @@ export const VoteList = (props) => (
         <TextField source="ip"/>
       </ReferenceField>
       <DateField source="createdAt"/>
-      <ReferenceField label="OK" source="ok" reference="ok">
-        <ApproveField source="ok"/>
-      </ReferenceField>
+      <ApproveField label="OK" source="confirmed"/>
       <EditButton basePath="/Vote"/>
     </Datagrid>
   </List>

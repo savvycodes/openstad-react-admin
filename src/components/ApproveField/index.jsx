@@ -2,11 +2,15 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const ApproveField = ({ source, record = {} }) => {
-  console.log(record)
-
+const ApproveField = ({ source, record, handleCheckBoxChange = {} }) => {
   return (
-    <span>{record[source]}</span>
+    <Checkbox
+      checked={!!record[source]}
+      onChange={handleCheckBoxChange}
+      name={source}
+      color="primary"
+      padding={0}
+    />
   );
 };
 

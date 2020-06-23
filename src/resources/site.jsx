@@ -81,10 +81,7 @@ export default function SimpleExpansionPanel() {
 }
 
 
-export const SiteEdit = (props) => {
-  const classes = useStyles();
-
-
+export const SiteEdit = (props) => {  
     return (<Edit title="Edit site" {...props}>
         <TabbedForm redirect="edit">
             <FormTab label="Info" >

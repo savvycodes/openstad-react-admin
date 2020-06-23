@@ -8,7 +8,7 @@ import { TagList, TagEdit, TagCreate, TagIcon } from './resources/tag.jsx';
 
 import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.jsx';
 import { UserList, UserEdit, UserCreate, UserIcon } from './resources/user.jsx';
-import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea.jsx';
+import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
 import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
@@ -28,6 +28,8 @@ import themeReducer from './themeReducer';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 import theme from './theme';
+import { AreaList } from './resources/area/list';
+import { AreaCreate, AreaEdit, AreaIcon } from './resources/area';
 
 /*
 customRoutes={[
@@ -38,7 +40,6 @@ export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
   const user = props.user;
   const userPath = "/user/" + user.id;
-  console.log('props', props.displayAppBar)
 
   return (
     <Admin
@@ -52,6 +53,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
       {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={IdeaIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
+      {resources.area && resources.area.active ?  <Resource name="area" list={AreaList} edit={AreaEdit} create={AreaCreate} icon={AreaIcon} options={{menuTitle: 'Polygonen'}} />  : <div />}
       {resources.article && resources.article.active ?  <Resource name="article" list={ArticleList} edit={ArticleEdit} create={ArticleCreate} icon={ArticleIcon} options={{menuTitle: 'Artikelen'}} />  : <div />}
       {resources.tag && resources.tag.active ?  <Resource name="tag" list={TagList} edit={TagEdit} create={TagCreate} icon={TagIcon} options={{menuTitle: 'Tags'}}  />  : <div />}
       {resources.argument && resources.argument.active ? <Resource name="argument" list={ArgumentList} edit={ArgumentEdit} create={ArgumentCreate} icon={ArgumentIcon} options={{menuTitle: 'Argumenten'}} /> : <div />}

@@ -12,7 +12,7 @@ export default (props) => {
   }
 
   return (
-    <p style={{ marginBottom: '0px', color: 'blue' }}>
+    <div style={{ marginBottom: '0px', color: 'blue' }}>
       <span>
         {'Import row count'}: <strong>{values.length}</strong>
       </span>
@@ -42,6 +42,6 @@ export default (props) => {
           <InfoOutlined/>
           </span>
       </LightTooltip>
-    </p>
+    </div>
   );
 }

@@ -51,7 +51,7 @@ export default (props) => {
         <span>{'Create rows'}</span>
       </Button>
       <Button
-        disabled={!values || values.length < 1 || importing || !idPresent || (idPresent && !useId)}
+        disabled={!values || values.length < 1 || importing || !idPresent || (idPresent && useId)}
         onClick={handleSubmitOverwrite}
         color='primary'
         variant='contained'

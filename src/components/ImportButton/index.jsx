@@ -17,6 +17,7 @@ import ImportNotifications from './ImportNotificationsLine';
 import ImportRowCount from './ImportRowCountLine';
 import ImportDelimiter from './ImportDelimiterLine';
 import countFailedImportRows from './countFailedImportRows';
+import ImportWithIDCheckboxLine from './ImportWithIDCheckboxLine';
 
 export const ImportButton = (props) => {
   const { resource } = props;
@@ -30,6 +31,7 @@ export const ImportButton = (props) => {
   const [fileName, setFileName] = React.useState('');
   const [values, setValues] = React.useState([]);
   const [delimiter, setDelimiter] = React.useState(',');
+  const [useWithID, setUseWithID] = React.useState(true);
   const [dialogStatus, setDialogStatus] = React.useState('base');
   const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
   const dataProvider = useDataProvider();
@@ -189,6 +191,7 @@ export const ImportButton = (props) => {
                   <li>{'Must contain an \'id\' column for overwrite'}</li>
                 </ol>
                 <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
+                <ImportWithIDCheckboxLine {...{ useWithID, setUseWithID }}/>
                 <FileUpload  {...{ onFileAdded, clear }} />
                 <ImportNotifications {...{ csvValidationNotifications }} />
                 <ImportRowCount {...{ values }} />

@@ -55,7 +55,7 @@ const Form = (props) => (
       <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl}/>
     </FormTab>
     <FormTab label=" Extradata">
-      <TextInput disabled source="id"/>
+      {props.edit && <TextInput disabled source="id"/>}
       <JsonInput source="extraData"/>
     </FormTab>
     <FormTab label="Comments">

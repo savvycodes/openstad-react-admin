@@ -111,7 +111,6 @@ export const ImportButton = (props) => {
   };
 
   const handleSubmitOverwrite = async () => {
-
     const callback = (value) => {
       value = prepareData(value);
       return dataProvider.update(resource, { id: value.id, data: value });
@@ -123,7 +122,11 @@ export const ImportButton = (props) => {
   const handleReload = async () => {
     clear();
     setDialogStatus('base');
-  }
+  };
+
+  const handleCheckBoxChange = async (e) => {
+    setUseId(e.target.checked);
+  };
 
   const onFileAdded = async (e) => {
     const { target } = e;
@@ -191,7 +194,7 @@ export const ImportButton = (props) => {
                   <li>{'Must contain an \'id\' column for overwrite'}</li>
                 </ol>
                 <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
-                <ImportUseIdCheckboxLine {...{ useId, handleCheckBoxChange: setUseId }}/>
+                <ImportUseIdCheckboxLine {...{ useId, handleCheckBoxChange }}/>
                 <FileUpload  {...{ onFileAdded, clear }} />
                 <ImportNotifications {...{ csvValidationNotifications }} />
                 <ImportRowCount {...{ values }} />

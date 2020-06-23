@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button as RAButton } from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import { useNotify, useDataProvider } from 'react-admin';
+import { useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
 import {
   Dialog,

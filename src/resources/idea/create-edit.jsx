@@ -41,7 +41,7 @@ const IdeaTitle = ({ record }) => {
 const Form = (props) => (
   <TabbedForm {...props}>
     <FormTab label="Info">
-      <TextInput disabled source="id"/>
+      {props.edit && <TextInput disabled source="id"/>}
       <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
         <SelectInput optionText="email"/>
       </ReferenceInput>
@@ -123,7 +123,7 @@ export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
 
   return (
     <Edit title={<IdeaTitle/>} {...props}>
-      <Form {...props}/>
+      <Form {...props} edit/>
     </Edit>
   )
 }));

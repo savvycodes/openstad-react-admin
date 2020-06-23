@@ -46,8 +46,8 @@ export default (props) => {
                     key={index}
                     style={{ color: validationError.color, display: 'block' }}
                   >
-                      {`${validationError.message}`}
-                    </span>
+                    {`${validationError.message}`}
+                  </span>
                 );
               })
             }

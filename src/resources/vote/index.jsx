@@ -22,11 +22,7 @@ export const VoteIcon = ListAltIcon;
 export const VoteList = (props) => {
   const dataProvider = useDataProvider();
 
-  const handleCheckBoxChange = async (e) => {
-    const { checked, value } = e.target;
-
-    dataProvider.toggle('vote',{checked, value});
-  };
+  const handleCheckBoxChange = async (e) => dataProvider.toggle('vote',{value: e.target.value});
 
   return (
     <List {...props} title="Vote">
@@ -45,7 +41,7 @@ export const VoteList = (props) => {
           <TextField source="ip"/>
         </ReferenceField>
         <DateField source="createdAt"/>
-        <ApproveField label="Approved" source="confirmed" handleCheckBoxChange={handleCheckBoxChange}/>
+        <ApproveField label="Approved" source="checked" handleCheckBoxChange={handleCheckBoxChange}/>
         <EditButton basePath="/Vote"/>
       </Datagrid>
     </List>

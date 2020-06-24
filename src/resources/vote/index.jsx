@@ -23,12 +23,9 @@ export const VoteList = (props) => {
   const dataProvider = useDataProvider();
 
   const handleCheckBoxChange = async (e) => {
-    const checked = e.target.checked;
+    const { checked, value } = e.target;
 
-
-    // TODO: TOMORROW -- finish api call
-
-    dataProvider.toggle(checked);
+    dataProvider.toggle('vote',{checked, value});
   };
 
   return (

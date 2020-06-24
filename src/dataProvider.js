@@ -1,6 +1,5 @@
 import simpleRestProvider from './simpleRestProvider';
 import { fetchUtils } from 'react-admin';
-import myActions from './actions';
 
 const createHttpClient = (jwt, siteKey, csrf) => {
   return (url, options = {}) => {
@@ -28,7 +27,6 @@ const myDataProvider = (api, jwt, siteKey, csrf) => {
 
   return {
     ...dataProvider,
-    ...myActions,
   };
 };
 

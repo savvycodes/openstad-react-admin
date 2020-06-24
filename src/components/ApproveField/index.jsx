@@ -17,6 +17,7 @@ const ApproveField = ({ source, record, handleCheckBoxChange = {} }) => {
       onChange={handleCheckBoxChange}
       name={source}
       color="primary"
+      value={record.id}
       padding={0}
     />
   );

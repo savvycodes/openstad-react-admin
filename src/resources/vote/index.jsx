@@ -16,15 +16,32 @@ import {
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ApproveField from '../../components/ApproveField';
 import { useDataProvider } from 'react-admin';
+import { useDispatch } from 'react-redux';
+import { CRUD_UPDATE_SUCCESS, FETCH_END, UPDATE } from 'react-admin';
 
 export const VoteIcon = ListAltIcon;
 
 export const VoteList = (props) => {
   const dataProvider = useDataProvider();
+  const dispatch = useDispatch();
+  const resource = 'vote';
 
   const handleCheckBoxChange = async (e) => {
-    await dataProvider.toggle('vote', { value: e.target.value });
-    window.location.reload(true);
+    const payload = await dataProvider.toggle('vote', { value: e.target.value });
+
+    dispatch({
+      type: CRUD_UPDATE_SUCCESS,
+      payload,
+      meta: {
+        resource,
+        notification: {
+          body: 'vote approved',
+          level: 'info'
+        },
+        fetchResponse: UPDATE,
+        fetchStatus: FETCH_END
+      }
+    });
   };
 
   return (

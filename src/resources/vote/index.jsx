@@ -22,7 +22,10 @@ export const VoteIcon = ListAltIcon;
 export const VoteList = (props) => {
   const dataProvider = useDataProvider();
 
-  const handleCheckBoxChange = async (e) => dataProvider.toggle('vote',{value: e.target.value});
+  const handleCheckBoxChange = async (e) => {
+    await dataProvider.toggle('vote', { value: e.target.value });
+    window.location.reload(true);
+  };
 
   return (
     <List {...props} title="Vote">

@@ -10,10 +10,14 @@ const RowCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
+/**
+ * By default votes are approved, so an empty checkbox is approval
+ * only a false result is disapproved: record[source] !== false
+ */
 const ApproveField = ({ source, record, handleCheckBoxChange = {} }) => {
   return (
     <RowCheckbox
-      checked={!!record[source]}
+      checked={record[source] !== false}
       onChange={handleCheckBoxChange}
       name={source}
       color="primary"

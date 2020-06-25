@@ -6,7 +6,7 @@ export default (props) => {
   const { delimiter, handleImportDelimiterChange } = props;
 
   return (
-    <div style={{ margin: '20px 0' }}>
+    <div style={{ margin: '10px 0' }}>
       <span>Delimiter: </span>
       <Select
         labelId="demo-simple-select-label"

@@ -1,5 +1,6 @@
 import { stringify } from 'query-string';
 import { fetchUtils } from 'ra-core';
+
 /**
  * Maps react-admin queries to a simple REST API
  *
@@ -37,7 +38,13 @@ const formatResourceUrl = (resource,) => {
 
 }
 
-export default (apiUrl, httpClient = fetchUtils.fetchJson) => ({
+export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
+  {
+    toggle: (resource, params) => {
+      const url = `${apiUrl}/${resource}/${params.value}/toggle`;
+
+      return httpClient(url).then(({ json }) => ({ data: json }))
+    },
     getList: (resource, params) => {
 
         const { page, perPage } = params.pagination;

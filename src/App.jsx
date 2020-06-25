@@ -1,16 +1,13 @@
 import React from 'react';
 import './App.less';
 import { Admin, Resource, fetchUtils} from 'react-admin';
-import { Route } from 'react-router-dom';
-import simpleRestProvider from 'ra-data-simple-rest';
 import { ArticleList, ArticleEdit, ArticleCreate, ArticleIcon } from './resources/article.jsx';
 import { TagList, TagEdit, TagCreate, TagIcon } from './resources/tag.jsx';
-
 import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.jsx';
 import { UserList, UserEdit, UserCreate, UserIcon } from './resources/user.jsx';
 import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
-import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote.jsx';
+import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
 import { SiteEdit } from './resources/site.jsx';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';

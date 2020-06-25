@@ -35,7 +35,7 @@ export default (props) => {
     'red' : 'blue';
 
   return (
-    <p style={{ marginBottom: '0px', color }}>
+    <div style={{ marginBottom: '0px', color }}>
       <span>
         {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
       </span>
@@ -67,6 +67,6 @@ export default (props) => {
           <InfoOutlined/>
           </span>
       </LightTooltip>
-    </p>
+    </div>
   );
 }

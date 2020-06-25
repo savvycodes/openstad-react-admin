@@ -7,7 +7,7 @@ import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.
 import { UserList, UserEdit, UserCreate, UserIcon } from './resources/user.jsx';
 import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
-import { VoteList, VoteEdit, VoteCreate, VoteIcon } from './resources/vote';
+import { VoteList, VoteIcon } from './resources/vote';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
 import { SiteEdit } from './resources/site.jsx';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
@@ -54,7 +54,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.article && resources.article.active ?  <Resource name="article" list={ArticleList} edit={ArticleEdit} create={ArticleCreate} icon={ArticleIcon} options={{menuTitle: 'Artikelen'}} />  : <div />}
       {resources.tag && resources.tag.active ?  <Resource name="tag" list={TagList} edit={TagEdit} create={TagCreate} icon={TagIcon} options={{menuTitle: 'Tags'}}  />  : <div />}
       {resources.argument && resources.argument.active ? <Resource name="argument" list={ArgumentList} edit={ArgumentEdit} create={ArgumentCreate} icon={ArgumentIcon} options={{menuTitle: 'Argumenten'}} /> : <div />}
-      {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} edit={VoteEdit} create={VoteCreate} icon={VoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
+      {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} icon={VoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
       {resources.user && resources.user.active ? <Resource name="user" list={UserList} edit={UserEdit} create={UserCreate} icon={UserIcon} options={{menuTitle: 'Gebruikers',userPath: userPath}} /> : <div />}
       {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={NewsletterSignupIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
     </Admin>

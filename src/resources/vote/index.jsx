@@ -35,7 +35,7 @@ export const VoteList = (props) => {
       meta: {
         resource,
         notification: {
-          body: 'vote approved',
+          body: 'Vote updated!',
           level: 'info'
         },
         fetchResponse: UPDATE,
@@ -48,21 +48,11 @@ export const VoteList = (props) => {
     <List {...props} title="Vote">
       <Datagrid>
         <TextField source="id"/>
-        <ReferenceField label="User ID" source="userId" reference="user">
-          <TextField source="userId"/>
-        </ReferenceField>
-        <ReferenceField label="Opinion" source="opinion" reference="opinion">
-          <BooleanField source="opinion"/>
-        </ReferenceField>
-        <ReferenceField label="Zip Code" source="zipCode" reference="zipCode">
-          <TextField source="zipCode"/>
-        </ReferenceField>
-        <ReferenceField label="IP" source="ip" reference="ip">
-          <TextField source="ip"/>
-        </ReferenceField>
+        <TextField source="opinion"/>
+        <TextField source="zipCode" title="Postcode"/>
+        <TextField source="ip"/>
         <DateField source="createdAt"/>
         <ApproveField label="Approved" source="checked" handleCheckBoxChange={handleCheckBoxChange}/>
-        <EditButton basePath="/Vote"/>
       </Datagrid>
     </List>
   );

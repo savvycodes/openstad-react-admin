@@ -80,30 +80,39 @@ export const ImportButton = (props) => {
     });
   };
 
-  const prepareData = (value) => {
-    // certain columns should be send
+  const prepareData = (value, addRemoveKeys) => {
+    // certain columns should not be send, for instance date values, like createdAt and updatedAt
     // They are currently also present in export
-    // should probably not be send by api
-    const removeKeys = ['deletedAt'];
+    // some should probably, like deletedAt, should not be send by api
+    const standardRemoveKeys = ['deletedAt', 'createdAt', 'updatedAt'];
+    const removeKeys = addRemoveKeys ? standardRemoveKeys.concat(addRemoveKeys) : standardRemoveKeys;
+    const arrayKeys = ['images'];
 
-    Object.keys(value).forEach((key) => {
-      // in case value is empty ont send it, many values will fail on empty string
-      // for instance int types
-      // this might cause issue when wanting to empty a field
-      if (!value[key] || removeKeys.includes(key)) {
-        delete value[key];
+    const cleanUp = function (value, key, parentValues) {
+      if (typeof value === 'object') {
+
+        Object.keys(value).forEach((key) => {
+          // in case value is empty ont send it, many values will fail on empty string
+          // for instance int types
+          // this might cause issue when wanting to empty a field
+          cleanUp(value[key], key, value)
+        });
+      } else {
+        if (!value || removeKeys.includes(key)) {
+          delete parentValues[key];
+        }
       }
-      //@todo split by point . extraData.phone should be
-      // extraData: {"phone" : extraData.phone, "theme": extraData.phone}
+    }
 
-    });
+    cleanUp(value, null)
 
     return value;
   }
 
   const handleSubmitCreate = async () => {
     const callback = (value) => {
-      value = prepareData(value);
+      // add Id key to remove
+      value = prepareData(value, ['id']);
       return dataProvider.create(resource, { data: value })
     };
 

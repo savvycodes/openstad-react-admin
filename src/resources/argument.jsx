@@ -33,9 +33,6 @@ export const ArgumentEdit = (props) => (
 );
 
 export const ArgumentCreate = (props) => {
-  console.log('props.options.imageApiUrl', props.options.imageApiUrl);
-
-
   return <Create title="Argument toevoegen" {...props}>
         <SimpleForm>
             <TextInput source="sku" />

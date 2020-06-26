@@ -34,9 +34,6 @@ export const ProductEdit = (props) => (
 );
 
 export const ProductCreate = (props) => {
-  console.log('props.options.imageApiUrl', props.options.imageApiUrl);
-
-
   return <Create title="Product toevoegen" {...props}>
         <SimpleForm>
             <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl} />

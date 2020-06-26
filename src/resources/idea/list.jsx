@@ -26,8 +26,9 @@ export const IdeaList = (props) => (
       <TextField source="id"/>
       <ImageField source="extraData.images[0]" label="Image"/>
       <TextField source="title"/>
-      <TextField source="summary"/>
-      <TextField source="description"/>
+      <TextField source="status"/>
+      <TextField source="yes"/>
+      <TextField source="no"/>
       <DateField source="createdAt"/>
       <EditButton basePath="/idea"/>
     </Datagrid>

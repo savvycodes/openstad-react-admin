@@ -55,6 +55,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
           pageSize: perPage,
           range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
           filter: JSON.stringify(params.filter),
+          includeVoteCount: 1
         };
 
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
@@ -70,8 +71,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
       getOne: (resource, params) => {
         let url;
 
-        console.log('===??? resource', resource);
-        console.log('===??? resource', resource);
 
         // In case of current request make a call to the root that's where the siteData is found
         // All other resources are children of the site
@@ -79,12 +78,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
           url = apiUrl;
         } else {
           // add include tags always
-          url = `${apiUrl}/${resource}/${params.id}?includeTags=1`;
+          url = `${apiUrl}/${resource}/${params.id}?includeTags=1&includeVoteCount=1`;
         }
 
         return httpClient(url)
           .then(({ json }) => {
-            console.log('json', json);
 
             // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
             //here only solution so editing tags works
@@ -92,9 +90,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
               ...json,
               tags: json.tags ? json.tags.map(tag => tag.id) : [],
             }
-
-            console.log('json single', json);
-
 
             return { data: json }
           });
@@ -133,9 +128,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
             sort: JSON.stringify([field, order]),
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(Object.assign(Object.assign({}, params.filter), { [params.target]: params.id })),
+            includeVoteCount: 1
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        console.log('urlurlurl', url)
+
         return httpClient(url).then(({ headers, json }) => {
 /*            if (!headers.has('content-range')) {
                 throw new Error('The Content-Range header WADDDUP is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?');

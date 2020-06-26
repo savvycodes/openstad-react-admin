@@ -119,7 +119,6 @@ export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
 
   // @TODO, in site.config.ideas is validation rules for
   // form pass to form and add it, maybe move entire logic to form component?
-  console.log('site data object', data)
 
   return (
     <Edit title={<IdeaTitle/>} {...props}>

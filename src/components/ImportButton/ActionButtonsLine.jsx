@@ -42,7 +42,7 @@ export default (props) => {
         <span>{'close'}</span>
       </Button>
       <Button
-        disabled={(!values || values.length < 1) || importing || (idPresent && useId)}
+        disabled={(!values || values.length < 1) || importing}
         onClick={handleSubmitCreate}
         color='secondary'
         variant='contained'

@@ -11,18 +11,15 @@ import locale    from 'react-json-editor-ajrm/locale/en';
 // Our app
 class JsonInput extends Component {
   render() {
-    console.log('rendndndndn')
-    console.log('JSONInput',JSONInput)
-
     return (
       <Field name={this.props.source}>
       {(fieldProps) => {
-        console.log('fieldProps',fieldProps)
+        const json =  fieldProps.input.value ? fieldProps.input.value : {};
 
         return (
           <JSONInput
             id          = 'ideaExtraData'
-            placeholder = { fieldProps.input.value }
+            placeholder = { json }
             locale      = { locale }
             height      = '550px'
             width       = '100%'

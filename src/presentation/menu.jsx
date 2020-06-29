@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import DefaultIcon from '@material-ui/icons/ViewList';
 import SettingsIcon from '@material-ui/icons/Settings';
+import DataUsageOutlinedIcon from '@material-ui/icons/DataUsageOutlined';
 
 const styles = {
     root: {}, // Style applied to the MenuItem from material-ui
@@ -50,7 +51,7 @@ const Menu = ({ classes, resources, onMenuClick, logout, dense, open }) => {
         classes={classes}
         to={userResource.options.userPath}
         primaryText="Mijn gegevens"
-        leftIcon={<DefaultIcon />}
+        leftIcon={<DataUsageOutlinedIcon />}
         onClick={onMenuClick}
       /> : <span />}
     </div>

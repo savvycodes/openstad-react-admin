@@ -11,8 +11,11 @@ import { VoteList, VoteIcon } from './resources/vote';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
 import { SiteEdit, SiteIcon } from './resources/site';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
-
-
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import HowToVoteIcon from '@material-ui/icons/HowToVote';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
 import { SettingsForm } from './profile.jsx';
 
 /* presentation elements */
@@ -49,14 +52,14 @@ export const OpenstadReactAdmin = (props) => {
       {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
-      {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={IdeaIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
-      {resources.area && resources.area.active ?  <Resource name="area" list={AreaList} edit={AreaEdit} create={AreaCreate} icon={AreaIcon} options={{menuTitle: 'Polygonen'}} />  : <div />}
+      {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={SpeakerNotesIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
+      {resources.area && resources.area.active ?  <Resource name="area" list={AreaList} edit={AreaEdit} create={AreaCreate} icon={ChangeHistoryIcon} options={{menuTitle: 'Polygonen'}} />  : <div />}
       {resources.article && resources.article.active ?  <Resource name="article" list={ArticleList} edit={ArticleEdit} create={ArticleCreate} icon={ArticleIcon} options={{menuTitle: 'Artikelen'}} />  : <div />}
-      {resources.tag && resources.tag.active ?  <Resource name="tag" list={TagList} edit={TagEdit} create={TagCreate} icon={TagIcon} options={{menuTitle: 'Tags'}}  />  : <div />}
+      {resources.tag && resources.tag.active ?  <Resource name="tag" list={TagList} edit={TagEdit} create={TagCreate} icon={LocalOfferIcon} options={{menuTitle: 'Tags'}}  />  : <div />}
       {resources.argument && resources.argument.active ? <Resource name="argument" list={ArgumentList} edit={ArgumentEdit} create={ArgumentCreate} icon={ArgumentIcon} options={{menuTitle: 'Argumenten'}} /> : <div />}
-      {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} icon={VoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
+      {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} icon={HowToVoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
       {resources.user && resources.user.active ? <Resource name="user" list={UserList} edit={UserEdit} create={UserCreate} icon={UserIcon} options={{menuTitle: 'Gebruikers',userPath: userPath}} /> : <div />}
-      {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={NewsletterSignupIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
+      {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={ContactMailIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
     </Admin>
   );
 }

@@ -9,7 +9,7 @@ import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
 import { VoteList, VoteIcon } from './resources/vote';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
-import { SiteEdit } from './resources/site.jsx';
+import { SiteEdit } from './resources/site';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
 
 

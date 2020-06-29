@@ -5,7 +5,7 @@ import { MenuItemLink, getResources, useTranslate, Translate, ReduxState } from 
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import DefaultIcon from '@material-ui/icons/ViewList';
-import { useSelector, useDispatch } from 'react-redux';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const styles = {
     root: {}, // Style applied to the MenuItem from material-ui
@@ -25,7 +25,7 @@ const Menu = ({ classes, resources, onMenuClick, logout, dense, open }) => {
         classes={classes}
         to={'/site/' + siteResource.options.siteId}
         primaryText="Site settings"
-        leftIcon={<DefaultIcon />}
+        leftIcon={<SettingsIcon />}
         onClick={onMenuClick}
       />: <span />}
 

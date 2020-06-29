@@ -9,7 +9,7 @@ import {
   NumberInput
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
-import JsonInput from '../form-fields/JsonInput.jsx';
+import JsonInput from '../../form-fields/JsonInput.jsx';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 export const SiteIcon = SettingsIcon;

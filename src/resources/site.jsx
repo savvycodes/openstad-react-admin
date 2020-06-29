@@ -1,36 +1,16 @@
 // in Ideas.js
 import React from 'react';
 import {
-  List,
-  Datagrid,
   Edit,
-  Create,
-  Pagination,
-  ReferenceInput,
   SelectInput,
-  SimpleForm,
-  ImageField,
-  DateField,
-  TextField,
-  EditButton,
   TextInput,
-  DateInput,
-  ArrayField,
   TabbedForm,
-  FunctionField,
   FormTab,
-  ReferenceManyField,
   BooleanInput,
   NumberInput
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
-import BookIcon from '@material-ui/icons/Book';
 import JsonInput from '../form-fields/JsonInput.jsx';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -81,7 +61,7 @@ export default function SimpleExpansionPanel() {
 }
 
 
-export const SiteEdit = (props) => {  
+export const SiteEdit = (props) => {
     return (<Edit title="Edit site" {...props}>
         <TabbedForm redirect="edit">
             <FormTab label="Info" >

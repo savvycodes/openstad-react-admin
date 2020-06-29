@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.less';
-import { Admin, Resource, fetchUtils} from 'react-admin';
+import { Admin, Resource} from 'react-admin';
 import { ArticleList, ArticleEdit, ArticleCreate, ArticleIcon } from './resources/article.jsx';
 import { TagList, TagEdit, TagCreate, TagIcon } from './resources/tag.jsx';
 import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.jsx';

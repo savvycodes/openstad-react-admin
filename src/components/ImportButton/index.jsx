@@ -11,13 +11,13 @@ import {
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
 import validateCsv from './validateCsv';
-import ActionButtonsLine from './ActionButtonsLine';
-import FileUpload from './FileUpload';
-import ImportNotifications from './ImportNotificationsLine';
-import ImportRowCount from './ImportRowCountLine';
-import ImportDelimiter from './ImportDelimiterLine';
+import ActionButtonsLine from './ActionButtonsLine.jsx';
+import FileUpload from './FileUpload.jsx';
+import ImportNotifications from './ImportNotificationsLine.jsx';
+import ImportRowCount from './ImportRowCountLine.jsx';
+import ImportDelimiter from './ImportDelimiterLine.jsx';
 import countFailedImportRows from './countFailedImportRows';
-import ImportUseIdCheckboxLine from './ImportUseIdCheckboxLine';
+import ImportUseIdCheckboxLine from './ImportUseIdCheckboxLine.jsx';
 
 export const ImportButton = (props) => {
   const { resource } = props;

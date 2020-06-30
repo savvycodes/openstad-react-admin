@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
-import LightTooltip from '../LightTooltip';
+import LightTooltip from '../LightTooltip/index.jsx';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
 
 export default (props) => {

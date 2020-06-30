@@ -1,15 +1,15 @@
 import React from 'react';
-import './App.less';
+//import './App.less';
 import { Admin, Resource} from 'react-admin';
 import { ArticleList, ArticleEdit, ArticleCreate, ArticleIcon } from './resources/article.jsx';
 import { TagList, TagEdit, TagCreate, TagIcon } from './resources/tag.jsx';
 import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.jsx';
 import { UserList, UserEdit, UserCreate, UserIcon } from './resources/user.jsx';
-import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea';
+import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea/index.jsx';
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
-import { VoteList, VoteIcon } from './resources/vote';
+import { VoteList, VoteIcon } from './resources/vote/index.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
-import { SiteEdit, SiteIcon } from './resources/site';
+import { SiteEdit, SiteIcon } from './resources/site/index.jsx';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
@@ -28,8 +28,8 @@ import themeReducer from './themeReducer';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 import theme from './theme';
-import { AreaList } from './resources/area/list';
-import { AreaCreate, AreaEdit, AreaIcon } from './resources/area';
+import { AreaList } from './resources/area/list.jsx';
+import { AreaCreate, AreaEdit, AreaIcon } from './resources/area/index.jsx';
 
 /*
 customRoutes={[

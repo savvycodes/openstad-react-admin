@@ -21,8 +21,8 @@ import {
   Loading,
   Error
 } from 'react-admin';
-import FileUpload from '../../form-fields/FileUpload';
-import JsonInput from '../../form-fields/JsonInput';
+import FileUpload from '../../form-fields/FileUpload.jsx';
+import JsonInput from '../../form-fields/JsonInput.jsx';
 import React from 'react';
 import { connect } from 'react-redux';
 import { MenuItemLink,  } from 'react-admin';

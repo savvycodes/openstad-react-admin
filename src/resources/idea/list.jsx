@@ -1,5 +1,5 @@
 import { Datagrid, DateField, EditButton, ImageField, List, TextField, TopToolbar } from 'react-admin';
-import { ImportButton } from '../../components/ImportButton'
+import { ImportButton } from '../../components/ImportButton/index.jsx';
 import React from 'react';
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 

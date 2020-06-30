@@ -9,8 +9,8 @@ import {
   required
 } from 'react-admin';
 import React from 'react';
-import BackButton from '../../components/BackButton';
-import JsonInput from '../../form-fields/JsonInput';
+import BackButton from '../../components/BackButton/index.jsx';
+import JsonInput from '../../form-fields/JsonInput.jsx';
 
 const AreaTitle = ({ record }) => {
   return <span>Area {record ? `"${record.title}"` : ''}</span>;

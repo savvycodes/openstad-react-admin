@@ -12,7 +12,7 @@ ReactDOM.render(
     <OpenstadReactAdmin
       displayAppBar={true}
       site={{
-        id: 149
+        id: 142
       }}
       user={{
         id: 26
@@ -24,7 +24,7 @@ ReactDOM.render(
       }}
       restApi={{
         //     url: '/api/site/1',
-         url: '/api/site/149'
+         url: '/api/site/142'
       }}
       jwt=""
       siteKey="xxxxxxx"

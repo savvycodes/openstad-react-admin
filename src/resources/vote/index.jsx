@@ -14,7 +14,7 @@ import {
   TextInput,
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import ApproveField from '../../components/ApproveField';
+import ApproveField from '../../components/ApproveField/index.jsx';
 import { useDataProvider } from 'react-admin';
 import { useDispatch } from 'react-redux';
 import { CRUD_UPDATE_SUCCESS, FETCH_END, UPDATE } from 'react-admin';

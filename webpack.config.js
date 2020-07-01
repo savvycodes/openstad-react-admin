@@ -8,10 +8,10 @@ module.exports = {
 // mode: 'production',
 	mode: 'development',
 
-	entry: './src/App.jsx',
+	entry: './src/index.jsx',
 
 	output: {
-		path: __dirname + '/../../openstad-landing/lib/modules/admin-widgets/public/', //
+		path: __dirname + '/../../openstad-landing/packages/cms/lib/modules/admin-widgets/public/', //
 	//	path: __dirname + '/dist',
 		filename: 'js/index.js',
 	//	filename: 'js/openstad-component.js',

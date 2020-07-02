@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField } from 'react-admin';
+import { List, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, FunctionField } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
 export const ArgumentIcon = ListAltIcon;

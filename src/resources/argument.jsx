@@ -1,11 +1,19 @@
 import React from 'react';
-import { List, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, FunctionField } from 'react-admin';
+import { List, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, FunctionField, Filter } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
 export const ArgumentIcon = ListAltIcon;
 
+const ArgumentFilters = (props) => (
+  <Filter {...props}>
+    {/*<TextInput label="Search" source="q" alwaysOn />*/}
+    <TextInput label="Id" source="id" defaultValue="" />
+    <TextInput label="Description" source="description" defaultValue="" />
+  </Filter>
+);
+
 export const ArgumentList = (props) => (
-    <List {...props}  title="Argumenten">
+    <List {...props} filters={<ArgumentFilters />} title="Argumenten">
         <Datagrid>
             <TextField source="id" />
             <TextField source="description" />

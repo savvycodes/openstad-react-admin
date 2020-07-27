@@ -12,7 +12,7 @@ const TagFilters = (props) => (
 );
 
 export const TagList = (props) => (
-    <List {...props} filters={TagFilters} title="Tags">
+    <List {...props} filters={<TagFilters />} title="Tags">
         <Datagrid>
             <TextField source="name" />
             <EditButton basePath="/tag" />

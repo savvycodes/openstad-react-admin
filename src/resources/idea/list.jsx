@@ -28,7 +28,7 @@ const IdeaFilters = (props) => (
 );
 
 export const IdeaList = (props) => (
-  <List {...props} actions={<ListActions/>} >
+  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>} >
     <Datagrid>
       <TextField source="id"/>
       <ImageField source="extraData.images[0]" label="Image"/>

@@ -12,7 +12,7 @@ const OrderFilters = (props) => (
 );
 
 export const OrderList = (props) => (
-    <List filters={OrderFilters} {...props}>
+    <List filters={<OrderFilters />} {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="title" />

@@ -21,7 +21,7 @@ const AreaFilters = (props) => (
 );
 
 export const AreaList = (props) => (
-  <List {...props} filters={AreaFilters} actions={<ListActions/>}>
+  <List {...props} filters={<AreaFilters />} actions={<ListActions/>}>
     <Datagrid>
       <TextField source="id"/>
       <TextField source="name"/>

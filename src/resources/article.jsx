@@ -1,6 +1,5 @@
-// in Articles.js
 import React from 'react';
-import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, Filter } from 'react-admin';
+import { List, Datagrid, Filter, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
 export const ArticleIcon = BookIcon;
 

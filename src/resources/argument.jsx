@@ -1,6 +1,6 @@
 // in posts.js
 import React from 'react';
-import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField } from 'react-admin';
+import { List, NumberField, ReferenceInput, SelectInput, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
 export const ArgumentIcon = ListAltIcon;
@@ -24,10 +24,11 @@ const ArgumentTitle = ({ record }) => {
 export const ArgumentEdit = (props) => (
     <Edit title={<ArgumentTitle />} {...props}>
         <SimpleForm>
-          <TextInput source="sku" />
-          <TextInput source="name" />
+          <TextInput disabled source="id" />
           <TextInput multiline source="description" />
-          <NumberInput source="regular_price" />
+          <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
+            <SelectInput optionText="email"/>
+          </ReferenceInput>
         </SimpleForm>
     </Edit>
 );
@@ -35,10 +36,9 @@ export const ArgumentEdit = (props) => (
 export const ArgumentCreate = (props) => {
   return <Create title="Argument toevoegen" {...props}>
         <SimpleForm>
-            <TextInput source="sku" />
-            <TextInput source="name" />
-            <TextInput multiline source="description" />
-            <NumberInput source="regular_price" />
+          <TextInput disabled source="id" />
+          <TextInput multiline source="description" />
+
         </SimpleForm>
     </Create>
 };

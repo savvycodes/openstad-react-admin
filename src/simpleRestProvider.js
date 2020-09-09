@@ -50,7 +50,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
-          sort: JSON.stringify([field, order]),
+          sort: 'createdate_desc',//JSON.stringify([field, order]),
           page: (page -1),
           pageSize: perPage,
           range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
@@ -105,7 +105,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
         return httpClient(url).then(({ json }) => {
-          console.log('json', json);
 
           // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
           //here only solution so editing tags works
@@ -115,8 +114,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
               ...record
             }
           }) : [];
-
-          console.log('json.records', json.records)
 
           return { data: json.records }
         });
@@ -166,9 +163,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
     create: (resource, params) => httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
         body: JSON.stringify(params.data),
-    }).then(({ json }) => ({
-        data: Object.assign(Object.assign({}, params.data), { id: json.id }),
-    })),
+    })
+      .then(({ json }) => ({
+          data: Object.assign(Object.assign({}, params.data), { id: json.id }),
+      })
+
+    ),
     delete: (resource, params) => httpClient(`${apiUrl}/${resource}/${params.id}`, {
         method: 'DELETE',
     }).then(({ json }) => ({ data: json })),

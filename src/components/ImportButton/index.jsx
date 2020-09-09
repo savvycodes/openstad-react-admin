@@ -65,7 +65,8 @@ export const ImportButton = (props) => {
     let apiValidationErrors = [];
 
     Promise.all(
-      values.map((value) => callback(value).catch((error) => {
+      values.map((value) => callback(value).catch((error, response) => {
+
         apiValidationErrors.push({
           messageType: 'apiValidationError',
           color: 'red',
@@ -85,11 +86,14 @@ export const ImportButton = (props) => {
     // They are currently also present in export
     // some should probably, like deletedAt, should not be send by api
     const standardRemoveKeys = ['deletedAt', 'createdAt', 'updatedAt'];
+    // certains keys should be parsed as object but exported as a JSON
+    const exceptionsObjectKeys = ['location'];
+    
     const removeKeys = addRemoveKeys ? standardRemoveKeys.concat(addRemoveKeys) : standardRemoveKeys;
     const arrayKeys = ['images'];
 
     const cleanUp = function (value, key, parentValues) {
-      if (typeof value === 'object') {
+      if (typeof value === 'object' && !exceptionsObjectKeys.includes(key)) {
 
         Object.keys(value).forEach((key) => {
           // in case value is empty ont send it, many values will fail on empty string

@@ -39,30 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-//              <JsonInput source="config" />
-
-/*
-<ExpansionPanel>
-  <ExpansionPanelSummary
-    expandIcon={<ExpandMoreIcon />}
-    aria-controls="panel1a-content"
-    id="panel1a-header"
-  >
-    <Typography className={classes.heading}>Expansion Panel 1</Typography>
-  </ExpansionPanelSummary>
-  <ExpansionPanelDetails>
-    <Typography>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-      sit amet blandit leo lobortis eget.
-    </Typography>
-  </ExpansionPanelDetails>
-</ExpansionPanel>
- */
-
-export default function SimpleExpansionPanel() {
-}
-
-
 export const SiteEdit = (props) => {
   return (<Edit title="Edit site" {...props}>
       <TabbedForm redirect="edit">
@@ -126,8 +102,8 @@ export const SiteEdit = (props) => {
         </FormTab>
         <FormTab label="Password Protection">
           <BooleanInput source="config.basicAuth.active" label="Is active?" fullWidth variant="outlined" />
-          <TextInput label="Email To" source="config.basicAuth.user" variant="outlined" />
-          <TextInput label="Email Address" source="config.basicAuth.password" variant="outlined"  />
+          <TextInput label="User" source="config.basicAuth.user" variant="outlined" />
+          <TextInput label="Password" source="config.basicAuth.password" variant="outlined"  />
         </FormTab>
         <FormTab label="Advanced">
           <TextInput disabled source="id" />

@@ -58,7 +58,7 @@ const Form = (props) => (
       {props.edit && <TextInput disabled source="id"/>}
       <JsonInput source="extraData"/>
     </FormTab>
-    <FormTab label="Comments">
+    {/*<FormTab label="Comments">
       <ReferenceManyField
         reference="argument"
         target="ideaId"
@@ -74,7 +74,7 @@ const Form = (props) => (
           <EditButton basePath="/Argument"/>
         </Datagrid>
       </ReferenceManyField>
-    </FormTab>
+    </FormTab>*/}
     {/*<FormTab label="Votes">*/}
     {/*  <ReferenceManyField*/}
     {/*    reference="vote"*/}

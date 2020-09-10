@@ -11,6 +11,12 @@ const exporter = posts => {
         if (postForExport.can) {
           delete postForExport.can;
         }
+
+        if (postForExport.user) {
+          delete user;
+        }
+
+
         postForExport.location = postForExport.location ? JSON.stringify(postForExport.location) : ''; // add a field
         return postForExport;
     });

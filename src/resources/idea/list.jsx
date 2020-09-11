@@ -2,6 +2,8 @@
 import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar, downloadCSV } from 'react-admin';
 import { ImportButton } from '../../components/ImportButton/index.jsx';
 import React from 'react';
+import {cloneElement} from 'react';
+
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
 import jsonExport from 'jsonexport/dist';
@@ -14,7 +16,7 @@ const exporter = posts => {
         }
 
         if (postForExport.user) {
-          delete user;
+          delete postForExport.user;
         }
 
 
@@ -27,11 +29,32 @@ const exporter = posts => {
     });
 };
 
+
 export const ListActions = props => {
-  const { className, basePath, total, currentSort, filterValues, permanentFilter, resource } = props;
+  const {
+    className,
+    filters,
+    permanentFilter,
+    currentSort,
+    resource,
+    displayedFilters,
+    filterValues,
+    hasCreate,
+    basePath,
+    selectedIds,
+    showFilter,
+    total,
+  } = props;
 
   return (
     <TopToolbar className={className}>
+    {filters && cloneElement(filters, {
+                resource,
+                showFilter,
+                displayedFilters,
+                filterValues,
+                context: 'button',
+            })}
       <CreateButton basePath={basePath}  />
       <ExportButton
          exporter={exporter}
@@ -45,10 +68,11 @@ export const ListActions = props => {
   );
 };
 
+
 const IdeaFilters = (props) => (
   <Filter {...props}>
-    {/*<TextInput label="Search" source="q" alwaysOn />*/}
-    <TextInput label="Id" source="id" defaultValue="" />
+    <TextInput label="Id" source="id"  defaultValue="" />
+    <TextInput label="Status" source="status"  defaultValue="" />
   </Filter>
 );
 
@@ -60,8 +84,8 @@ export const IdeaList = (props) => (
       <ImageField source="extraData.images[0]" label="Image"/>
       <TextField source="title"/>
       <TextField source="status"/>
-      <TextField source="yes"/>
-      <TextField source="no"/>
+      <TextField source="yes" sortable={false} />
+      <TextField source="no" sortable={false} />
       <DateField source="createdAt"/>
       <EditButton basePath="/idea"/>
     </Datagrid>

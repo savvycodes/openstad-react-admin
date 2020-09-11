@@ -50,7 +50,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
-          sort: 'createdate_desc',//JSON.stringify([field, order]),
+          sort: JSON.stringify([field, order]),
           page: (page -1),
           pageSize: perPage,
           range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),

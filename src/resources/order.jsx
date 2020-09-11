@@ -1,12 +1,18 @@
-// in Orders.js
 import React from 'react';
-import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
+import { List, Filter, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
 
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 export const OrderIcon = LocalMallIcon;
 
+const OrderFilters = (props) => (
+  <Filter {...props}>
+    {/*<TextInput label="Search" source="q" alwaysOn />*/}
+    <TextInput label="Id" source="id" defaultValue="" />
+  </Filter>
+);
+
 export const OrderList = (props) => (
-    <List {...props}>
+    <List filters={<OrderFilters />} {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="title" />

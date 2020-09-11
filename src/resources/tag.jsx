@@ -1,13 +1,18 @@
-// in posts.js
 import React from 'react';
-import { List, NumberField, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField } from 'react-admin';
+import { List, Filter, Datagrid, Edit, Create, SimpleForm, TextField, EditButton, TextInput } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import FileUpload from '../form-fields/FileUpload.jsx';
 
 export const TagIcon = ListAltIcon;
 
+const TagFilters = (props) => (
+  <Filter {...props}>
+    {/*<TextInput label="Search" source="q" alwaysOn />*/}
+    <TextInput label="Id" source="id" defaultValue="" />
+  </Filter>
+);
+
 export const TagList = (props) => (
-    <List {...props} title="Tags">
+    <List {...props} filters={<TagFilters />} title="Tags">
         <Datagrid>
             <TextField source="name" />
             <EditButton basePath="/tag" />

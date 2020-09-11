@@ -1,4 +1,5 @@
-import { Datagrid, DateField, EditButton, ImageField, List, TextField, TopToolbar, downloadCSV } from 'react-admin';
+
+import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar, downloadCSV } from 'react-admin';
 import { ImportButton } from '../../components/ImportButton/index.jsx';
 import React from 'react';
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
@@ -44,8 +45,16 @@ export const ListActions = props => {
   );
 };
 
+const IdeaFilters = (props) => (
+  <Filter {...props}>
+    {/*<TextInput label="Search" source="q" alwaysOn />*/}
+    <TextInput label="Id" source="id" defaultValue="" />
+  </Filter>
+);
+
 export const IdeaList = (props) => (
-  <List {...props} actions={<ListActions/>} exporter={exporter}>
+
+  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>} exporter={exporter}>
     <Datagrid>
       <TextField source="id"/>
       <ImageField source="extraData.images[0]" label="Image"/>

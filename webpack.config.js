@@ -5,8 +5,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
 
 	devtool: 'eval-source-map',
-	mode: 'development',
-	entry: './src/index.jsx',
+//	mode: 'development',
+	mode: 'production',
+	entry: ['babel-polyfill', './src/index.jsx'],
 
 	output: {
 		path: __dirname + '/../../openstad-landing/packages/cms/lib/modules/admin-widgets/public/', //

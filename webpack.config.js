@@ -1,10 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 
-	devtool: 'eval-source-map',
+//	devtool: 'eval-source-map',
+	devtool: 'none',
 //	mode: 'development',
 	mode: 'production',
 	entry: ['babel-polyfill', './src/index.jsx'],
@@ -32,22 +33,10 @@ module.exports = {
   ],
 
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        test: /\.jsx?$/,
-        exclude: /\/core-js/,
-        minify(file, sourceMap) {
-          const extractedComments = [];
-          const { error, map, code, warnings } = require('uglify-js') // Or require('./path/to/uglify-module')
-                .minify(
-                  file,
-                  { /* Your options for minification */ },
-                );
-          return { error, map, code, warnings, extractedComments };
-        }
-
-      })
-    ]
+		minimize: true,
+    minimizer: [new TerserPlugin({
+			test: /\.jsx?$/,
+		})],
   },
 
 	module: {

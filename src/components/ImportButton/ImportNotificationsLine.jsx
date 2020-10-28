@@ -11,18 +11,20 @@ export default (props) => {
     return (
       <React.Fragment>
         <Typography color="inherit">
+          <ul>
           {
             csvValidationNotifications.map((validationError, index) => {
               return (
-                <span
+                <li
                   key={index}
-                  style={{ color: validationError.color, display: 'block' }}
+                  style={{ color: validationError.color}}
                 >
                     {`${validationError.message}`}
-                  </span>
+                  </li>
               );
             })
           }
+          </ul>
         </Typography>
       </React.Fragment>);
   }
@@ -42,18 +44,20 @@ export default (props) => {
       <LightTooltip title={
         <React.Fragment>
           <Typography color="inherit">
+          <ul>
             {
               csvValidationNotifications.map((validationError, index) => {
                 return (
-                  <span
+                  <li
                     key={index}
                     style={{ color: validationError.color, display: 'block' }}
                   >
                     {`${validationError.message}`}
-                  </span>
+                  </li>
                 );
               })
             }
+            </ul>
           </Typography>
         </React.Fragment>
       } TransitionComponent={Zoom} interactive arrow placement="top">

@@ -66,11 +66,15 @@ export const ImportButton = (props) => {
 
     Promise.all(
       values.map((value) => callback(value).catch((error, response) => {
+        var valueKeys = Object.keys(value);
+        // add first info rows for more information what row failed
+        var formattedFirstValue =  valueKeys[0] && value[valueKeys[0]] ? `${valueKeys[0]}: ${value[valueKeys[0]].slice(0, 25)}` : '';
+        var formattedSecondValue =  valueKeys[1] && value[valueKeys[1]] ? `${valueKeys[1]}: ${value[valueKeys[1]].slice(0, 25)}` : '';
 
         apiValidationErrors.push({
           messageType: 'apiValidationError',
           color: 'red',
-          message: error.message,
+          message: 'Failed to import row: ' + formattedFirstValue + '; ' + formattedSecondValue + ', because of error: ' +error.message,
         });
       })),
     ).then(() => {
@@ -88,7 +92,7 @@ export const ImportButton = (props) => {
     const standardRemoveKeys = ['deletedAt', 'createdAt', 'updatedAt'];
     // certains keys should be parsed as object but exported as a JSON
     const exceptionsObjectKeys = ['location'];
-    
+
     const removeKeys = addRemoveKeys ? standardRemoveKeys.concat(addRemoveKeys) : standardRemoveKeys;
     const arrayKeys = ['images'];
 
@@ -182,7 +186,7 @@ export const ImportButton = (props) => {
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             {dialogStatus === 'importFinished' ?
               (<>
-                <h3>Import complete!</h3>
+                <h3>Import complete!!</h3>
                 <p>
                   Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total
                   of <b>{totalRows}</b> rows

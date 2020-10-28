@@ -55,7 +55,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
           pageSize: perPage,
           range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
           filter: JSON.stringify(params.filter),
-          includeVoteCount: 1
+          includeVoteCount: 1,
+          includeUser: 1
         };
 
         const url = `${apiUrl}/${resource}?${stringify(query)}`;

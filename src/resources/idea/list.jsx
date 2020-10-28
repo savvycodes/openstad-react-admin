@@ -16,7 +16,7 @@ const exporter = posts => {
         }
 
         if (postForExport.user) {
-          delete postForExport.user;
+        //  delete postForExport.user;
         }
 
 

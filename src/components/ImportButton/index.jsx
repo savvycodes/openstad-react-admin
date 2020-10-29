@@ -30,7 +30,7 @@ export const ImportButton = (props) => {
   const [importing, setImporting] = React.useState(false);
   const [fileName, setFileName] = React.useState('');
   const [values, setValues] = React.useState([]);
-  const [delimiter, setDelimiter] = React.useState(',');
+  const [delimiter, setDelimiter] = React.useState('');
   const [useId, setUseId] = React.useState(true);
   const [dialogStatus, setDialogStatus] = React.useState('base');
   const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
@@ -180,7 +180,7 @@ export const ImportButton = (props) => {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>
-          {'Import to'} "{resource}"
+         {'Import '} {resource}s
         </DialogTitle>
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
@@ -196,19 +196,16 @@ export const ImportButton = (props) => {
               </>)
               :
               <>
-                <p>Here you can upload a csv or tsv file for bulk editing or creation.
-                  For creating: use a file without 'id' column.
-                  For editing: use a file with 'id' column.
-                  If you would like to edit the records from the index as a csv file, use the 'export' button in the top
-                  right corner to export as a csv including the id column. After editing the csv in your editor of
-                  choice,
-                  use this import function to upload the file.
-                </p>
+                <p>Upload a csv or tsv file for bulk editing or creation. </p>
+                <ul>
+                  <li>For creating: use a file without 'id' column.</li>
+                  <li>For editing: use a file with 'id' column. (for instance export here, edit in excel and upload again)</li>
+                </ul>
                 <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
                 <ol>
                   <li>{'Must be a \'.csv\' or \'.tsv\' file'}</li>
-                  <li>{'Must not contain an \'id\' column for new'}</li>
-                  <li>{'Must contain an \'id\' column for overwrite'}</li>
+                  <li>{'Only columns corresponding to the data model will be imported, columns with user or aggregated data etc. will be ignored.'}</li>
+                  <li>{'For setting a specific user to a row use a header named userId in your csv.'}</li>
                 </ol>
                 <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
                 <ImportUseIdCheckboxLine {...{ checked: useId, handleCheckBoxChange }}/>

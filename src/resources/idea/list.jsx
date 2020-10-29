@@ -1,12 +1,41 @@
 
-import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar, downloadCSV } from 'react-admin';
+import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar, downloadCSV, useListContext } from 'react-admin';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import { ImportButton } from '../../components/ImportButton/index.jsx';
+import Inbox from '@material-ui/icons/Inbox';
+
 import React from 'react';
 import {cloneElement} from 'react';
 
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
 import jsonExport from 'jsonexport/dist';
+
+const useStyles = makeStyles(
+    theme => ({
+        message: {
+            textAlign: 'center',
+            opacity: theme.palette.type === 'light' ? 0.5 : 0.8,
+            margin: '0 1em',
+            color:
+                theme.palette.type === 'light'
+                    ? 'inherit'
+                    : theme.palette.text.primary,
+        },
+        icon: {
+            width: '9em',
+            height: '9em',
+        },
+        toolbar: {
+            textAlign: 'center',
+            marginTop: '2em',
+        },
+    }),
+    { name: 'RaEmpty' }
+);
 
 const exporter = posts => {
     const postsForExport = posts.map(post => {
@@ -27,6 +56,29 @@ const exporter = posts => {
     jsonExport(postsForExport, { headers: ['id', 'title', 'description']  }, (err, csv) => {
         downloadCSV(csv, 'ideas'); // download as 'posts.csv` file
     });
+};
+
+const Empty = (props) => {
+    const { basePath, resource } = useListContext();
+    const classes = useStyles(props);
+
+    return (
+      <div className={classes.message}>
+        <Inbox className={classes.icon} />
+        <Box textAlign="center" m={1}>
+            <Typography variant="h4" paragraph>
+                No ideas yet
+            </Typography>
+            <Typography variant="body1">
+                Create one or import from a file
+            </Typography>
+            <div className={classes.toolbar}>
+            <CreateButton basePath={basePath} />
+            <ImportButton resource={resource} />
+            </div>
+        </Box>
+        </div>
+    );
 };
 
 
@@ -63,7 +115,7 @@ export const ListActions = props => {
          sort={currentSort}
          filter={{ ...filterValues, ...permanentFilter }}
        />
-      <ImportButton {...props} />
+      <ImportButton resource={resource} />
     </TopToolbar>
   );
 };
@@ -78,7 +130,7 @@ const IdeaFilters = (props) => (
 
 export const IdeaList = (props) => (
 
-  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>} exporter={exporter}>
+  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>} exporter={exporter} empty={<Empty />}>
     <Datagrid>
       <TextField source="id"/>
       <ImageField source="extraData.images[0]" label="Image"/>

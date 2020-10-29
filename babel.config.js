@@ -2,11 +2,22 @@ module.exports = function (api) {
   api.cache(true);
 
   const presets = [
-		"@babel/preset-env",
-		"@babel/preset-react",
+		["@babel/preset-env", {
+			targets: {
+				edge: "17",
+				ie: '11',
+				firefox: "60",
+				chrome: "67",
+				safari: "11.1",
+			},
+    }],
+		["@babel/preset-react", {
+    }],
 	];
 
   const plugins = [
+    "@babel/plugin-transform-parameters",
+    "@babel/plugin-transform-arrow-functions",
  		[
 			"react-css-modules",
 			{

@@ -36,6 +36,8 @@ const IdeaTitle = ({ record }) => {
 };
 
 
+
+
 // , maxLength(5000), minLength(140)
 // @todo set up redux to access site rest object
 const Form = (props) => (

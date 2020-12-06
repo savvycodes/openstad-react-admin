@@ -19,6 +19,7 @@ import {
   ReduxState,
   useQuery,
   Loading,
+  AutocompleteInput,
   Error
 } from 'react-admin';
 import FileUpload from '../../form-fields/FileUpload.jsx';
@@ -35,17 +36,23 @@ const IdeaTitle = ({ record }) => {
   return <span>Idea {record ? `"${record.title}"` : ''}</span>;
 };
 
-
-
-
 // , maxLength(5000), minLength(140)
 // @todo set up redux to access site rest object
 const Form = (props) => (
   <TabbedForm {...props}>
     <FormTab label="Info">
       {props.edit && <TextInput disabled source="id"/>}
-      <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
-        <SelectInput optionText="email"/>
+      <ReferenceInput
+        label="User"
+        source="userId"
+        reference="user"
+        variant="outlined"
+        perPage={25}
+        filterToQuery={searchText => ({ email: {'substring': searchText} })}
+        filter={{ role: {'!=': 'anonymous'} }}
+        sort={{ field: 'email', order: 'ASC' }}
+      >
+          <AutocompleteInput optionText="email" />
       </ReferenceInput>
       <TextInput source="title" variant="outlined" fullWidth/>
       <TextInput source="summary" options={{ multiLine: true }} variant="outlined" fullWidth validate={[required()]} />

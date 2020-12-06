@@ -63,18 +63,21 @@ const Empty = (props) => {
     const classes = useStyles(props);
 
     return (
-      <div className={classes.message}>
-        <Inbox className={classes.icon} />
+        <div>
         <Box textAlign="center" m={1}>
-            <Typography variant="h4" paragraph>
-                No ideas yet
-            </Typography>
-            <Typography variant="body1">
-                Create one or import from a file
-            </Typography>
+            <div className={classes.message}>
+              <Inbox className={classes.icon} />
+
+              <Typography variant="h4" paragraph>
+                  No ideas yet
+              </Typography>
+              <Typography variant="body1">
+                  Create one or import from a file
+              </Typography>
+            </div>
             <div className={classes.toolbar}>
-            <CreateButton basePath={basePath} />
-            <ImportButton resource={resource} />
+              <CreateButton basePath={basePath} />
+              <ImportButton resource={resource} />
             </div>
         </Box>
         </div>

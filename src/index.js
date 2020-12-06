@@ -7,6 +7,7 @@ import './index.css';
 import {OpenstadReactAdmin} from './App';
 import * as serviceWorker from './serviceWorker';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <OpenstadReactAdmin

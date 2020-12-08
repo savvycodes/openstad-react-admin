@@ -1,13 +1,18 @@
 // in Users.js
 import React from 'react';
-import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
+import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, Filter } from 'react-admin';
 import PersonIcon from '@material-ui/icons/Person';
 //import EditableDatagrid from './react-data-grid/index.jsx';
 
 export const UserIcon = PersonIcon;
+const UserFilter = (props) => (
+  <Filter {...props}>
+    <TextInput label="Search" source="q" alwaysOn />
+  </Filter>
+);
 
 export const UserList = (props) => (
-    <List {...props}>
+    <List {...props} filters={<UserFilter />}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="role" />

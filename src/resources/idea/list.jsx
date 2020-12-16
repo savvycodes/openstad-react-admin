@@ -139,8 +139,8 @@ export const IdeaList = (props) => (
       <ImageField source="extraData.images[0]" label="Image"/>
       <TextField source="title"/>
       <TextField source="status"/>
-      <TextField source="yes" sortable={false} />
-      <TextField source="no" sortable={false} />
+      <TextField source="yes" />
+      <TextField source="no" />
       <DateField source="createdAt"/>
       <EditButton basePath="/idea"/>
     </Datagrid>

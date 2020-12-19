@@ -43,6 +43,7 @@ export const ImportButton = (props) => {
   const clear = () => {
     setImporting(false);
     setImporting(false);
+    setFileName('');
     setValues([]);
     setCsvValidationNotifications([]);
   };

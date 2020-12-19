@@ -24,9 +24,9 @@ export default (props, state) => {
     <span
       style={{
         verticalAlign: 'middle',
-        padding: '8px',
-        cursor: 'pointer',
-        color: 'red',
+        padding: '4px',
+        cursor: fileName && fileName !== '' ? 'pointer' : 'not-allowed',
+        color: fileName && fileName !== '' ? 'red' : 'grey',
       }}
       onClick={clear}
     >

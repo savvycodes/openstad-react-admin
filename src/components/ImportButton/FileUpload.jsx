@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-export default (props) => {
-  const { onFileAdded, clear } = props;
+export default (props, state) => {
+  const { onFileAdded, clear, fileName } = props;
 
   return (<div>
     <Button variant='contained' component='label'>
@@ -17,6 +17,10 @@ export default (props) => {
         accept='.csv,.tsv,.txt'
       />
     </Button>
+    <span style={{
+      verticalAlign: 'middle',
+      paddingLeft: '8px',
+    }}>{fileName}</span>
     <span
       style={{
         verticalAlign: 'middle',
@@ -26,7 +30,7 @@ export default (props) => {
       }}
       onClick={clear}
     >
-      <DeleteForeverIcon />
+      <DeleteForeverIcon/>
     </span>
   </div>);
 }

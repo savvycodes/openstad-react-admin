@@ -1,45 +1,50 @@
 import {
   Create,
-  Datagrid, DateField,
-  Edit, EditButton,
-  FormTab, FunctionField, Pagination,
+  Edit,
+  Toolbar,
+  SaveButton,
+  DeleteButton,
+  FormTab,
   ReferenceArrayInput,
   ReferenceInput,
-  ReferenceManyField,
   SelectArrayInput,
-  SelectInput,
-  SimpleForm,
   TabbedForm,
-  TextField,
   TextInput,
-  minLength,
-  maxLength,
   required,
   getResources,
-  ReduxState,
   useQuery,
   Loading,
   AutocompleteInput,
   Error
 } from 'react-admin';
-import FileUpload from '../../form-fields/FileUpload.jsx';
 import JsonInput from '../../form-fields/JsonInput.jsx';
 import React from 'react';
 import { connect } from 'react-redux';
-import { MenuItemLink,  } from 'react-admin';
-import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
-import DefaultIcon from '@material-ui/icons/ViewList';
-import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+});
 
 const IdeaTitle = ({ record }) => {
   return <span>Idea {record ? `"${record.title}"` : ''}</span>;
 };
 
+const CustomToolbar = props => (
+  <Toolbar {...props} classes={useStyles()}>
+    <SaveButton />
+    <DeleteButton undoable={false} />
+  </Toolbar>
+);
+
 // , maxLength(5000), minLength(140)
 // @todo set up redux to access site rest object
 const Form = (props) => (
-  <TabbedForm {...props}>
+  <TabbedForm {...props}  toolbar={<CustomToolbar />}>
     <FormTab label="Info">
       {props.edit && <TextInput disabled source="id"/>}
       <ReferenceInput

@@ -132,7 +132,6 @@ const IdeaFilters = (props) => (
 );
 
 export const IdeaList = (props) => (
-
   <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>} exporter={exporter} empty={<Empty />}>
     <Datagrid>
       <TextField source="id"/>

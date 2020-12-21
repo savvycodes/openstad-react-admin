@@ -124,7 +124,6 @@ const PostBulkActionButtons = props => (
   </Fragment>
 );
 
-
 const IdeaFilters = (props) => (
   <Filter {...props}>
     <TextInput label="Id" source="id"  defaultValue="" />

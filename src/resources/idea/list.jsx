@@ -94,9 +94,7 @@ export const ListActions = props => {
     resource,
     displayedFilters,
     filterValues,
-    hasCreate,
     basePath,
-    selectedIds,
     showFilter,
     total,
   } = props;

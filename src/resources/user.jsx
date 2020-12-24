@@ -36,6 +36,7 @@ export const UserEdit = (props) => (
             <TextInput source="firstName" variant="outlined" fullWidth  />
             <TextInput source="lastName" variant="outlined" fullWidth  />
             <TextInput source="email" variant="outlined" fullWidth  />
+            <TextInput source="zipCode" variant="outlined" fullWidth  />
         </SimpleForm>
     </Edit>
 );
@@ -48,6 +49,7 @@ export const UserCreate = (props) => (
           <TextInput source="firstName" variant="outlined" fullWidth  />
           <TextInput source="lastName" variant="outlined" fullWidth  />
           <TextInput source="email" variant="outlined" fullWidth  />
+          <TextInput source="zipCode" variant="outlined" fullWidth  />
         </SimpleForm>
     </Create>
 );

@@ -43,10 +43,11 @@ export const UserEdit = (props) => (
 export const UserCreate = (props) => (
     <Create title="Create a User" {...props}>
         <SimpleForm>
-            <TextInput source="title" variant="outlined" fullWidth  />
-            <TextInput source="teaser" options={{ multiLine: true }}  variant="outlined" fullWidth />
-            <TextInput source="teaser" options={{ multiLine: true }}  variant="outlined" fullWidth />
-
+          <TextInput disabled source="id" variant="outlined" fullWidth />
+          <TextInput disabled source="role" variant="outlined" fullWidth  />
+          <TextInput source="firstName" variant="outlined" fullWidth  />
+          <TextInput source="lastName" variant="outlined" fullWidth  />
+          <TextInput source="email" variant="outlined" fullWidth  />
         </SimpleForm>
     </Create>
 );

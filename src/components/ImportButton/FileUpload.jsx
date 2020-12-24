@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-export default (props, state) => {
+export default (props) => {
   const { onFileAdded, clear, fileName } = props;
 
   return (<div>

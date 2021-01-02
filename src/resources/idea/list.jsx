@@ -1,14 +1,11 @@
-
-import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar, downloadCSV, useListContext } from 'react-admin';
+import React, { Fragment, cloneElement } from 'react';
+import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar,
+  downloadCSV, useListContext, BulkDeleteButton } from 'react-admin';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { ImportButton } from '../../components/ImportButton/index.jsx';
 import Inbox from '@material-ui/icons/Inbox';
-
-import React from 'react';
-import {cloneElement} from 'react';
 
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
@@ -94,9 +91,7 @@ export const ListActions = props => {
     resource,
     displayedFilters,
     filterValues,
-    hasCreate,
     basePath,
-    selectedIds,
     showFilter,
     total,
   } = props;
@@ -123,6 +118,11 @@ export const ListActions = props => {
   );
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <BulkDeleteButton  undoable={false} {...props} />
+  </Fragment>
+);
 
 const IdeaFilters = (props) => (
   <Filter {...props}>
@@ -132,15 +132,15 @@ const IdeaFilters = (props) => (
 );
 
 export const IdeaList = (props) => (
-
-  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>} exporter={exporter} empty={<Empty />}>
+  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>}  bulkActionButtons={<PostBulkActionButtons />}
+        exporter={exporter} empty={<Empty />}>
     <Datagrid>
       <TextField source="id"/>
       <ImageField source="extraData.images[0]" label="Image"/>
       <TextField source="title"/>
       <TextField source="status"/>
-      <TextField source="yes" sortable={false} />
-      <TextField source="no" sortable={false} />
+      <TextField source="yes" />
+      <TextField source="no" />
       <DateField source="createdAt"/>
       <EditButton basePath="/idea"/>
     </Datagrid>

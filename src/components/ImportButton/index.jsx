@@ -43,6 +43,7 @@ export const ImportButton = (props) => {
   const clear = () => {
     setImporting(false);
     setImporting(false);
+    setFileName('');
     setValues([]);
     setCsvValidationNotifications([]);
   };
@@ -209,7 +210,7 @@ export const ImportButton = (props) => {
                 </ol>
                 <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
                 <ImportUseIdCheckboxLine {...{ checked: useId, handleCheckBoxChange }}/>
-                <FileUpload  {...{ onFileAdded, clear }} />
+                <FileUpload  {...{ onFileAdded, clear, fileName }} />
                 <ImportNotifications {...{ csvValidationNotifications }} />
                 <ImportRowCount {...{ values }} />
               </>

@@ -4,7 +4,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 export default (props) => {
-  const { onFileAdded, clear } = props;
+  const { onFileAdded, clear, fileName } = props;
 
   return (<div>
     <Button variant='contained' component='label'>
@@ -17,16 +17,20 @@ export default (props) => {
         accept='.csv,.tsv,.txt'
       />
     </Button>
+    <span style={{
+      verticalAlign: 'middle',
+      paddingLeft: '8px',
+    }}>{fileName}</span>
     <span
       style={{
         verticalAlign: 'middle',
-        padding: '8px',
-        cursor: 'pointer',
-        color: 'red',
+        padding: '4px',
+        cursor: fileName && fileName !== '' ? 'pointer' : 'not-allowed',
+        color: fileName && fileName !== '' ? 'red' : 'grey',
       }}
       onClick={clear}
     >
-      <DeleteForeverIcon />
+      <DeleteForeverIcon/>
     </span>
   </div>);
 }

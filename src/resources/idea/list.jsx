@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { ImportButton } from '../../components/ImportButton/index.jsx';
 import Inbox from '@material-ui/icons/Inbox';
+import { Button as RAButton } from 'react-admin';
+import ContentCreate from '@material-ui/icons/Create';
 
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
@@ -121,6 +123,7 @@ export const ListActions = props => {
 const PostBulkActionButtons = props => (
   <Fragment>
     <BulkDeleteButton  undoable={false} {...props} />
+    <RAButton onClick={() => {console.log('sss')}} label={'edit'} {...props}><ContentCreate /></RAButton>
   </Fragment>
 );
 

@@ -1,6 +1,6 @@
 import React, { Fragment, cloneElement } from 'react';
 import { Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar,
-  downloadCSV, useListContext, BulkDeleteButton } from 'react-admin';
+  downloadCSV, useListContext, BulkDeleteButton, SimpleForm, SaveButton } from 'react-admin';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import { Button as RAButton } from 'react-admin';
 import ContentCreate from '@material-ui/icons/Create';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
+import {ReferenceInput, SelectInput} from 'react-admin';
 
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
@@ -150,6 +151,12 @@ const BulkEditDialog = (props) => {
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+            <SimpleForm>
+                <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
+                    <SelectInput optionText="status"/>
+                </ReferenceInput>
+                {/*<SaveButton />*/}
+            </SimpleForm>
         </Dialog>
     );
 }

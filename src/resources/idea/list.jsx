@@ -8,8 +8,8 @@ import { ImportButton } from '../../components/ImportButton/index.jsx';
 import Inbox from '@material-ui/icons/Inbox';
 import { Button as RAButton } from 'react-admin';
 import ContentCreate from '@material-ui/icons/Create';
-import BulkEditDialog from '../../components/BulkEditDialog';
-
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
@@ -135,6 +135,24 @@ const IdeaFilters = (props) => (
     <TextInput label="Status" source="status"  defaultValue="" />
   </Filter>
 );
+
+const BulkEditDialog = (props) => {
+    const { onClose, selectedValue, open } = props;
+
+    const handleClose = () => {
+        onClose(selectedValue);
+    };
+
+    const handleListItemClick = (value) => {
+        onClose(value);
+    };
+
+    return (
+        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+        </Dialog>
+    );
+}
 
 export const IdeaList = (props) => {
     const [open, setOpen] = React.useState(false);

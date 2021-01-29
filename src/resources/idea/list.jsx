@@ -8,6 +8,8 @@ import { ImportButton } from '../../components/ImportButton/index.jsx';
 import Inbox from '@material-ui/icons/Inbox';
 import { Button as RAButton } from 'react-admin';
 import ContentCreate from '@material-ui/icons/Create';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
@@ -123,7 +125,7 @@ export const ListActions = props => {
 const PostBulkActionButtons = props => (
   <Fragment>
     <BulkDeleteButton  undoable={false} {...props} />
-    <RAButton onClick={() => {console.log('sss')}} label={'edit'} {...props}><ContentCreate /></RAButton>
+    <RAButton onClick={props.handleBulkEditClick} label={'edit'} {...props}><ContentCreate /></RAButton>
   </Fragment>
 );
 
@@ -134,18 +136,50 @@ const IdeaFilters = (props) => (
   </Filter>
 );
 
-export const IdeaList = (props) => (
-  <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>}  bulkActionButtons={<PostBulkActionButtons />}
-        exporter={exporter} empty={<Empty />}>
-    <Datagrid>
-      <TextField source="id"/>
-      <ImageField source="extraData.images[0]" label="Image"/>
-      <TextField source="title"/>
-      <TextField source="status"/>
-      <TextField source="yes" />
-      <TextField source="no" />
-      <DateField source="createdAt"/>
-      <EditButton basePath="/idea"/>
-    </Datagrid>
-  </List>
-);
+const BulkEditDialog = (props) => {
+    const { onClose, selectedValue, open } = props;
+
+    const handleClose = () => {
+        onClose(selectedValue);
+    };
+
+    const handleListItemClick = (value) => {
+        onClose(value);
+    };
+
+    return (
+        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+        </Dialog>
+    );
+}
+
+export const IdeaList = (props) => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleBulkEditClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (value) => {
+        setOpen(false);
+    };
+
+    return (
+    <Fragment>
+        <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>}  bulkActionButtons={<PostBulkActionButtons handleBulkEditClick={handleBulkEditClick} />}
+              exporter={exporter} empty={<Empty />}>
+            <Datagrid>
+                <TextField source="id"/>
+                <ImageField source="extraData.images[0]" label="Image"/>
+                <TextField source="title"/>
+                <TextField source="status"/>
+                <TextField source="yes" />
+                <TextField source="no" />
+                <DateField source="createdAt"/>
+                <EditButton basePath="/idea"/>
+            </Datagrid>
+        </List>
+        <BulkEditDialog open={open} onClose={handleClose} />
+    </Fragment>
+)};

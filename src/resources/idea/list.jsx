@@ -1,4 +1,4 @@
-import React, {Fragment, cloneElement, useState} from 'react';
+import React, {Fragment, cloneElement, useState, useEffect} from 'react';
 import {
     Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar,
     downloadCSV, useListContext, BulkDeleteButton, SimpleForm, SaveButton
@@ -132,12 +132,13 @@ export const ListActions = props => {
 const BulkEditButton = ({selectedIds}) => {
     const [open, setOpen] = useState(false);
     const refresh = useRefresh();
+    const [status, setStatus] = useState('');
     const notify = useNotify();
     const unselectAll = useUnselectAll();
-    const [updateMany] = useUpdateMany(
+    const [updateMany, {loading}] = useUpdateMany(
         'idea',
         selectedIds,
-        {views: 0},
+        {status: status},
         {
             onSuccess: () => {
                 refresh();
@@ -150,8 +151,10 @@ const BulkEditButton = ({selectedIds}) => {
     const handleClick = () => setOpen(true);
     const handleDialogClose = () => setOpen(false);
 
-    const handleConfirm = () => {
-        updateMany();
+    // useEffect(() => updateMany());
+
+    const handleConfirm = (payload) => {
+        setStatus(payload.status)
         setOpen(false);
     };
 
@@ -160,11 +163,14 @@ const BulkEditButton = ({selectedIds}) => {
             <Button label="Bulk edit" onClick={handleClick}><ContentCreate/></Button>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={open}>
                 <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
-                <SimpleForm save={handleConfirm}>
+                <SimpleForm save={handleConfirm} disabled={loading}>
                     <SelectInput source="status" choices={[
-                        {id: 'closed', name: 'Closed'},
-                        {id: 'open', name: 'Open'},
-                        {id: 'denied', name: 'Denied'},
+                        {id: 'CLOSED', name: 'Closed'},
+                        {id: 'OPEN', name: 'Open'},
+                        {id: 'ACCEPTED', name: 'Accepted'},
+                        {id: 'DENIED', name: 'Denied'},
+                        {id: 'BUSY', name: 'Busy'},
+                        {id: 'DONE', name: 'Done'},
                     ]}/>
                 </SimpleForm>
             </Dialog>

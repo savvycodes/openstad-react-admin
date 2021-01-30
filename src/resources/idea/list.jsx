@@ -138,8 +138,9 @@ const IdeaFilters = (props) => (
 );
 
 const BulkEditDialog = (props) => {
-    const { onClose, selectedValue, open } = props;
+    const { onClose, selectedValue, open, resource } = props;
 
+    console.log(resource)
     const handleClose = () => {
         onClose(selectedValue);
     };
@@ -150,9 +151,9 @@ const BulkEditDialog = (props) => {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-            <SimpleForm>
-                <ReferenceInput label="User" source="userId" reference="user" variant="outlined">
+            <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
+            <SimpleForm save={() => console.log('sdsad')}>
+                <ReferenceInput label="Status" source="ideaId" reference="idea" variant="outlined">
                     <SelectInput optionText="status"/>
                 </ReferenceInput>
                 {/*<SaveButton />*/}
@@ -187,6 +188,6 @@ export const IdeaList = (props) => {
                 <EditButton basePath="/idea"/>
             </Datagrid>
         </List>
-        <BulkEditDialog open={open} onClose={handleClose} />
+        <BulkEditDialog open={open} onClose={handleClose} resource={props.resource} />
     </Fragment>
 )};

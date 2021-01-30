@@ -137,16 +137,16 @@ const BulkEditButton = ({selectedIds}) => {
     const notify = useNotify();
     const unselectAll = useUnselectAll();
     const [updateMany, {loading}] = useUpdateMany(
-        'ideas',
+        'idea',
         selectedIds,
         {views: 0},
         {
             onSuccess: () => {
                 refresh();
-                notify('Posts updated');
-                unselectAll('posts');
+                notify('Ideas updated');
+                unselectAll('idea');
             },
-            onFailure: error => notify('Error: posts not updated', 'warning'),
+            onFailure: error => notify('Error: ideas not updated', 'warning'),
         }
     );
     const handleClick = () => setOpen(true);

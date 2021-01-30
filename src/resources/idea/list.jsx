@@ -157,11 +157,6 @@ const BulkEditButton = ({selectedIds}) => {
         setOpen(false);
     };
 
-    // const handleSubmit = (value) => {
-    //     // dataProvider.updateMany()
-    //     console.log('sadas')
-    // };
-
     return (
         <Fragment>
             <Button label="Bulk edit" onClick={handleClick}><ContentCreate/></Button>
@@ -173,20 +168,8 @@ const BulkEditButton = ({selectedIds}) => {
                         {id: 'open', name: 'Open'},
                         {id: 'denied', name: 'Denied'},
                     ]}/>
-                    {/*<ReferenceInput label="Status" source="ideaId" reference="idea" variant="outlined">*/}
-                    {/*    <SelectInput optionText="status"/>*/}
-                    {/*</ReferenceInput>*/}
-                    {/*<SaveButton />*/}
                 </SimpleForm>
             </Dialog>
-            {/*<Confirm*/}
-            {/*    isOpen={open}*/}
-            {/*    loading={loading}*/}
-            {/*    title="Update View Count"*/}
-            {/*    content="Are you sure you want to reset the views for these items?"*/}
-            {/*    onConfirm={handleConfirm}*/}
-            {/*    onClose={handleDialogClose}*/}
-            {/*/>*/}
         </Fragment>
     );
 }
@@ -205,44 +188,7 @@ const IdeaFilters = (props) => (
     </Filter>
 );
 
-// const BulkEditDialog = (props) => {
-//     const {onClose, selectedValue, open} = props;
-//
-//     const handleClose = () => {
-//         onClose(selectedValue);
-//     };
-//
-//
-//
-//     return (
-//         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-//             <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
-//             <SimpleForm save={handleSubmit}>
-//                 <SelectInput source="status" choices={[
-//                     {id: 'closed', name: 'Closed'},
-//                     {id: 'open', name: 'Open'},
-//                     {id: 'denied', name: 'Denied'},
-//                 ]}/>
-//                 {/*<ReferenceInput label="Status" source="ideaId" reference="idea" variant="outlined">*/}
-//                 {/*    <SelectInput optionText="status"/>*/}
-//                 {/*</ReferenceInput>*/}
-//                 {/*<SaveButton />*/}
-//             </SimpleForm>
-//         </Dialog>
-//     );
-// }
-
 export const IdeaList = (props) => {
-    // const [open, setOpen] = React.useState(false);
-
-    // const handleBulkEditClick = () => {
-    //     setOpen(true);
-    // };
-    //
-    // const handleClose = (value) => {
-    //     setOpen(false);
-    // };
-
     return (
         <Fragment>
             <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>}
@@ -259,7 +205,6 @@ export const IdeaList = (props) => {
                     <EditButton basePath="/idea"/>
                 </Datagrid>
             </List>
-            {/*<BulkEditDialog open={open} onClose={handleClose} />*/}
         </Fragment>
     )
 };

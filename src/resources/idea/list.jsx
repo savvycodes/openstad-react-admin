@@ -140,7 +140,6 @@ const IdeaFilters = (props) => (
 const BulkEditDialog = (props) => {
     const { onClose, selectedValue, open, resource } = props;
 
-    console.log(resource)
     const handleClose = () => {
         onClose(selectedValue);
     };

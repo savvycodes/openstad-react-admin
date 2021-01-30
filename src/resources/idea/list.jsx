@@ -15,6 +15,7 @@ import {ReferenceInput, SelectInput} from 'react-admin';
 import { CreateButton, ExportButton } from 'ra-ui-materialui';
 // in PostList.js
 import jsonExport from 'jsonexport/dist';
+import dataProvider from "../../dataProvider";
 
 const useStyles = makeStyles(
     theme => ({
@@ -138,23 +139,29 @@ const IdeaFilters = (props) => (
 );
 
 const BulkEditDialog = (props) => {
-    const { onClose, selectedValue, open, resource } = props;
+    const { onClose, selectedValue, open } = props;
 
     const handleClose = () => {
         onClose(selectedValue);
     };
 
-    const handleListItemClick = (value) => {
+    const handleSubmit = (value) => {
+        // dataProvider.updateMany()
         onClose(value);
     };
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
-            <SimpleForm save={() => console.log('sdsad')}>
-                <ReferenceInput label="Status" source="ideaId" reference="idea" variant="outlined">
-                    <SelectInput optionText="status"/>
-                </ReferenceInput>
+            <SimpleForm save={handleSubmit}>
+                <SelectInput source="status" choices={[
+                    { id: 'closed', name: 'Closed' },
+                    { id: 'open', name: 'Open' },
+                    { id: 'denied', name: 'Denied' },
+                ]} />
+                {/*<ReferenceInput label="Status" source="ideaId" reference="idea" variant="outlined">*/}
+                {/*    <SelectInput optionText="status"/>*/}
+                {/*</ReferenceInput>*/}
                 {/*<SaveButton />*/}
             </SimpleForm>
         </Dialog>
@@ -187,6 +194,6 @@ export const IdeaList = (props) => {
                 <EditButton basePath="/idea"/>
             </Datagrid>
         </List>
-        <BulkEditDialog open={open} onClose={handleClose} resource={props.resource} />
+        <BulkEditDialog open={open} onClose={handleClose} />
     </Fragment>
 )};

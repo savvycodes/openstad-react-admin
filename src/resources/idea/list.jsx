@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import {ImportButton} from '../../components/ImportButton/index.jsx';
 import Inbox from '@material-ui/icons/Inbox';
-import {Button, Confirm} from 'react-admin';
+import {Button} from 'react-admin';
 import ContentCreate from '@material-ui/icons/Create';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';

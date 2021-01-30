@@ -13,16 +13,14 @@ import ContentCreate from '@material-ui/icons/Create';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import {
-    ReferenceInput, SelectInput, useUpdateMany,
+    SelectInput,
+    useUpdateMany,
     useRefresh,
     useNotify,
     useUnselectAll,
 } from 'react-admin';
-
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
-// in PostList.js
 import jsonExport from 'jsonexport/dist';
-import dataProvider from "../../dataProvider";
 
 const useStyles = makeStyles(
     theme => ({

@@ -135,26 +135,29 @@ const BulkEditButton = ({selectedIds}) => {
     const [status, setStatus] = useState('');
     const notify = useNotify();
     const unselectAll = useUnselectAll();
+
+    /**
+     * TODO: try to solve with useUpdateMany, otherwise use dataprovider
+     */
     const [updateMany, {loading}] = useUpdateMany(
         'idea',
         selectedIds,
-        {status: status},
-        {
-            onSuccess: () => {
-                refresh();
-                notify('Ideas updated');
-                unselectAll('idea');
-            },
-            onFailure: error => notify('Error: ideas not updated', 'warning'),
-        }
+        // {status: status},
+        // {
+        //     onSuccess: () => {
+        //         refresh();
+        //         notify('Ideas updated');
+        //         unselectAll('idea');
+        //     },
+        //     onFailure: error => notify('Error: ideas not updated', 'warning'),
+        // }
     );
     const handleClick = () => setOpen(true);
     const handleDialogClose = () => setOpen(false);
 
-    // useEffect(() => updateMany());
 
     const handleConfirm = (payload) => {
-        setStatus(payload.status)
+        updateMany()
         setOpen(false);
     };
 

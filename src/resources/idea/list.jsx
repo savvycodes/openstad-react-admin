@@ -134,7 +134,7 @@ const BulkEditButton = ({selectedIds}) => {
     const refresh = useRefresh();
     const notify = useNotify();
     const unselectAll = useUnselectAll();
-    const [updateMany, {loading}] = useUpdateMany(
+    const [updateMany] = useUpdateMany(
         'idea',
         selectedIds,
         {views: 0},

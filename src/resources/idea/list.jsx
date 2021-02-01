@@ -21,6 +21,7 @@ import {
 } from 'react-admin';
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
+import { useDataProvider } from 'react-admin';
 
 const useStyles = makeStyles(
     theme => ({
@@ -131,33 +132,37 @@ export const ListActions = props => {
 
 const BulkEditButton = ({selectedIds}) => {
     const [open, setOpen] = useState(false);
+    const dataProvider = useDataProvider();
+
     const refresh = useRefresh();
-    const [status, setStatus] = useState('');
+    // const [status, setStatus] = useState('');
     const notify = useNotify();
     const unselectAll = useUnselectAll();
 
-    /**
-     * TODO: try to solve with useUpdateMany, otherwise use dataprovider
-     */
-    const [updateMany, {loading}] = useUpdateMany(
-        'idea',
-        selectedIds,
-        // {status: status},
-        // {
-        //     onSuccess: () => {
-        //         refresh();
-        //         notify('Ideas updated');
-        //         unselectAll('idea');
-        //     },
-        //     onFailure: error => notify('Error: ideas not updated', 'warning'),
-        // }
-    );
+    // /**
+    //  * TODO: try to solve with useUpdateMany, otherwise use dataprovider
+    //  */
+    // const [updateMany, {loading}] = useUpdateMany(
+    //     'idea',
+    //     selectedIds,
+    //     // {status: status},
+    //     // {
+    //     //     onSuccess: () => {
+    //     //         refresh();
+    //     //         notify('Ideas updated');
+    //     //         unselectAll('idea');
+    //     //     },
+    //     //     onFailure: error => notify('Error: ideas not updated', 'warning'),
+    //     // }
+    // );
     const handleClick = () => setOpen(true);
     const handleDialogClose = () => setOpen(false);
 
 
-    const handleConfirm = (payload) => {
-        updateMany()
+    const handleConfirm = async (payload) => {
+        payload.ids = selectedIds;
+        console.log(payload)
+        await dataProvider.updateMany('idea', payload)
         setOpen(false);
     };
 
@@ -166,7 +171,7 @@ const BulkEditButton = ({selectedIds}) => {
             <Button label="Bulk edit" onClick={handleClick}><ContentCreate/></Button>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={open}>
                 <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
-                <SimpleForm save={handleConfirm} disabled={loading}>
+                <SimpleForm save={handleConfirm}>
                     <SelectInput source="status" choices={[
                         {id: 'CLOSED', name: 'Closed'},
                         {id: 'OPEN', name: 'Open'},

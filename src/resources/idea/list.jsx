@@ -18,10 +18,11 @@ import {
     useRefresh,
     useNotify,
     useUnselectAll,
+    useMutation,
 } from 'react-admin';
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
-import { useDataProvider } from 'react-admin';
+import {useDataProvider} from 'react-admin';
 
 const useStyles = makeStyles(
     theme => ({
@@ -139,20 +140,56 @@ const BulkEditButton = ({selectedIds}) => {
     const notify = useNotify();
     const unselectAll = useUnselectAll();
 
+    // /**
+    //  * TODO: try to solve with useUpdateMany, otherwise use dataprovider
+    //  */
+    // const [updateMany, {loading}] = useUpdateMany(
+    //     'idea',
+    //     selectedIds,
+    //     // {status: status},
+    //     // {
+    //     //     onSuccess: () => {
+    //     //         refresh();
+    //     //         notify('Ideas updated');
+    //     //         unselectAll('idea');
+    //     //     },
+    //     //     onFailure: error => notify('Error: ideas not updated', 'warning'),
+    //     // }
+    // );
     const handleClick = () => setOpen(true);
     const handleDialogClose = () => setOpen(false);
 
-    const handleConfirm = async (data) => {
-        await dataProvider.updateMany('idea', {data, ids: selectedIds})
-        setOpen(false);
-    };
+
+    const [mutate, {loading}] = useMutation();
+    const confirm = data => mutate({
+        type: 'updateMany',
+        resource: 'idea',
+        payload: {ids: selectedIds, data},
+        options: {
+            onSuccess: () => {
+                refresh();
+                notify('Ideas updated');
+                unselectAll('idea');
+            },
+            onFailure: error => notify('Error: ideas not updated', 'warning'),
+        }
+    });
+    // const HandleConfirm = (data) => useMutation({
+    //     type: 'updateMany',
+    //     resource: 'idea',
+    //     payload: {ids: selectedIds, data},
+    // })
+    // const handleConfirm = async (data) => {
+    //     await dataProvider.updateMany('idea', {data, ids: selectedIds})
+    //     setOpen(false);
+    // };
 
     return (
         <Fragment>
-            <Button label="Bulk edit" onClick={handleClick}><ContentCreate/></Button>
+            <Button label="Bulk edit" onClick={handleClick} disabled={loading}><ContentCreate/></Button>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={open}>
                 <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
-                <SimpleForm save={handleConfirm}>
+                <SimpleForm save={confirm}>
                     <SelectInput source="status" choices={[
                         {id: 'CLOSED', name: 'Closed'},
                         {id: 'OPEN', name: 'Open'},

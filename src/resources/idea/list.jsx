@@ -160,7 +160,7 @@ const BulkEditButton = ({selectedIds}) => {
     const handleDialogClose = () => setOpen(false);
 
 
-    const [mutate, {loading}] = useMutation();
+    const [mutate, {loading, data, error}] = useMutation();
     const confirm = data => mutate({
         type: 'updateMany',
         resource: 'idea',
@@ -174,6 +174,16 @@ const BulkEditButton = ({selectedIds}) => {
             onFailure: error => notify('Error: ideas not updated', 'warning'),
         }
     });
+
+    if(data){
+        refresh();
+        notify('Ideas updated');
+        unselectAll('idea');
+    }
+
+    if(error){
+        notify('Error: ideas not updated', 'warning')
+    }
     // const HandleConfirm = (data) => useMutation({
     //     type: 'updateMany',
     //     resource: 'idea',

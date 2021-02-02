@@ -133,33 +133,11 @@ export const ListActions = props => {
 
 const BulkEditButton = ({selectedIds}) => {
     const [open, setOpen] = useState(false);
-    const dataProvider = useDataProvider();
-
     const refresh = useRefresh();
-    // const [status, setStatus] = useState('');
     const notify = useNotify();
     const unselectAll = useUnselectAll();
-
-    // /**
-    //  * TODO: try to solve with useUpdateMany, otherwise use dataprovider
-    //  */
-    // const [updateMany, {loading}] = useUpdateMany(
-    //     'idea',
-    //     selectedIds,
-    //     // {status: status},
-    //     // {
-    //     //     onSuccess: () => {
-    //     //         refresh();
-    //     //         notify('Ideas updated');
-    //     //         unselectAll('idea');
-    //     //     },
-    //     //     onFailure: error => notify('Error: ideas not updated', 'warning'),
-    //     // }
-    // );
     const handleClick = () => setOpen(true);
     const handleDialogClose = () => setOpen(false);
-
-
     const [mutate, {loading, data, error}] = useMutation();
     const confirm = data => mutate({
         type: 'updateMany',
@@ -184,15 +162,6 @@ const BulkEditButton = ({selectedIds}) => {
     if(error){
         notify('Error: ideas not updated', 'warning')
     }
-    // const HandleConfirm = (data) => useMutation({
-    //     type: 'updateMany',
-    //     resource: 'idea',
-    //     payload: {ids: selectedIds, data},
-    // })
-    // const handleConfirm = async (data) => {
-    //     await dataProvider.updateMany('idea', {data, ids: selectedIds})
-    //     setOpen(false);
-    // };
 
     return (
         <Fragment>

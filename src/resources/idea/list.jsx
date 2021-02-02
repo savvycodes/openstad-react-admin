@@ -158,11 +158,8 @@ const BulkEditButton = ({selectedIds}) => {
     const handleClick = () => setOpen(true);
     const handleDialogClose = () => setOpen(false);
 
-
-    const handleConfirm = async (payload) => {
-        payload.ids = selectedIds;
-        console.log(payload)
-        await dataProvider.updateMany('idea', payload)
+    const handleConfirm = async (data) => {
+        await dataProvider.updateMany('idea', {data, ids: selectedIds})
         setOpen(false);
     };
 

@@ -165,7 +165,7 @@ const BulkEditButton = ({selectedIds}) => {
 
     return (
         <Fragment>
-            <Button label="Bulk edit" onClick={handleClick} disabled={loading}><ContentCreate/></Button>
+            <Button label="Bulk edit" onClick={handleClick}><ContentCreate/></Button>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={open}>
                 <DialogTitle id="simple-dialog-title">Bulk edit</DialogTitle>
                 <SimpleForm save={confirm}>

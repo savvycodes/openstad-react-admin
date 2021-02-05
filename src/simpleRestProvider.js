@@ -157,15 +157,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
       }).then(({ json }) => ({ data: json }))
     },
     // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
-    updateMany: (resource, params) => Promise.all(params.ids.map(id => {
-        console.log('params')
-        console.log(resource)
-        console.log(params)
-        console.log(params.data)
-        return httpClient(`${apiUrl}/${resource}/${id}`, {
+    updateMany: (resource, params) => Promise.all(params.ids.map(id => httpClient(`${apiUrl}/${resource}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(params.data),
-    })})).then(responses => ({ data: responses.map(({ json }) => json.id) })),
+    }))).then(responses => ({ data: responses.map(({ json }) => json.id) })),
     create: (resource, params) => httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
         body: JSON.stringify(params.data),

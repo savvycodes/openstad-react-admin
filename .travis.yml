@@ -1,24 +1,14 @@
-dist: xenial
 language: node_js
 node_js:
-  - 13
-os: linux
+  - "12.13"
 
-env:
-  global:
-    - NPM_USERNAME=${NPM_USERNAME:-openstad}
+script:
+  - npm run test
 
-services:
-  - docker
-  - mongodb
-
-
-stages:
-  - name: npm_publish
-    if: tag IS present AND branch =~ /release|master/
-
-jobs:
-  include:
-    - stage: npm_publish
-      name: 'Publish to NPM'
-      script: bash npm_publish
+deploy:
+  provider: npm
+  email: $NPM_EMAIL
+  api_key: $NPM_AUTH_TOKEN
+  tag: next
+  on:
+    tags: true

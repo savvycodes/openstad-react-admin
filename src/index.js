@@ -8,10 +8,18 @@ import {OpenstadReactAdmin} from './App';
 import * as serviceWorker from './serviceWorker';
 
 
+displayAppBar
+site
+user
+imageApi
+restApi
+jwt
+siteKey
+resources
+
 ReactDOM.render(
   <React.StrictMode>
     <OpenstadReactAdmin
-      displayAppBar={true}
       site={{
         id: 142
       }}

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 //import './App.less';
 import { Admin, Resource} from 'react-admin';
 import { ArticleList, ArticleEdit, ArticleCreate, ArticleIcon } from './resources/article.jsx';
@@ -31,11 +33,6 @@ import theme from './theme';
 import { AreaList } from './resources/area/list.jsx';
 import { AreaCreate, AreaEdit, AreaIcon } from './resources/area/index.jsx';
 
-/*
-customRoutes={[
-]}
- */
-
 export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
   const user = props.user;
@@ -49,7 +46,7 @@ export const OpenstadReactAdmin = (props) => {
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
     >
-      {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
+      {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.siteId}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
       {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={SpeakerNotesIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
@@ -63,3 +60,24 @@ export const OpenstadReactAdmin = (props) => {
     </Admin>
   );
 }
+
+OpenstadReactAdmin.propTypes = {
+  // Expects following object {id : 1}, initial ideas to add user REST object, but can be changed to userId
+  site: PropTypes.object.isRequired,
+  // Expects following object {id : 1}, initial ideas to add user REST object, but can be changed to userId
+  user: PropTypes.object.isRequired,
+  // Expects string of image openstad API
+  imageApi: PropTypes.string.isRequired,
+  // Expects of REST API, in openstad this format is with site id, since every site has it's own REST api
+  // So base of rest api would be something like this /api/site/148, for dev there is a proxy and in CMS and Admin panel proxies to API exists
+  // this fixes the CORS errors
+  restApi: PropTypes.element.isRequired,
+  // JTW for active user or siteKey apikey for static admin user for testing in DEV
+  jwt: PropTypes.string,
+  siteKey: PropTypes.string,
+  // array of objects with list of resources and whether they are active of not
+  // this is config that can potentially be changed by where it's loaded
+  // This makes it possible for some sites to show articles in admin, but in others not if not relevant
+  // This way admin users can customize the admin interface for moderators a bit.
+  resources: PropTypes.array.isRequired
+};

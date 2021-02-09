@@ -1,13 +1,16 @@
 {
-  "name": "my-app",
+  "name": "openstad-react-admin",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^7.1.2",
     "babel-preset-react": "^6.24.1",
     "filepond": "^4.13.4",
@@ -26,7 +29,8 @@
     "react-filepond": "^7.0.1",
     "react-json-editor-ajrm": "^2.5.9",
     "react-scripts": "3.4.1",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "redux-mock-store": "^1.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -43,6 +47,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "core-js": "^3.4.1",
     "css-loader": "^3.0.0",
+    "enzyme": "^3.11.0",
     "exports-loader": "^0.7.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "imports-loader": "^0.8.0",
@@ -53,6 +58,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-proxy-loader": "^0.3.5",
+    "react-test-renderer": "^17.0.1",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "4.2.3",
     "uglifyjs-webpack-plugin": "^2.2.0",

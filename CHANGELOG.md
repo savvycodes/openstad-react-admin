@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.3
+* Add bulk update for ideas
+
 ## 0.1.1
 * Fixing automatic build and publish
 

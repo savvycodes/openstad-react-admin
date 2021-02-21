@@ -46,7 +46,7 @@ export const OpenstadReactAdmin = (props) => {
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
     >
-      {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.siteId}} /> : <div />}
+      {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
       {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={SpeakerNotesIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}

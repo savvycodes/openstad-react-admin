@@ -52,3 +52,5 @@ export const ArticleCreate = (props) => (
         </SimpleForm>
     </Create>
 );
+
+

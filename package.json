@@ -1,7 +1,7 @@
 {
   "name": "openstad-react-admin",
   "homepage": "https://github.com/Amsterdam/openstad-react-admin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -70,7 +70,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "watch": "webpack --watch",
+    "watch": "webpack --watch --mode development",
     "build-lib": "webpack"
   },
   "eslintConfig": {

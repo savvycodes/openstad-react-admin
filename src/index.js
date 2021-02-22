@@ -68,6 +68,9 @@ ReactDOM.render(
         newsletterSignup: {
           active: true
         },
+        choicesGuide: {
+          active: true
+        },
         tag: {
           active: true
         },

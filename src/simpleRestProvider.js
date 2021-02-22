@@ -47,99 +47,117 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
     },
     getList: (resource, params) => {
 
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        const query = {
-          sort: JSON.stringify([field, order]),
-          page: (page -1),
-          pageSize: perPage,
-          range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-          filter: JSON.stringify(params.filter),
-          includeVoteCount: 1,
-          includeUser: 1
-        };
+      const { page, perPage } = params.pagination;
+      const { field, order } = params.sort;
+      
+      const query = {
+        sort: JSON.stringify([field, order]),
+        page: (page -1),
+        pageSize: perPage,
+        range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+        filter: JSON.stringify(params.filter),
+        includeUser: 1,
+      };
 
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+      if ( resource == 'idea' ) {
+        query.includeVoteCount = 1;
+        // query.includeArguments = 1;
+      }
 
-        return httpClient(url).then(({ headers, json }) => {
+      const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-          return {
+      console.log('----------------------------------------------------------------------------------------------------');
+      console.log(url);
+
+      return httpClient(url).then(({ headers, json }) => {
+
+        let result = {
+            data: json,
+            total: json.length
+        };;
+        
+        if ( resource != 'choicesGuide' ) {
+          // no paging in the api for choicesGuides
+          result = {
             data: json.records,
             total: json.metadata.totalCount
           };
-        });
-    },
-      getOne: (resource, params) => {
-        let url;
-
-
-        // In case of current request make a call to the root that's where the siteData is found
-        // All other resources are children of the site
-        if (resource === 'site') {
-          url = apiUrl;
-        } else {
-          // add include tags always
-          url = `${apiUrl}/${resource}/${params.id}?includeTags=1&includeVoteCount=1`;
         }
 
-        return httpClient(url)
-          .then(({ json }) => {
+        return result;
+      });
+    },
+    getOne: (resource, params) => {
+      let url;
 
-            // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
-            //here only solution so editing tags works
-            json = {
-              ...json,
-              tags: json.tags ? json.tags.map(tag => tag.id) : [],
-            }
 
-            return { data: json }
-          });
+      // In case of current request make a call to the root that's where the siteData is found
+      // All other resources are children of the site
+      if (resource === 'site') {
+        url = apiUrl;
+      } else {
+        // add include tags always
+        url = `${apiUrl}/${resource}/${params.id}?includeTags=1&includeVoteCount=1`;
+      }
+
+      return httpClient(url)
+        .then(({ json }) => {
+
+          // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
+          //here only solution so editing tags works
+          json = {
+            ...json,
+            tags: json.tags ? json.tags.map(tag => tag.id) : [],
+          }
+
+          return { data: json }
+        });
     },
     getMany: (resource, params) => {
       const { page, perPage } = params.pagination ? params.pagination : {};
 
-        const query = {
-            filter: JSON.stringify({ id: params.ids }),
-            page: page || 0,
-            pageSize: perPage|| 100,
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+      const query = {
+        filter: JSON.stringify({ id: params.ids }),
+        page: page || 0,
+        pageSize: perPage|| 100,
+      };
+      const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-        return httpClient(url).then(({ json }) => {
+      return httpClient(url).then(({ json }) => {
 
-          // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
-          //here only solution so editing tags works
-          json.record = json.records ? json.records.map((record) => {
-            return {
-              tags: record.tags ? record.tags.map(tag => tag.id) : [],
-              ...record
-            }
-          }) : [];
+        // in case of references our api returns complete object, react admin looks for ids, we need to find proper general solution
+        //here only solution so editing tags works
+        json.record = json.records ? json.records.map((record) => {
+          return {
+            tags: record.tags ? record.tags.map(tag => tag.id) : [],
+            ...record
+          }
+        }) : [];
 
-          return { data: json.records }
-        });
+        return { data: json.records }
+      });
     },
     getManyReference: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify(Object.assign(Object.assign({}, params.filter), { [params.target]: params.id })),
-            includeVoteCount: 1
+      const { page, perPage } = params.pagination;
+      const { field, order } = params.sort;
+      const query = {
+        sort: JSON.stringify([field, order]),
+        range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+        filter: JSON.stringify(Object.assign(Object.assign({}, params.filter), { [params.target]: params.id })),
+        includeVoteCount: 1
+      };
+      const url = `${apiUrl}/${resource}?${stringify(query)}`;
+
+      return httpClient(url).then(({ headers, json }) => {
+        /*            if (!headers.has('content-range')) {
+                      throw new Error('The Content-Range header WADDDUP is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?');
+                      }*/
+
+        return {
+          data: json.records,
+          total: json.metadata ? json.metadata.totalCount : 0
         };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
-        return httpClient(url).then(({ headers, json }) => {
-/*            if (!headers.has('content-range')) {
-                throw new Error('The Content-Range header WADDDUP is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?');
-            }*/
-
-            return {
-                data: json.records,
-                total: json.metadata ? json.metadata.totalCount : 0
-            };
-        });
+      });
     },
     update: (resource, params) => {
       let url;
@@ -158,23 +176,23 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
     },
     // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
     updateMany: (resource, params) => Promise.all(params.ids.map(id => httpClient(`${apiUrl}/${resource}/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(params.data),
+      method: 'PUT',
+      body: JSON.stringify(params.data),
     }))).then(responses => ({ data: responses.map(({ json }) => json.id) })),
     create: (resource, params) => httpClient(`${apiUrl}/${resource}`, {
-        method: 'POST',
-        body: JSON.stringify(params.data),
+      method: 'POST',
+      body: JSON.stringify(params.data),
     })
       .then(({ json }) => ({
-          data: Object.assign(Object.assign({}, params.data), { id: json.id }),
+        data: Object.assign(Object.assign({}, params.data), { id: json.id }),
       })
 
-    ),
+           ),
     delete: (resource, params) => httpClient(`${apiUrl}/${resource}/${params.id}`, {
-        method: 'DELETE',
+      method: 'DELETE',
     }).then(({ json }) => ({ data: json })),
     // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
     deleteMany: (resource, params) => Promise.all(params.ids.map(id => httpClient(`${apiUrl}/${resource}/${id}`, {
-        method: 'DELETE',
+      method: 'DELETE',
     }))).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-});
+  });

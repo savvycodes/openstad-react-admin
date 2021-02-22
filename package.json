@@ -63,7 +63,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "watch": "webpack --watch",
+    "watch": "webpack --watch --mode development",
     "build-lib": "webpack"
   },
   "eslintConfig": {

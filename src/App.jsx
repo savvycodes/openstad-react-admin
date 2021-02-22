@@ -11,6 +11,7 @@ import { VoteList, VoteIcon } from './resources/vote/index.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
 import { SiteEdit, SiteIcon } from './resources/site/index.jsx';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
+import { ChoicesGuideList, ChoicesGuideEdit, ChoicesGuideCreate, ChoicesGuideIcon } from './resources/choicesGuide/index.jsx';
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
@@ -34,7 +35,7 @@ import { AreaCreate, AreaEdit, AreaIcon } from './resources/area/index.jsx';
 /*
 customRoutes={[
 ]}
- */
+*/
 
 export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
@@ -60,6 +61,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.vote && resources.vote.active ? <Resource name="vote" list={VoteList} icon={HowToVoteIcon} options={{menuTitle: 'Stemmen'}} /> : <div />}
       {resources.user && resources.user.active ? <Resource name="user" list={UserList} edit={UserEdit} create={UserCreate} icon={UserIcon} options={{menuTitle: 'Gebruikers',userPath: userPath}} /> : <div />}
       {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={ContactMailIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
+      {resources.choicesGuide && resources.choicesGuide.active ? <Resource name="choicesGuide" list={ChoicesGuideList} edit={ChoicesGuideEdit} create={ChoicesGuideCreate} icon={ChoicesGuideIcon} options={{menuTitle: 'Keuzewijzers'}} /> : <div />}
     </Admin>
   );
 }

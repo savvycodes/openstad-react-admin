@@ -27,7 +27,7 @@ ReactDOM.render(
       }}
       statsApi={{
         //     url: '/api/site/1',
-        url: '/stats/site/142'
+        url: '/stats/site/145/overview'
       }}
       jwt=""
       siteKey="xxxxxxx"

@@ -44,9 +44,16 @@ export const OpenstadReactAdmin = (props) => {
   const user = props.user;
   const userPath = "/user/" + user.id;
 
+  console.log('resources.site && resources.site.active', props)
+
   return (
     <Admin
-        dashboard={Dashboard}
+        dashboard={(dashboardProps) => {
+          return <Dashboard
+              {...dashboardProps}
+              statsApi={props.statsApi && props.statsApi.url ? props.statsApi.url : false}
+          />
+        }}
         theme={theme}
         dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey, props.csrf)}
         appLayout={MyLayout}
@@ -79,6 +86,7 @@ OpenstadReactAdmin.propTypes = {
   // So base of rest api would be something like this /api/site/148, for dev there is a proxy and in CMS and Admin panel proxies to API exists
   // this fixes the CORS errors
   restApi: PropTypes.element.isRequired,
+  statsApi: PropTypes.element.isRequired,
   // JTW for active user or siteKey apikey for static admin user for testing in DEV
   jwt: PropTypes.string,
   siteKey: PropTypes.string,

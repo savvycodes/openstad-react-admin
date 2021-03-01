@@ -186,15 +186,15 @@ export const ImportButton = (props) => {
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             {dialogStatus === 'importFinished' ?
-              (<>
-                <h3>Import complete!!</h3>
+              <>
+                <h3>Import complete!</h3>
                 <p>
                   Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total
                   of <b>{totalRows}</b> rows
                 </p>
                 <h5 style={{ color: 'red' }}>{countFailedImportRows(csvValidationNotifications)} failed rows:</h5>
                 <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
-              </>)
+              </>
               :
               <>
                 <p>Upload a csv or tsv file for bulk editing or creation. </p>

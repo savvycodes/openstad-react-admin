@@ -43,7 +43,7 @@ const appBarStyles = {
   backgroundColor: 'white',
   color: 'rgb(63, 80, 182)',
   boxShadow: 'none',
-  padding: '3px 0'
+
 }
 
 const AdminAppBar = props => {

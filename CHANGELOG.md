@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.6
+* Add statistics dashboard
+
 ## 0.1.5
 * Add choices guide resource
 

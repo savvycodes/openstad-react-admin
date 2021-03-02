@@ -11,7 +11,7 @@ const ArticleFilters = (props) => (
 );
 
 export const ArticleList = (props) => (
-    <List {...props} filters={<ArticleFilters />}>
+    <List {...props} filters={<ArticleFilters />} sort={{field: 'id', order: 'DESC'}}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="title" />

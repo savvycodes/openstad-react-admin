@@ -5,7 +5,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 export const ArgumentIcon = ListAltIcon;
 
 export const ArgumentList = (props) => (
-    <List {...props}  title="Argumenten">
+    <List {...props}  title="Argumenten"  sort={{field: 'id', order: 'DESC'}}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="description" />

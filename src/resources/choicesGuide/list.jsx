@@ -20,7 +20,7 @@ const ChoicesGuideFilters = (props) => (
 );
 
 export const ChoicesGuideList = (props) => (
-  <List {...props}>
+  <List {...props} sort={{field: 'id', order: 'DESC'}}>
     <Datagrid>
       <TextField source="id" />
       <TextField source="title" />

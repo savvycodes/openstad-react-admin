@@ -19,10 +19,13 @@ import {
     useNotify,
     useUnselectAll,
     useMutation,
+    Pagination
 } from 'react-admin';
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
 import {useDataProvider} from 'react-admin';
+
+const IdeaPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
 const useStyles = makeStyles(
     theme => ({
@@ -200,9 +203,15 @@ const IdeaFilters = (props) => (
 export const IdeaList = (props) => {
     return (
         <Fragment>
-            <List {...props} filters={<IdeaFilters/>} actions={<ListActions/>}
+            <List {...props}
+                  sort={{field: 'id', order: 'DESC'}}
+                  filters={<IdeaFilters/>}
+                  actions={<ListActions/>}
                   bulkActionButtons={<ListBulkActionButtons/>}
-                  exporter={exporter} empty={<Empty/>}>
+                  exporter={exporter}
+                  empty={<Empty/>}
+                  pagination={<IdeaPagination />}
+            >
                 <Datagrid>
                     <TextField source="id"/>
                     <ImageField source="extraData.images[0]" label="Image"/>

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.7
+* Redirect to list view after create for tags, users and ideas
+* Set default ordering to id's DESC
+* Refresh table view after ideas import
+
 ## 0.1.6
 * Add statistics dashboard
 

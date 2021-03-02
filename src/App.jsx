@@ -44,13 +44,20 @@ export const OpenstadReactAdmin = (props) => {
   const user = props.user;
   const userPath = "/user/" + user.id;
 
-  console.log('resources.site && resources.site.active', props)
+  // @todo: Also move the dataProvider to generic header options,
+  //  this way JWT, siteKey and CSRF logic can be in one place at the top
+  const authHeader = props.siteKey ? {
+    'X-Authorization': `${props.siteKey}`
+  } : {
+    'X-Authorization': `Bearer ${props.jwt}`
+  };
 
   return (
     <Admin
         dashboard={(dashboardProps) => {
           return <Dashboard
               {...dashboardProps}
+              authHeader={authHeader}
               statsApi={props.statsApi && props.statsApi.url ? props.statsApi.url : false}
           />
         }}

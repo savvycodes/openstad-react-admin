@@ -8,7 +8,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import axios from 'axios';
 
-import {LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, CartesianGrid} from 'recharts';
+import {LineChart, Line, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, CartesianGrid} from 'recharts';
 
 /**
  * Fetch a list of statistics from the API and display.
@@ -33,12 +33,10 @@ class Dashboard extends Component {
     }
 
     fetchStats() {
-        console.log(' fetchStats this.props.statsUrl', this.props, this.props.statsApi)
-
-        axios.get(this.props.statsApi)
+        axios.get(this.props.statsApi, {
+            headers: this.props.authHeader
+        })
             .then((response) => {
-
-                console.log('response', response.data)
 
                 this.setState({
                     loading: false,
@@ -103,12 +101,15 @@ const Statistics = (props) => {
                         // for counters use columns
                         // for Chars use full width
                         <Card style={{
-                            width: statistic.result.length === 1 ? '23%' : '90%',
+                            width: statistic.result.length === 1 ? '250px' : '90%',
+                            height: statistic.result.length === 1 ? '180px' : '600px',
                             margin: '0 0 20px 20px',
                             display: 'inline-block'
                         }}>
                             <CardHeader title={statistic.description}/>
-                            <CardContent>
+                            <CardContent style={{
+                                height: statistic.result.length === 1 ? '180px' : '500px',
+                            }}>
                                 {statistic.result.length === 1 ?
                                     <Counter data={statistic.result[0]}/> :
                                     <Chart data={statistic.result}/>
@@ -128,17 +129,30 @@ const Counter = ({data}) => {
 }
 
 const Chart = ({data}) => {
-    return  <LineChart
-            width={800} height={500}
+
+    data = data.map((row, i) => {
+        //const format = i === 1  ? '$2 $1, $3' : '$2 $1';
+        // we format it with the year now, but it takes a lot of space
+        // Pretty charts like Google Analytics only show the months / years when it's relevant
+        // For instance when it's the first. This is a little bit more complicated, so for now just always show
+        // the year for clarity.
+        const format = '$2 $1, $3';
+        row.niceDate = new Date(row.date).toString().replace(/\S+\s(\S+)\s(\d+)\s(\d+)\s.*/, format);
+        return row;
+    })
+
+    return <ResponsiveContainer width="100%" >
+        <AreaChart
             data={data}
             margin={{top: 20, right: 20, bottom: 20, left: 20}}
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date"/>
+            <XAxis dataKey="niceDate"/>
             <YAxis/>
             <Tooltip/>
-            <Line type="monotone" dataKey="counted" stroke="#8884d8"/>
-        </LineChart>
+            <Area type="monotone" dataKey="counted" stroke="#8884d8" fill="#8884d8"/>
+        </AreaChart>
+    </ResponsiveContainer>
 }
 
 const Loader = () => {

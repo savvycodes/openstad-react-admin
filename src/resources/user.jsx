@@ -1,8 +1,8 @@
 // in Users.js
 import React from 'react';
-import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, Filter } from 'react-admin';
+import { Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, Filter } from 'react-admin';
 import PersonIcon from '@material-ui/icons/Person';
-//import EditableDatagrid from './react-data-grid/index.jsx';
+import {CustomList as List} from '../components/CustomList';
 
 export const UserIcon = PersonIcon;
 const UserFilter = (props) => (

@@ -1,6 +1,7 @@
 // in Users.js
 import React from 'react';
-import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
+import { Datagrid, DateField, TextField } from 'react-admin';
+import {CustomList as List} from '../components/CustomList';
 import PersonIcon from '@material-ui/icons/Person';
 //import EditableDatagrid from './react-data-grid/index.jsx';
 

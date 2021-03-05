@@ -1,6 +1,8 @@
 import React from 'react';
-import { List, Datagrid, Filter, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
+import { Datagrid, Filter, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
+import {CustomList as List} from '../components/CustomList';
+
 export const ArticleIcon = BookIcon;
 
 const ArticleFilters = (props) => (

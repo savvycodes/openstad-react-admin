@@ -1,6 +1,7 @@
-import { Datagrid, Filter, TextInput, EditButton, List, TextField, TopToolbar } from 'react-admin';
+import { Datagrid, Filter, TextInput, EditButton, TextField, TopToolbar } from 'react-admin';
 import React from 'react';
 import { CreateButton } from 'ra-ui-materialui';
+import {CustomList as List} from '../../components/CustomList';
 
 export const ListActions = props => {
   const { className, basePath } = props;

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.9
+* Remove domain edit field for site Resource, will cause bugs, needs more logic in API
+
 ## 0.1.7
 * Redirect to list view after create for tags, users and ideas
 * Set default ordering to id's DESC

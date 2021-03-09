@@ -45,7 +45,6 @@ export const SiteEdit = (props) => {
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />
-          <TextInput source="domain" fullWidth variant="outlined" />
         </FormTab>
         <FormTab label="Ideas">
           <BooleanInput source="config.ideas.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />

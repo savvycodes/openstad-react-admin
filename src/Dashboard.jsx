@@ -124,7 +124,6 @@ const Statistics = (props) => {
 
 
 const Counter = ({data}) => {
-    console.log('data', data)
     return <h3 style={{fontSize: '25px'}}>{data.counted}</h3>
 }
 

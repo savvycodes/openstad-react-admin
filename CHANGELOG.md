@@ -1,7 +1,8 @@
 # Changelog
 
-## 0.1.5
+## 0.1.6
 * Add choices guide resource
+* Add choices guide import/export
 
 ## 0.1.3
 * Add bulk update for ideas

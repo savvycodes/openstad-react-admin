@@ -1,6 +1,8 @@
 import { stringify } from 'query-string';
 import { fetchUtils } from 'ra-core';
 
+import { importChoicesGuide } from './resources/choicesGuide/import.jsx'
+
 /**
  * Maps react-admin queries to a simple REST API
  *
@@ -66,14 +68,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
 
       const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-      console.log('----------------------------------------------------------------------------------------------------');
-      console.log(url);
-
       return httpClient(url).then(({ headers, json }) => {
 
         let result = {
-            data: json,
-            total: json.length
+          data: json,
+          total: json.length
         };;
         
         if ( resource != 'choicesGuide' ) {
@@ -114,6 +113,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
         });
     },
     getMany: (resource, params) => {
+
+      // ik denk dat get many hier alleen door de imort knop wordt gebruikt en dat ik er daarom wel mee wegkom, maar dit slaat natuurlijk nergens op - zie ook createMany
+      if ( resource == 'choicesGuide' ) {
+        alert('Importeren van keuzewijzers als update is niet geimplementeerd')
+        return Promise.reject();
+      }
+      
       const { page, perPage } = params.pagination ? params.pagination : {};
 
       const query = {
@@ -179,15 +185,26 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
       method: 'PUT',
       body: JSON.stringify(params.data),
     }))).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-    create: (resource, params) => httpClient(`${apiUrl}/${resource}`, {
-      method: 'POST',
-      body: JSON.stringify(params.data),
-    })
-      .then(({ json }) => ({
+    create: (resource, params ) => {
+      return httpClient(`${apiUrl}/${resource}`, {
+        method: 'POST',
+        body: JSON.stringify(params.data),
+      }).then(({ json }) => ({
         data: Object.assign(Object.assign({}, params.data), { id: json.id }),
-      })
-
-           ),
+      }))
+    },
+    createMany: (resource, params) => {
+      if ( resource == 'choicesGuide' ) {
+        // dit is niet de plaats om dit te doen, maar ik heb nog geen andere hook kyunnen vinden
+        return importChoicesGuide(apiUrl, httpClient, params)
+      }
+      return httpClient(`${apiUrl}/${resource}`, {
+        method: 'POST',
+        body: JSON.stringify(params.data),
+      }).then(({ json }) => ({
+        data: Object.assign(Object.assign({}, params.data), { id: json.id }),
+      }))
+    },
     delete: (resource, params) => httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'DELETE',
     }).then(({ json }) => ({ data: json })),
@@ -195,4 +212,31 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
     deleteMany: (resource, params) => Promise.all(params.ids.map(id => httpClient(`${apiUrl}/${resource}/${id}`, {
       method: 'DELETE',
     }))).then(responses => ({ data: responses.map(({ json }) => json.id) })),
+
+    // ChoicesgGuide specific calls ----------------------------------------------------------------------------------------------------
+
+    getCompleteChoicesgGuide: (params) => {
+      const url = `${apiUrl}/choicesguide/${params.id}?&includeChoices=1&includeQuestions=1`;
+      return httpClient(url).then(({ headers, json }) => {
+        let result = {
+          data: json,
+          total: json.length
+        };;
+        return result;
+      });
+    },
+
+    getChoicesgGuideResults: (params) => {
+      const url = `${apiUrl}/choicesguide/${params.id}/result`;
+      return httpClient(url).then(({ headers, json }) => {
+        let result = {
+          data: json,
+          total: json.length
+        };;
+        return result;
+      });
+    },
+
+    // end ChoicesgGuide specific calls ----------------------------------------------------------------------------------------------------
+    
   });

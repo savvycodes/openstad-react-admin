@@ -3,6 +3,9 @@
 ## 0.1.9
 * Remove domain edit field for site Resource, will cause bugs, needs more logic in API
 
+## 0.1.8
+* Add choices guide import/export
+
 ## 0.1.7
 * Redirect to list view after create for tags, users and ideas
 * Set default ordering to id's DESC
@@ -10,8 +13,6 @@
 
 ## 0.1.6
 * Add statistics dashboard
-
-## 0.1.5
 * Add choices guide resource
 
 ## 0.1.3

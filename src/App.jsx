@@ -34,10 +34,25 @@ import theme from './theme';
 import { AreaList } from './resources/area/list.jsx';
 import { AreaCreate, AreaEdit, AreaIcon } from './resources/area/index.jsx';
 
+import { resolveBrowserLocale, useLocale } from "react-admin";
+import polyglotI18nProvider from "ra-i18n-polyglot";
+import englishMessages from "ra-language-english";
+import * as domainMessages from "react-admin-import-csv/lib/i18n";
+const locale = 'en';
+const messages = {
+  en: { ...englishMessages, ...domainMessages.en },
+};
+const i18nProvider = polyglotI18nProvider(
+  (locale) => (messages[locale] ? messages[locale] : messages.en),
+  locale
+);
+
 /*
 customRoutes={[
 ]}
 */
+
+
 
 export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
@@ -65,6 +80,7 @@ export const OpenstadReactAdmin = (props) => {
         dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey, props.csrf)}
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
+        i18nProvider={i18nProvider}
     >
       {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}

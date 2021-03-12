@@ -86,7 +86,15 @@ export const SiteEdit = (props) => {
               {
                 id: 'budgeting',
                 name: 'Budgeting'
-              }
+              },
+              {
+                id: 'count-per-theme',
+                name: 'Count per theme '
+              },
+              {
+                id: 'budgeting-per-theme',
+                name: 'Budgeting per theme'
+              },
             ]}
           />
           <NumberInput source="config.votes.maxIdeas" label='What is max amount of ideas users can vote for?' fullWidth variant="outlined" />

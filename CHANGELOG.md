@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.20
+* Add options for selecting  for voting type: count per theme and budgetting per theme in site vote setting
+
 ## 0.1.9
 * Remove domain edit field for site Resource, will cause bugs, needs more logic in API
 

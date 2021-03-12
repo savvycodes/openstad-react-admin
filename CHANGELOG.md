@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.20
+## 0.1.10
 * Add options for selecting  for voting type: count per theme and budgetting per theme in site vote setting
 
 ## 0.1.9

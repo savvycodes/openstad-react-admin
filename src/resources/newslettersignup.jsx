@@ -8,7 +8,7 @@ import PersonIcon from '@material-ui/icons/Person';
 export const NewsletterSignupIcon = PersonIcon;
 
 export const NewsletterSignupList = (props) => (
-    <List {...props}>
+    <List {...props} sort={{field: 'id', order: 'DESC'}}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="email" />

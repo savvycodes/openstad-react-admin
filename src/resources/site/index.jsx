@@ -45,7 +45,6 @@ export const SiteEdit = (props) => {
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />
-          <TextInput source="domain" fullWidth variant="outlined" />
         </FormTab>
         <FormTab label="Ideas">
           <BooleanInput source="config.ideas.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />
@@ -87,7 +86,15 @@ export const SiteEdit = (props) => {
               {
                 id: 'budgeting',
                 name: 'Budgeting'
-              }
+              },
+              {
+                id: 'count-per-theme',
+                name: 'Count per theme '
+              },
+              {
+                id: 'budgeting-per-theme',
+                name: 'Budgeting per theme'
+              },
             ]}
           />
           <NumberInput source="config.votes.maxIdeas" label='What is max amount of ideas users can vote for?' fullWidth variant="outlined" />

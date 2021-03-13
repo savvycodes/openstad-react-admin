@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as RAButton } from 'react-admin';
+import {Button as RAButton, useRefresh} from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
@@ -35,6 +35,7 @@ export const ImportButton = (props) => {
   const [dialogStatus, setDialogStatus] = React.useState('base');
   const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
   const dataProvider = useDataProvider();
+  const refresh = useRefresh()
 
   const openImportDialog = () => {
     setOpen(true);
@@ -50,17 +51,15 @@ export const ImportButton = (props) => {
 
   const handleClose = () => {
     clear();
-
     setOpen(false);
   };
 
   const handleImportDelimiterChange = (e) => {
     setDelimiter(e.target.value);
-
     clear();
   };
 
-  const handleSubmit = (callback) => {
+  const handleSubmit = (callback, afterSucces) => {
     setImporting(true);
 
     let apiValidationErrors = [];
@@ -80,9 +79,9 @@ export const ImportButton = (props) => {
       })),
     ).then(() => {
       setCsvValidationNotifications(apiValidationErrors);
-
       setImporting(false);
       setDialogStatus('importFinished');
+      refresh();
     });
   };
 
@@ -186,15 +185,15 @@ export const ImportButton = (props) => {
         <DialogContent>
           <div id='alert-dialog-description' style={{ fontFamily: 'sans-serif' }}>
             {dialogStatus === 'importFinished' ?
-              (<>
-                <h3>Import complete!!</h3>
+              <>
+                <h3>Import complete!</h3>
                 <p>
                   Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total
                   of <b>{totalRows}</b> rows
                 </p>
                 <h5 style={{ color: 'red' }}>{countFailedImportRows(csvValidationNotifications)} failed rows:</h5>
                 <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
-              </>)
+              </>
               :
               <>
                 <p>Upload a csv or tsv file for bulk editing or creation. </p>

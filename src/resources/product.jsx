@@ -14,7 +14,7 @@ const ProductFilters = (props) => (
 );
 
 export const ProductList = (props) => (
-    <List {...props} filters={<ProductFilters />}  title="Producten">
+    <List {...props} filters={<ProductFilters />}  title="Producten" sort={{field: 'id', order: 'DESC'}}>
         <Datagrid>
             <TextField source="sku" />
             <TextField source="name" />

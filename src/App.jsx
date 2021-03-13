@@ -34,23 +34,53 @@ import theme from './theme';
 import { AreaList } from './resources/area/list.jsx';
 import { AreaCreate, AreaEdit, AreaIcon } from './resources/area/index.jsx';
 
+import { resolveBrowserLocale, useLocale } from "react-admin";
+import polyglotI18nProvider from "ra-i18n-polyglot";
+import englishMessages from "ra-language-english";
+import * as domainMessages from "react-admin-import-csv/lib/i18n";
+const locale = 'en';
+const messages = {
+  en: { ...englishMessages, ...domainMessages.en },
+};
+const i18nProvider = polyglotI18nProvider(
+  (locale) => (messages[locale] ? messages[locale] : messages.en),
+  locale
+);
+
 /*
 customRoutes={[
 ]}
 */
+
+
 
 export const OpenstadReactAdmin = (props) => {
   const resources = props.resources;
   const user = props.user;
   const userPath = "/user/" + user.id;
 
+  // @todo: Also move the dataProvider to generic header options,
+  //  this way JWT, siteKey and CSRF logic can be in one place at the top
+  const authHeader = props.siteKey ? {
+    'X-Authorization': `${props.siteKey}`
+  } : {
+    'X-Authorization': `Bearer ${props.jwt}`
+  };
+
   return (
     <Admin
-        dashboard={Dashboard}
+        dashboard={(dashboardProps) => {
+          return <Dashboard
+              {...dashboardProps}
+              authHeader={authHeader}
+              statsApi={props.statsApi && props.statsApi.url ? props.statsApi.url : false}
+          />
+        }}
         theme={theme}
         dataProvider={dataProvider(props.restApi.url, props.jwt, props.siteKey, props.csrf)}
         appLayout={MyLayout}
         customReducers={{ theme: themeReducer }}
+        i18nProvider={i18nProvider}
     >
       {resources.site && resources.site.active ? <Resource name="site" edit={SiteEdit}  icon={IdeaIcon} options={{menuTitle: 'Sites', hideMenulink:true, siteId: props.site.id}} /> : <div />}
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
@@ -79,6 +109,7 @@ OpenstadReactAdmin.propTypes = {
   // So base of rest api would be something like this /api/site/148, for dev there is a proxy and in CMS and Admin panel proxies to API exists
   // this fixes the CORS errors
   restApi: PropTypes.element.isRequired,
+  statsApi: PropTypes.element.isRequired,
   // JTW for active user or siteKey apikey for static admin user for testing in DEV
   jwt: PropTypes.string,
   siteKey: PropTypes.string,

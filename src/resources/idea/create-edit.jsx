@@ -15,7 +15,10 @@ import {
   useQuery,
   Loading,
   AutocompleteInput,
-  Error
+  Error,
+  useNotify,
+    useRefresh,
+    useRedirect,
 } from 'react-admin';
 import JsonInput from '../../form-fields/JsonInput.jsx';
 import React from 'react';
@@ -141,8 +144,16 @@ export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
   )
 }));
 
-export const IdeaCreate = withRouter(connect(mapStateToProps)((props) => (
-  <Create title="Create a Idea" {...props}>
-    <Form {...props}/>
-  </Create>
-)));
+export const IdeaCreate = withRouter(connect(mapStateToProps)((props) => {
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    return <Create title="Create a Idea" {...props} onSuccess={() => {
+        notify('ra.notification.created', 'info', {smart_count: 1});
+        redirect('/idea');
+        refresh()
+    }}>
+        <Form {...props}/>
+    </Create>
+}));

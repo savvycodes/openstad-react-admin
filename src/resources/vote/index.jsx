@@ -11,7 +11,7 @@ import {
   BooleanField,
   TextField,
   EditButton,
-  TextInput,
+  TextInput, Pagination,
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ApproveField from '../../components/ApproveField/index.jsx';
@@ -20,6 +20,9 @@ import { useDispatch } from 'react-redux';
 import { CRUD_UPDATE_SUCCESS, FETCH_END, UPDATE } from 'react-admin';
 
 export const VoteIcon = ListAltIcon;
+
+const VotePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
+
 
 export const VoteList = (props) => {
   const dataProvider = useDataProvider();
@@ -45,7 +48,7 @@ export const VoteList = (props) => {
   };
 
   return (
-    <List {...props} title="Vote">
+    <List {...props} title="Vote" pagination={<VotePagination />}>
       <Datagrid>
         <TextField source="id"/>
         <TextField source="opinion"/>

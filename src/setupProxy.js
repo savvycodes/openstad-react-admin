@@ -17,6 +17,14 @@ module.exports = function(app) {
   );
 
   app.use(
+        '/stats',
+        createProxyMiddleware({
+            target: 'http://localhost:8111',
+            changeOrigin: true,
+        })
+    );
+
+  app.use(
     '/image',
     createProxyMiddleware({
   //    target: 'https://image-server2.openstadsdeel.nl',

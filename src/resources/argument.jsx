@@ -6,7 +6,7 @@ import {CustomList as List} from '../components/CustomList';
 export const ArgumentIcon = ListAltIcon;
 
 export const ArgumentList = (props) => (
-    <List {...props}  title="Argumenten">
+    <List {...props}  title="Argumenten"  sort={{field: 'id', order: 'DESC'}}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="description" />

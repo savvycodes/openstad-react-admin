@@ -1,5 +1,16 @@
 import React from 'react';
-import { Filter, Datagrid, Edit, Create, SimpleForm, TextField, EditButton, TextInput } from 'react-admin';
+
+import {
+    Filter,
+    Datagrid,
+    Edit,
+    Create,
+    SimpleForm,
+    TextField,
+    EditButton,
+    TextInput,
+    Pagination, useNotify, useRefresh, useRedirect
+} from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {CustomList as List} from '../components/CustomList';
 
@@ -12,9 +23,12 @@ const TagFilters = (props) => (
   </Filter>
 );
 
+const TagPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
+
 export const TagList = (props) => (
-    <List {...props} filters={<TagFilters />} title="Tags">
+    <List {...props} filters={<TagFilters />} title="Tags" pagination={<TagPagination />} sort={{field: 'id', order: 'DESC'}}>
         <Datagrid>
+            <TextField source="id" />
             <TextField source="name" />
             <EditButton basePath="/tag" />
         </Datagrid>
@@ -34,8 +48,15 @@ export const TagEdit = (props) => (
 );
 
 export const TagCreate = (props) => {
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const redirect = useRedirect();
 
-  return <Create title="Tag toevoegen" {...props}>
+  return <Create title="Tag toevoegen" {...props} onSuccess={() => {
+      notify('ra.notification.created', 'info', {smart_count: 1});
+      redirect('/tag');
+      refresh()
+  }}>
         <SimpleForm>
             <TextInput source="name" label="Tag name" variant="outlined" />
         </SimpleForm>

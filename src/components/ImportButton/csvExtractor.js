@@ -7,10 +7,7 @@ const setObjectValue = (object, path, value) => {
   return over(lensPathFunction, () => value, object || {});
 };
 
-export async function processCsvFile(
-  file,
-  parseConfig= {}
-) {
+export async function processCsvFile(file, parseConfig = {}) {
   if (!file) {
     return;
   }
@@ -20,10 +17,7 @@ export async function processCsvFile(
   return processCsvData(csvData);
 }
 
-export async function getCsvData(
-  file,
-  inputConfig = {}
-) {
+export async function getCsvData(file, inputConfig = {}) {
   let config = {};
 
   const isObject = !!inputConfig && typeof inputConfig === "object";
@@ -62,10 +56,10 @@ export function processCsvData(data) {
   } else {
     const dataRows = [];
 
-    data.forEach( (obj) => {
-        let value = {}
-        for (let key in obj) value = setObjectValue(value, key, obj[key]);
-        dataRows.push(value);
+    data.forEach((obj) => {
+      let value = {};
+      for (let key in obj) value = setObjectValue(value, key, obj[key]);
+      dataRows.push(value);
     });
 
     return dataRows;

@@ -4,9 +4,9 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import { Provider } from 'react-redux';
-import BackButton from '../BackButton/index.jsx';
-import configureStore from 'redux-mock-store';
+import { Provider } from "react-redux";
+import BackButton from "../BackButton/index.jsx";
+import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
@@ -26,9 +26,12 @@ afterEach(() => {
 
 it("renders with or without a name", () => {
   act(() => {
-    render(<Provider store={mockStore({})}>
-      <BackButton />
-    </Provider>, container);
+    render(
+      <Provider store={mockStore({})}>
+        <BackButton />
+      </Provider>,
+      container
+    );
   });
 
   expect(container.textContent).toBe("Go Back");

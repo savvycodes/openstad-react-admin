@@ -1,21 +1,21 @@
-import simpleRestProvider from './simpleRestProvider';
-import { fetchUtils } from 'react-admin';
+import simpleRestProvider from "./simpleRestProvider";
+import { fetchUtils } from "react-admin";
 
 const createHttpClient = (jwt, siteKey, csrf) => {
   return (url, options = {}) => {
     if (!options.headers) {
-      options.headers = new Headers({ Accept: 'application/json' });
+      options.headers = new Headers({ Accept: "application/json" });
     }
 
     // add JWT for authenticating with API
     if (jwt) {
-      options.headers.set('X-Authorization', `Bearer ${jwt}`);
+      options.headers.set("X-Authorization", `Bearer ${jwt}`);
     } else if (siteKey) {
-      options.headers.set('X-Authorization', `${siteKey}`);
+      options.headers.set("X-Authorization", `${siteKey}`);
     }
 
     if (csrf) {
-      options.headers.set('X-XSRF-TOKEN', `${csrf}`);
+      options.headers.set("X-XSRF-TOKEN", `${csrf}`);
     }
 
     return fetchUtils.fetchJson(url, options);
@@ -23,7 +23,10 @@ const createHttpClient = (jwt, siteKey, csrf) => {
 };
 
 const myDataProvider = (api, jwt, siteKey, csrf) => {
-  const dataProvider = simpleRestProvider(api, createHttpClient(jwt, siteKey, csrf));
+  const dataProvider = simpleRestProvider(
+    api,
+    createHttpClient(jwt, siteKey, csrf)
+  );
 
   return {
     ...dataProvider,

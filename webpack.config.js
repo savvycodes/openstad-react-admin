@@ -1,59 +1,58 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-
   // devtool: 'eval-source-map',
-	devtool: 'none',
+  devtool: "none",
   //mode: 'development',
-	mode: 'production',
-	entry: ['babel-polyfill', './src/index.jsx'],
+  mode: "production",
+  entry: ["babel-polyfill", "./src/index.jsx"],
 
-	output: {
-	  path: __dirname + '/dist',
-		filename: 'js/index.js',
-	//	filename: 'js/openstad-component.js',
-    library: 'OpenstadReactAdmin',
-    libraryTarget: 'window',
-	},
+  output: {
+    path: __dirname + "/dist",
+    filename: "js/index.js",
+    //	filename: 'js/openstad-component.js',
+    library: "OpenstadReactAdmin",
+    libraryTarget: "window",
+  },
 
-	externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-	},
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM",
+  },
 
   plugins: [
     new MiniCssExtractPlugin({
       //filename: 'css/default.css',
-      filename: 'css/main.css', //
+      filename: "css/main.css", //
       ignoreOrder: false,
     }),
   ],
 
   optimization: {
-		minimize: true,
-		minimizer: [new TerserPlugin({
-			test: /\.jsx?$/,
-		})],
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        test: /\.jsx?$/,
+      }),
+    ],
   },
 
-	module: {
-		rules: [
+  module: {
+    rules: [
+      {
+        test: /\.json$/,
+        loader: "json-loader",
+      },
 
-			{
-				test: /\.json$/,
-				loader: "json-loader"
-			},
-
-			{
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-
-        }
-			},
+        },
+      },
 
       {
         test: /\.less$/,
@@ -61,31 +60,29 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: process.env.NODE_ENV === 'development',
-					//		publicPath: '/public/path/to/',
-			//				publicPath: '/../openstad-landing/lib/modules/choices-guide-widgets/public/css/', //
+              hmr: process.env.NODE_ENV === "development",
+              //		publicPath: '/public/path/to/',
+              //				publicPath: '/../openstad-landing/lib/modules/choices-guide-widgets/public/css/', //
             },
           },
-          'css-loader',
-          'less-loader',
+          "css-loader",
+          "less-loader",
         ],
       },
-			{
-				test: /\.css/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							hmr: process.env.NODE_ENV === 'development',
-					//		publicPath: '/public/path/to/',
-			//				publicPath: '/../openstad-landing/lib/modules/choices-guide-widgets/public/css/', //
-						},
-					},
-					'css-loader',
-				],
-			},
-
-		],
-	},
-
-}
+      {
+        test: /\.css/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === "development",
+              //		publicPath: '/public/path/to/',
+              //				publicPath: '/../openstad-landing/lib/modules/choices-guide-widgets/public/css/', //
+            },
+          },
+          "css-loader",
+        ],
+      },
+    ],
+  },
+};

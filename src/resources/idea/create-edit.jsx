@@ -17,27 +17,27 @@ import {
   AutocompleteInput,
   Error,
   useNotify,
-    useRefresh,
-    useRedirect,
-} from 'react-admin';
-import JsonInput from '../../form-fields/JsonInput.jsx';
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+  useRefresh,
+  useRedirect,
+} from "react-admin";
+import JsonInput from "../../form-fields/JsonInput.jsx";
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    display: "flex",
+    justifyContent: "space-between",
   },
 });
 
 const IdeaTitle = ({ record }) => {
-  return <span>Idea {record ? `"${record.title}"` : ''}</span>;
+  return <span>Idea {record ? `"${record.title}"` : ""}</span>;
 };
 
-const CustomToolbar = props => (
+const CustomToolbar = (props) => (
   <Toolbar {...props} classes={useStyles()}>
     <SaveButton />
     <DeleteButton undoable={false} />
@@ -47,33 +47,50 @@ const CustomToolbar = props => (
 // , maxLength(5000), minLength(140)
 // @todo set up redux to access site rest object
 const Form = (props) => (
-  <TabbedForm {...props}  toolbar={<CustomToolbar />}>
+  <TabbedForm {...props} toolbar={<CustomToolbar />}>
     <FormTab label="Info">
-      {props.edit && <TextInput disabled source="id"/>}
+      {props.edit && <TextInput disabled source="id" />}
       <ReferenceInput
         label="User"
         source="userId"
         reference="user"
         variant="outlined"
         perPage={25}
-        filterToQuery={searchText => ({ email: {'substring': searchText} })}
-        filter={{ role: {'!=': 'anonymous'} }}
-        sort={{ field: 'email', order: 'ASC' }}
+        filterToQuery={(searchText) => ({ email: { substring: searchText } })}
+        filter={{ role: { "!=": "anonymous" } }}
+        sort={{ field: "email", order: "ASC" }}
       >
-          <AutocompleteInput optionText="email" />
+        <AutocompleteInput optionText="email" />
       </ReferenceInput>
-      <TextInput source="title" variant="outlined" fullWidth/>
-      <TextInput source="summary" options={{ multiLine: true }} variant="outlined" fullWidth validate={[required()]} />
-      <TextInput multiline source="description" variant="outlined" fullWidth validate={[required()]}/>
-      <ReferenceArrayInput label="tags" source="tags" reference="tag" variant="outlined">
-        <SelectArrayInput optionText="name"/>
+      <TextInput source="title" variant="outlined" fullWidth />
+      <TextInput
+        source="summary"
+        options={{ multiLine: true }}
+        variant="outlined"
+        fullWidth
+        validate={[required()]}
+      />
+      <TextInput
+        multiline
+        source="description"
+        variant="outlined"
+        fullWidth
+        validate={[required()]}
+      />
+      <ReferenceArrayInput
+        label="tags"
+        source="tags"
+        reference="tag"
+        variant="outlined"
+      >
+        <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
       {/*<h3>Image (TODO)</h3>
       <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl}/>*/}
     </FormTab>
     <FormTab label=" Extradata">
-      {props.edit && <TextInput disabled source="id"/>}
-      <JsonInput source="extraData"/>
+      {props.edit && <TextInput disabled source="id" />}
+      <JsonInput source="extraData" />
     </FormTab>
     {/*<FormTab label="Comments">
       <ReferenceManyField
@@ -111,49 +128,56 @@ const Form = (props) => (
   </TabbedForm>
 );
 
-
 const mapStateToProps = (state) => {
   const resources = getResources(state);
-  const siteResource = resources.find(resource => resource.name === 'site');
+  const siteResource = resources.find((resource) => resource.name === "site");
 
   return {
-    siteId: siteResource.options.siteId
-  }
+    siteId: siteResource.options.siteId,
+  };
 };
 
+export const IdeaEdit = withRouter(
+  connect(mapStateToProps)((props) => {
+    const { data, loading, error } = useQuery({
+      type: "getOne",
+      resource: "site",
+      payload: { id: props.siteId },
+    });
 
-export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
+    if (loading) return <Loading />;
+    if (error) return <Error />;
+    if (!data) return null;
 
-  const { data, loading, error } = useQuery({
-      type: 'getOne',
-      resource: 'site',
-      payload: { id: props.siteId }
-  });
+    // @TODO, in site.config.ideas is validation rules for
+    // form pass to form and add it, maybe move entire logic to form component?
 
-  if (loading) return <Loading />;
-  if (error) return <Error />;
-  if (!data) return null;
+    return (
+      <Edit title={<IdeaTitle />} {...props}>
+        <Form {...props} edit />
+      </Edit>
+    );
+  })
+);
 
-  // @TODO, in site.config.ideas is validation rules for
-  // form pass to form and add it, maybe move entire logic to form component?
-
-  return (
-    <Edit title={<IdeaTitle/>} {...props}>
-      <Form {...props} edit/>
-    </Edit>
-  )
-}));
-
-export const IdeaCreate = withRouter(connect(mapStateToProps)((props) => {
+export const IdeaCreate = withRouter(
+  connect(mapStateToProps)((props) => {
     const notify = useNotify();
     const refresh = useRefresh();
     const redirect = useRedirect();
 
-    return <Create title="Create a Idea" {...props} onSuccess={() => {
-        notify('ra.notification.created', 'info', {smart_count: 1});
-        redirect('/idea');
-        refresh()
-    }}>
-        <Form {...props}/>
-    </Create>
-}));
+    return (
+      <Create
+        title="Create a Idea"
+        {...props}
+        onSuccess={() => {
+          notify("ra.notification.created", "info", { smart_count: 1 });
+          redirect("/idea");
+          refresh();
+        }}
+      >
+        <Form {...props} />
+      </Create>
+    );
+  })
+);

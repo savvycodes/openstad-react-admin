@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import Checkbox from '@material-ui/core/Checkbox';
+import * as React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const RowCheckbox = withStyles({
   root: {

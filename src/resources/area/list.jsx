@@ -1,14 +1,21 @@
-import { Datagrid, Filter, TextInput, EditButton, TextField, TopToolbar } from 'react-admin';
-import React from 'react';
-import { CreateButton } from 'ra-ui-materialui';
-import {CustomList as List} from '../../components/CustomList';
+import {
+  Datagrid,
+  Filter,
+  TextInput,
+  EditButton,
+  TextField,
+  TopToolbar,
+} from "react-admin";
+import React from "react";
+import { CreateButton } from "ra-ui-materialui";
+import { CustomList as List } from "../../components/CustomList";
 
-export const ListActions = props => {
+export const ListActions = (props) => {
   const { className, basePath } = props;
 
   return (
     <TopToolbar className={className}>
-      <CreateButton basePath={basePath}  />
+      <CreateButton basePath={basePath} />
     </TopToolbar>
   );
 };
@@ -22,11 +29,16 @@ const AreaFilters = (props) => (
 );
 
 export const AreaList = (props) => (
-  <List {...props} filters={<AreaFilters />} actions={<ListActions/>}  sort={{field: 'id', order: 'DESC'}}>
+  <List
+    {...props}
+    filters={<AreaFilters />}
+    actions={<ListActions />}
+    sort={{ field: "id", order: "DESC" }}
+  >
     <Datagrid>
-      <TextField source="id"/>
-      <TextField source="name"/>
-      <EditButton basePath="/area"/>
+      <TextField source="id" />
+      <TextField source="name" />
+      <EditButton basePath="/area" />
     </Datagrid>
   </List>
 );

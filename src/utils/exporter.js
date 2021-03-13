@@ -1,8 +1,8 @@
-import { unparse as convertToCSV } from 'papaparse/papaparse.min';
-import { downloadCSV } from 'react-admin';
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import { downloadCSV } from "react-admin";
 
 // TODO: make dynamic (add fields and filename as arguments to method)
-export default rows => {
+export default (rows) => {
   if (rows.length > 0) {
     const [firstRow] = rows;
 
@@ -11,6 +11,6 @@ export default rows => {
       fields: Object.keys(firstRow),
     });
 
-    downloadCSV(csv, '???'); // download as '*.csv` file
+    downloadCSV(csv, "???"); // download as '*.csv` file
   }
 };

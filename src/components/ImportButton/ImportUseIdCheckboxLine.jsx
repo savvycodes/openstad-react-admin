@@ -1,12 +1,12 @@
-import React from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React from "react";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 export default (props) => {
   const { checked, handleCheckBoxChange } = props;
 
   return (
-    <div style={{ margin: '10px 0' }}>
+    <div style={{ margin: "10px 0" }}>
       <FormControlLabel
         control={
           <Checkbox
@@ -18,5 +18,6 @@ export default (props) => {
         }
         label="Use ID for import"
       />
-    </div>);
-}
+    </div>
+  );
+};

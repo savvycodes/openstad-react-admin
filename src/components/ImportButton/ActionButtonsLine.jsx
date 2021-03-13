@@ -1,8 +1,5 @@
-import React from 'react';
-import {
-  Button,
-  CircularProgress,
-} from '@material-ui/core';
+import React from "react";
+import { Button, CircularProgress } from "@material-ui/core";
 
 export default (props) => {
   const {
@@ -17,20 +14,16 @@ export default (props) => {
     dialogStatus,
   } = props;
 
-  if (dialogStatus === 'importFinished') {
+  if (dialogStatus === "importFinished") {
     return (
       <>
         <Button onClick={handleClose}>
-          <span>{'close'}</span>
+          <span>{"close"}</span>
         </Button>
 
-        <Button
-          onClick={handleReload}
-          color='secondary'
-          variant='contained'
-        >
-          {importing && <CircularProgress size={18} thickness={2}/>}
-          <span>{'Import another'}</span>
+        <Button onClick={handleReload} color="secondary" variant="contained">
+          {importing && <CircularProgress size={18} thickness={2} />}
+          <span>{"Import another"}</span>
         </Button>
       </>
     );
@@ -39,26 +32,32 @@ export default (props) => {
   return (
     <>
       <Button onClick={handleClose}>
-        <span>{'close'}</span>
+        <span>{"close"}</span>
       </Button>
       <Button
-        disabled={(!values || values.length < 1) || importing}
+        disabled={!values || values.length < 1 || importing}
         onClick={handleSubmitCreate}
-        color='secondary'
-        variant='contained'
+        color="secondary"
+        variant="contained"
       >
-        {importing && <CircularProgress size={18} thickness={2}/>}
-        <span>{'Create rows'}</span>
+        {importing && <CircularProgress size={18} thickness={2} />}
+        <span>{"Create rows"}</span>
       </Button>
       <Button
-        disabled={!values || values.length < 1 || importing || !idPresent || (idPresent && !useId)}
+        disabled={
+          !values ||
+          values.length < 1 ||
+          importing ||
+          !idPresent ||
+          (idPresent && !useId)
+        }
         onClick={handleSubmitOverwrite}
-        color='primary'
-        variant='contained'
+        color="primary"
+        variant="contained"
       >
-        {importing && <CircularProgress size={18} thickness={2}/>}
-        <span>{'Update rows'}</span>
+        {importing && <CircularProgress size={18} thickness={2} />}
+        <span>{"Update rows"}</span>
       </Button>
     </>
   );
-}
+};

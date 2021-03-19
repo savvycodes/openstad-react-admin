@@ -92,6 +92,8 @@ export const ExportButton = function(props) {
     jsonExport(body, {headers: [
       'choicesGuide_title', 'choicesGuide_description', 'choicesGuide_images', 'choicesGuide_config', 'questionGroup_answerDimensions', 'questionGroup_title', 'questionGroup_description', 'questionGroup_images', 'questionGroup_seqnr', 'question_title', 'question_description', 'question_images', 'question_type', 'question_dimensions', 'question_values', 'question_seqnr',
     ]}, (err, csv) => {
+      console.log('++++');
+      console.log(csv);
       downloadCSV(csv, `keuzewijzer-${choicesGuide.choicesGuideId}-${choicesGuide.title}`);
     });
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { ImportButton } from "react-admin-import-csv";
 
 export default ImportButton;

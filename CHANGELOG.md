@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.22
+* Fix react not present in Choices guide export
+
 ## 0.1.21
 * Better export of choices-guide results
 

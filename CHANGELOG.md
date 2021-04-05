@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.1.10
+## 0.1.21
+* Better export of choices-guide results
+
+## 0.1.20
 * Add options for selecting  for voting type: count per theme and budgetting per theme in site vote setting
 
 ## 0.1.9

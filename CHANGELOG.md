@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.23
+* Move siteId and port values voor development to .env file
+* Add image uploading input field for ideas
+
 ## 0.1.22
 * Fix react not present in Choices guide export
 

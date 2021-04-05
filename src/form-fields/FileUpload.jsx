@@ -3,12 +3,12 @@
  */
 
 // in LatLongInput.js
-import { Field } from 'react-final-form';
-import React, { Component } from 'react';
+import {Field} from 'react-final-form';
+import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField'
 
 // Import React FilePond
-import { FilePond, registerPlugin } from "react-filepond";
+import {FilePond, registerPlugin} from "react-filepond";
 
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
@@ -20,96 +20,145 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
 import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
+
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFilePoster);
 
 // Our app
 class FileUpload extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      // Set initial files, type 'local' means this is a file
-      // that has already been uploaded to the server (see docs)
-      files: [{
-          source: "index.html",
-          options: {
-            type: "local"
-          }
-        }]
+        this.state = {
+            // Set initial files, type 'local' means this is a file
+            // that has already been uploaded to the server (see docs)
+            images: undefined
+        };
+    }
 
-    };
-  }
+    handleInit(images) {
+        const currentImages = images ? images.map(function (image) {
 
-  handleInit() {
-    console.log("FilePond instance has initialised", this.pond);
-  }
-
-  render() {
-
-    return (
-      <span>
-        {/* Pass FilePond properties as attributes */}
-        <Field name="image">
-          {(fieldProps) => {
-          //  console.log('fieldProps.input.value', fieldProps.input.value)
-          const imageValue = fieldProps.input.value && fieldProps.input.value.url ? fieldProps.input.value.url : false;
-          const defaultImage = imageValue ? [{
-                source: imageValue,
+            return {
+                source: {url: image},
                 options: {
-                  type: "local",
-                  metadata: {
-                    poster: imageValue,
+                    type: "local",
+                    file: {
+                        name: image,
+                        //		 size: 3001025,
+                        //	 type: 'image/png'
+                    },
+                    metadata: {
+                        poster: image,
+                    }
+                },
+            }
+        }) : false;
+
+        if (currentImages) {
+            this.setState({
+                images: currentImages
+            })
+        }
+
+    }
+
+    render() {
+
+        return (
+            <span style={{
+                width: this.props.width ? this.props.width : '256px',
+                display: 'block',
+            }}>
+        {/* Pass FilePond properties as attributes */}
+                <Field name={this.props.fieldKey ? this.props.fieldKey : 'extraData.images'}>
+          {(fieldProps) => {
+              //  console.log('fieldProps.input.value', fieldProps.input.value)
+              const updateImages = (images, newImage) => {
+                  if (images) {
+                      images = images
+                          .filter(function (fileItem) {
+                              return fileItem.serverId;
+                          })
+                          .map(function (fileItem) {
+                              const file = fileItem.file;
+                              const url = fileItem.serverId && fileItem.serverId.url ? fileItem.serverId.url : fileItem.serverId;
+                              return url;
+                          });
+
+                      if (newImage) {
+                          images = [newImage.url].concat(images);
+                      }
+
+                      fieldProps.input.onChange(images);
                   }
-                },
-
-          }] :  undefined;
-
-          return <FilePond
-            ref={ref => (this.pond = ref)}
-            files={defaultImage}
-            filesss={this.state.files}
-            allowMultiple={false}
-            maxFiles={1}
-            name='image'
-            maxTotalFileSize="10MB"
-            //server={this.props.imageApiUrl}
-            oninit={() => this.handleInit()}
-            server={{
-              process: {
-                url: this.props.imageApiUrl,
-                onload: (response) => { // Once response is received, pushed new value to Final Form value variable, and populate through the onChange handler.
-                  const file = JSON.parse(response);
-                  //fieldProps.input.value = JSON.parse(response);
-                  fieldProps.input.onChange( JSON.parse(response) );
-                  return JSON.parse(response).url;
-                },
-                onerror: (response) => { // If error transpires, add error to value with error message.
-                  //fieldProps.input.value = '';
-                  fieldProps.input.onChange('');
-                  return false;
-                }
-              }
-            }}
-            onupdatefiles={fileItems => {
-              //fieldProps.input.onChange('test:image');
-              console.log('fileItems', fileItems);
-
-              if (fileItems[0]) {
-                console.log('fileItems[0].file', fileItems[0].file);
-
-              //  this.setState({
-                //  files: [fileItems[0].file]
-                  //files: [fileItems.map(fileItem => fileItem.file)]
-              //  });
               }
 
-            }}
-          />
+              return <FilePond
+
+                  ref={ref => (this.pond = ref)}
+                  files={this.state.images}
+                  onupdatefiles={fileItems => {
+                      // Set currently active file objects to this.state
+                      this.setState({
+                          images: fileItems.map(fileItem => fileItem.file)
+                      });
+                  }}
+                  filesss={this.state.files}
+                  allowMultiple={true}
+                  maxFiles={10}
+                  name={'image'}
+                  allowReorder={true}
+                  maxTotalFileSize="10MB"
+                  //server={this.props.imageApiUrl}
+                  oninit={() => this.handleInit(fieldProps.input.value)}
+                  server={{
+                      process: {
+                          url: this.props.imageApiUrl,
+                          onload: (response) => {// Once response is received, pushed new value to Final Form value variable, and populate through the onChange handler.
+                              const file = JSON.parse(response);
+                              updateImages(this.pond.getFiles(), file);
+
+                              //fieldProps.input.onChange( JSON.parse(response) );
+                              return JSON.parse(response).url;
+                          },
+                          onerror: (response) => { // If error transpires, add error to value with error message.
+                              //fieldProps.input.value = '';
+                              fieldProps.input.onChange('');
+                              return false;
+                          }
+                      }
+                  }}
+                  onremovefile={(error, file) => {
+                      updateImages(this.pond.getFiles());
+                  }}
+                  onreorderfiles={(files, origin, target) => {
+                      updateImages(this.pond.getFiles());
+                  }}
+                  onupdatefilesssss={fileItems => {
+                      //fieldProps.input.onChange('test:image');
+                      console.log('fileItems', fileItems);
+
+                      if (fileItems) {
+                          const arrayOfUrls = fileItems.map(file => {
+                              console.log('file', file);
+                              console.log('file.id', file.id);
+                              console.log('file.origin', file.origin);
+                              console.log('file.source', file.source);
+                              return file.source;
+                          });
+
+                          console.log('arrayOfUrls', arrayOfUrls)
+
+                          fieldProps.input.onChange(arrayOfUrls);
+
+                      }
+                  }}
+              />
           }}
         </Field>
       </span>
-    );
-  }
+        );
+    }
 }
 
 

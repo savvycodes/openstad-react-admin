@@ -26,6 +26,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
+import FileUpload from '../../form-fields/FileUpload';
+
 const useStyles = makeStyles({
   toolbar: {
     display: 'flex',
@@ -68,8 +70,7 @@ const Form = (props) => (
       <ReferenceArrayInput label="tags" source="tags" reference="tag" variant="outlined">
         <SelectArrayInput optionText="name"/>
       </ReferenceArrayInput>
-      {/*<h3>Image (TODO)</h3>
-      <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl}/>*/}
+      <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl}/>
     </FormTab>
     <FormTab label=" Extradata">
       {props.edit && <TextInput disabled source="id"/>}

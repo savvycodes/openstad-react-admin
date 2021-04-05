@@ -11,26 +11,22 @@ ReactDOM.render(
   <React.StrictMode>
     <OpenstadReactAdmin
       site={{
-        id: 142
+        id: process.env.REACT_APP_SITE_ID
       }}
       user={{
-        id: 26
+        id: process.env.REACT_APP_USER_ID
       }}
       imageApi={{
-        //url: '',
-  //      url: 'http://localhost:3333/image?access_token=MHhfb5U0m8vquAR81p',
         url: '/image'
       }}
       restApi={{
-        //     url: '/api/site/1',
-         url: '/api/site/142'
+         url: '/api/site/' + process.env.REACT_APP_SITE_ID
       }}
       statsApi={{
-        //     url: '/api/site/1',
-        url: '/stats/site/145/overview'
+        url: '/stats/site/'+ process.env.REACT_APP_SITE_ID+'/overview'
       }}
       jwt=""
-      siteKey="xxxxxxx"
+      siteKey={process.env.REACT_APP_SITE_KEY}
       resources={{
         idea: {
           active: true

@@ -11,7 +11,7 @@ module.exports = function(app) {
     '/api',
     createProxyMiddleware({
   //    target: 'https://image-server2.openstadsdeel.nl',
-      target: 'http://localhost:8111',
+      target: 'http://localhost:' +  process.env.REACT_APP_REST_API_PORT,
       changeOrigin: true,
     })
   );
@@ -19,7 +19,7 @@ module.exports = function(app) {
   app.use(
         '/stats',
         createProxyMiddleware({
-            target: 'http://localhost:8111',
+            target: 'http://localhost:'  + process.env.REACT_APP_REST_API_PORT,
             changeOrigin: true,
         })
     );
@@ -28,12 +28,14 @@ module.exports = function(app) {
     '/image',
     createProxyMiddleware({
   //    target: 'https://image-server2.openstadsdeel.nl',
-      target: 'http://localhost:3333',
+      target: 'http://localhost:' + process.env.REACT_APP_IMAGE_API_PORT,
       changeOrigin: true,
       onProxyReq : (proxyReq, req, res) => {
 
+          console.log('process.env', process.env)
+
          // add custom header to request
-         proxyReq.setHeader('Authorization', `Bearer 27834y23874`);
+         proxyReq.setHeader('Authorization', `Bearer ${process.env.REACT_APP_IMAGE_API_KEY}`);
       }
     })
   );

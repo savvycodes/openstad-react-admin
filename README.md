@@ -10,6 +10,12 @@ Running the react admin can be done by standard react script commands.
 npm start
 ```
 
+At least an Openstad API should be running for react admin to work. 
+
+## Env values
+
+See .env.example for settings env values for a development environment.
+
 ## Used in Admin panel and CMS
 
 It's current implementation is embedded both in the CMS and admin panel.

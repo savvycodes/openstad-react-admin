@@ -1,6 +1,6 @@
 import React from 'react';
 import { Filter, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
-import {CustomList as List} from '../components/CustomList';
+import {CustomList as List} from '../components/CustomList.jsx';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 export const OrderIcon = LocalMallIcon;
 

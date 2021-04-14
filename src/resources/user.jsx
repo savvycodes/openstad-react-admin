@@ -13,7 +13,7 @@ import {
     useNotify, useRefresh, useRedirect
 } from 'react-admin';
 import PersonIcon from '@material-ui/icons/Person';
-import {CustomList as List} from '../components/CustomList';
+import {CustomList as List} from '../components/CustomList.jsx';
 
 export const UserIcon = PersonIcon;
 const UserFilter = (props) => (

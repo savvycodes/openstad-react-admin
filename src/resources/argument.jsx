@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReferenceInput, SelectInput, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import {CustomList as List} from '../components/CustomList';
+import {CustomList as List} from '../components/CustomList.jsx';
 
 export const ArgumentIcon = ListAltIcon;
 

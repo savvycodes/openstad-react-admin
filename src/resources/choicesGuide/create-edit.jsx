@@ -3,7 +3,7 @@ import { Edit, Create, SimpleForm, TextField, EditButton, TextInput, TopToolbar,
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import { ExportButton } from './export.jsx'
 import { ResultButton } from './results.jsx'
-import {CustomList as List} from '../../components/CustomList';
+import {CustomList as List} from '../../components/CustomList.jsx';
 
 export const ChoicesGuideIcon = ListAltIcon;
 

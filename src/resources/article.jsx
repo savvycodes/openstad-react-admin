@@ -1,7 +1,7 @@
 import React from 'react';
 import { Datagrid, Filter, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
-import {CustomList as List} from '../components/CustomList';
+import {CustomList as List} from '../components/CustomList.jsx';
 
 export const ArticleIcon = BookIcon;
 

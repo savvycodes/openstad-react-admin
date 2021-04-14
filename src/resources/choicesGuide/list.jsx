@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Inbox from '@material-ui/icons/Inbox';
 import Typography from '@material-ui/core/Typography';
 import { CreateButton } from 'ra-ui-materialui';
-import {CustomList as List} from '../../components/CustomList';
+import {CustomList as List} from '../../components/CustomList.jsx';
 import ImportButton from './import.jsx';
 
 const useStyles = makeStyles(

@@ -23,7 +23,7 @@ import {
 } from 'react-admin';
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
-import {CustomList as List} from '../../components/CustomList';
+import {CustomList as List} from '../../components/CustomList.jsx';
 
 const IdeaPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 

@@ -12,7 +12,7 @@ import {
     Pagination, useNotify, useRefresh, useRedirect
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import {CustomList as List} from '../components/CustomList.jsx';
+import {CustomList as List} from '../components/CustomList/index.jsx';
 
 export const TagIcon = ListAltIcon;
 

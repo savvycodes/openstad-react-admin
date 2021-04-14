@@ -1,7 +1,7 @@
 // in Users.js
 import React from 'react';
 import { Datagrid, DateField, TextField } from 'react-admin';
-import {CustomList as List} from '../components/CustomList.jsx';
+import {CustomList as List} from '../components/CustomList/index.jsx';
 import PersonIcon from '@material-ui/icons/Person';
 //import EditableDatagrid from './react-data-grid/index.jsx';
 

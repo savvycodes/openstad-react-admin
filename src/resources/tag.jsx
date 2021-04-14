@@ -1,6 +1,6 @@
 import React from 'react';
+
 import {
-    List,
     Filter,
     Datagrid,
     Edit,
@@ -12,6 +12,7 @@ import {
     Pagination, useNotify, useRefresh, useRedirect
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import {CustomList as List} from '../components/CustomList';
 
 export const TagIcon = ListAltIcon;
 

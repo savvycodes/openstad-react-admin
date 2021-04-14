@@ -1,6 +1,6 @@
 import React, {Fragment, cloneElement, useState, useEffect} from 'react';
 import {
-    Datagrid, Filter, DateField, EditButton, ImageField, TextInput, List, TextField, TopToolbar,
+    Datagrid, Filter, DateField, EditButton, ImageField, TextInput, TextField, TopToolbar,
     downloadCSV, useListContext, BulkDeleteButton, SimpleForm, SaveButton
 } from 'react-admin';
 import Box from '@material-ui/core/Box';
@@ -23,7 +23,7 @@ import {
 } from 'react-admin';
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
-import {useDataProvider} from 'react-admin';
+import {CustomList as List} from '../../components/CustomList';
 
 const IdeaPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 

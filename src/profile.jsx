@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageInput, ImageField, List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
+import { ImageInput, ImageField, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput } from 'react-admin';
 import { FormGroup } from '@material-ui/core';
 
 const UserTitle = ({ record }) => {

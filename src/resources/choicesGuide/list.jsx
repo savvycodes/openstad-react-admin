@@ -1,11 +1,12 @@
 import React from 'react';
-import { Datagrid, Filter, TextInput, EditButton, List, TextField, TopToolbar, useListContext } from 'react-admin';
+import { Datagrid, Filter, TextInput, EditButton, TextField, TopToolbar, useListContext } from 'react-admin';
 import {makeStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Inbox from '@material-ui/icons/Inbox';
 import Typography from '@material-ui/core/Typography';
 import { CreateButton } from 'ra-ui-materialui';
-import ImportButton from './import.jsx'
+import {CustomList as List} from '../../components/CustomList';
+import ImportButton from './import.jsx';
 
 const useStyles = makeStyles(
     theme => ({

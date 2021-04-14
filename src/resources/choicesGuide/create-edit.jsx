@@ -1,8 +1,9 @@
 import React from 'react';
-import { List, Filter, Datagrid, Edit, Create, SimpleForm, TextField, EditButton, TextInput, TopToolbar, required } from 'react-admin';
+import { Edit, Create, SimpleForm, TextField, EditButton, TextInput, TopToolbar, required } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import { ExportButton } from './export.jsx'
 import { ResultButton } from './results.jsx'
+import {CustomList as List} from '../../components/CustomList';
 
 export const ChoicesGuideIcon = ListAltIcon;
 

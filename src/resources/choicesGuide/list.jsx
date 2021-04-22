@@ -60,11 +60,17 @@ const Empty = (props) => {
 
 export const ListActions = props => {
   const { className, basePath, total, resource, currentSort, filterValues, permanentFilter } = props;
-  
+
+  const importButtonConfig = {
+    logging: true,
+    disableImportNew: true,
+    disableImportOverwrite: true,
+  }
+
   return (
     <TopToolbar className={className}>
       <CreateButton basePath={basePath}  />
-      <ImportButton {...props}/>
+      <ImportButton {...props} {...importButtonConfig}/>
     </TopToolbar>
   );
 };

@@ -24,7 +24,7 @@
     "ra-data-simple-rest": "^3.3.2",
     "ra-input-json": "^0.2.8",
     "react": "^16.13.1",
-    "react-admin": "3.14.4",
+    "react-admin": "3.12.5",
     "react-admin-import-csv": "^0.2.16",
     "react-data-grid": "^7.0.0-canary.14",
     "react-dom": "^16.13.1",

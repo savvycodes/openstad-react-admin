@@ -22,7 +22,7 @@ const ArgumentTitle = ({ record }) => {
 };
 
 export const ArgumentEdit = (props) => (
-    <Edit undoable={false}  title={<ArgumentTitle />} {...props}>
+    <Edit mutationMode="pessimistic"  title={<ArgumentTitle />} {...props}>
         <SimpleForm>
           <TextInput disabled source="id" />
           <TextInput multiline source="description" />

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.27
+* Update react-admin and sub dependencies
+* Fix undoable to newer version of mutationType, which asks for a confirmation before deleting
+
 ## 0.1.26
 * Update react-admin library to latest
 

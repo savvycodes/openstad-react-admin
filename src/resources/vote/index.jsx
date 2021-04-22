@@ -66,7 +66,7 @@ const VoteTitle = ({ record }) => {
 };
 
 export const VoteEdit = (props) => (
-  <Edit undoable={false} title={<VoteTitle/>} {...props}>
+  <Edit mutationMode="pessimistic" title={<VoteTitle/>} {...props}>
     <SimpleForm>
       <TextInput source="sku"/>
       <TextInput source="name"/>

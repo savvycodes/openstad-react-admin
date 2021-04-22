@@ -24,7 +24,7 @@ const ChoicesGuideTitle = ({ record }) => {
 };
 
 export const ChoicesGuideEdit = (props) => (
-  <Edit undoable={false} title={<ChoicesGuideTitle />}  actions={<EditTopToolbar/>} {...props}>
+  <Edit mutationMode="pessimistic" title={<ChoicesGuideTitle />}  actions={<EditTopToolbar/>} {...props}>
     <SimpleForm>
       <TextInput source="title" label="Titel" validate={[required()]} variant="outlined" fullWidth/>
       <TextInput source="description" label="Beschrijving" multiline variant="outlined" fullWidth/>

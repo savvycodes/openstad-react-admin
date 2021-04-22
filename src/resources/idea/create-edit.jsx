@@ -39,17 +39,11 @@ const IdeaTitle = ({ record }) => {
   return <span>Idea {record ? `"${record.title}"` : ''}</span>;
 };
 
-const CustomToolbar = props => (
-  <Toolbar {...props} classes={useStyles()}>
-    <SaveButton />
-    <DeleteButton undoable={false} />
-  </Toolbar>
-);
 
 // , maxLength(5000), minLength(140)
 // @todo set up redux to access site rest object
 const Form = (props) => (
-  <TabbedForm {...props}  toolbar={<CustomToolbar />}>
+  <TabbedForm {...props}  >
     <FormTab label="Info">
       {props.edit && <TextInput disabled source="id"/>}
       <ReferenceInput
@@ -139,7 +133,7 @@ export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
   // form pass to form and add it, maybe move entire logic to form component?
 
   return (
-    <Edit undoable={false} title={<IdeaTitle/>} {...props}>
+    <Edit mutationMode="pessimistic" title={<IdeaTitle/>} {...props}>
       <Form {...props} edit/>
     </Edit>
   )

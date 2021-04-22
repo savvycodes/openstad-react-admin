@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 export const SiteEdit = (props) => {
   console.log('SiteEdit init');
-  return (<Edit undoable={false} title="Edit site" {...props}>
+  return (<Edit mutationMode="pessimistic" title="Edit site" {...props}>
       <TabbedForm redirect="edit" toolbar={<SaveToolbar />}>
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />

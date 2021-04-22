@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.24
+* Add confirm delete on every edit screen, not only in overview
+
 ## 0.1.23
 * Move siteId and port values voor development to .env file
 * Add image uploading input field for ideas

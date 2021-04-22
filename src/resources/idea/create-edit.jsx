@@ -139,7 +139,7 @@ export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
   // form pass to form and add it, maybe move entire logic to form component?
 
   return (
-    <Edit title={<IdeaTitle/>} {...props}>
+    <Edit undoable={false} title={<IdeaTitle/>} {...props}>
       <Form {...props} edit/>
     </Edit>
   )

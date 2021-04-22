@@ -110,7 +110,7 @@ const Form = (props) => (
 );
 
 export const AreaEdit = (props) => (
-    <Edit title={<AreaTitle/>} {...props} actions={<CreateEditActions/>} redirect="/area">
+    <Edit undoable={false} title={<AreaTitle/>} {...props} actions={<CreateEditActions/>} redirect="/area">
         <Form {...props}/>
     </Edit>
 );

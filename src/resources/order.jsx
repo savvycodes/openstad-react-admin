@@ -29,7 +29,7 @@ const OrderTitle = ({ record }) => {
 };
 
 export const OrderEdit = (props) => (
-    <Edit title={<OrderTitle />} {...props}>
+    <Edit undoable={false} title={<OrderTitle />} {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="title" />

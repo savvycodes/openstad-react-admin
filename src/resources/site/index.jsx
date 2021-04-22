@@ -1,18 +1,23 @@
 import React from 'react';
-import {
-  Edit,
-  SelectInput,
-  TextInput,
-  TabbedForm,
+import { Edit, SelectInput, TextInput, TabbedForm,
   FormTab,
   BooleanInput,
-  NumberInput
+  NumberInput,
+  Toolbar,
+  SaveButton
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import JsonInput from '../../form-fields/JsonInput.jsx';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 export const SiteIcon = SettingsIcon;
+
+const SaveToolbar = props => (
+    <Toolbar {...props} >
+      <SaveButton />
+    </Toolbar>
+);
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,8 +45,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const SiteEdit = (props) => {
-  return (<Edit title="Edit site" {...props}>
-      <TabbedForm redirect="edit">
+  return (<Edit undoable={false} title="Edit site" {...props}>
+      <TabbedForm redirect="edit" toolbar={<SaveToolbar />}>
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />

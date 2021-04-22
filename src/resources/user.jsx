@@ -40,7 +40,7 @@ const UserTitle = ({ record }) => {
 };
 
 export const UserEdit = (props) => (
-    <Edit title={<UserTitle />}  {...props}>
+    <Edit undoable={false} title={<UserTitle />}  {...props}>
         <SimpleForm redirect="edit" >
             <TextInput disabled source="id" variant="outlined" fullWidth />
             <TextInput disabled source="role" variant="outlined" fullWidth  />

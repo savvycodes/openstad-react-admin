@@ -29,7 +29,7 @@ const ProductTitle = ({ record }) => {
 };
 
 export const ProductEdit = (props) => (
-    <Edit title={<ProductTitle />} {...props}>
+    <Edit undoable={false} title={<ProductTitle />} {...props}>
         <SimpleForm>
         <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl} />
           <TextInput source="sku" />

@@ -4,10 +4,12 @@
  */
 
 const createProxyMiddleware = require('http-proxy-middleware');
-console.log('register proxy for dev')
+console.log('register proxy for dev');
 
 module.exports = function(app) {
-  app.use(
+    console.log('process.env', process.env);
+
+    app.use(
     '/api',
     createProxyMiddleware({
   //    target: 'https://image-server2.openstadsdeel.nl',
@@ -32,7 +34,6 @@ module.exports = function(app) {
       changeOrigin: true,
       onProxyReq : (proxyReq, req, res) => {
 
-          console.log('process.env', process.env)
 
          // add custom header to request
          proxyReq.setHeader('Authorization', `Bearer ${process.env.REACT_APP_IMAGE_API_KEY}`);

@@ -40,7 +40,7 @@ const TagTitle = ({ record }) => {
 };
 
 export const TagEdit = (props) => (
-    <Edit title={<TagTitle />} {...props}>
+    <Edit undoable={false} title={<TagTitle />} {...props}>
         <SimpleForm>
           <TextInput source="name" label="Tag name" variant="outlined" />
         </SimpleForm>

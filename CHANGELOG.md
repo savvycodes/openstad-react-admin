@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.25
+* Nothing new, bumping a version
+
 ## 0.1.24
 * Add confirm delete on every edit screen, not only in overview
 

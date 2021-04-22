@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.26
+* Update react-admin library to latest
+
 ## 0.1.25
 * Nothing new, bumping a version
 

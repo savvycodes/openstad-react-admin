@@ -76,7 +76,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "watch": "webpack --watch --mode development",
-    "build-lib": "webpack"
+    "build-lib": "webpack --mode development"
   },
   "eslintConfig": {
     "extends": "react-app"

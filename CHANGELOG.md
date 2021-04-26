@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.29
+* Reverted to React admin version and corresponding libraries that React Admin demo uses
+
+## 0.1.28
+* No new features, but struggling with React admin version in prod builds
+
 ## 0.1.27
 * Update react-admin and sub dependencies
 * Fix undoable to newer version of mutationType, which asks for a confirmation before deleting

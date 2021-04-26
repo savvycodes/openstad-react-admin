@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.30
+* Fixing build issues, update react admin to latest version
+
 ## 0.1.29
 * Reverted to React admin version and corresponding libraries that React Admin demo uses
 

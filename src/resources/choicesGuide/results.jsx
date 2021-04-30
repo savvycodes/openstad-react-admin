@@ -23,6 +23,7 @@ export const ResultButton = function(props) {
         userId: record.userId,
         answers: record.result && record.result.answers || {},
         scores: record.result && record.result.scores || {},
+        createdAt: record.createdAt,
       }
     });
 
@@ -85,7 +86,7 @@ export const ResultButton = function(props) {
     });
     extraDataFields = Object.keys(extraDataFields);
     
-    let userCSV = `user id,${questionIds.map( id => 'question ' + id ).join(',')},${choiceIds.map( id => 'choice ' + id ).join(',')},${extraDataFields.join(',')}\n`  
+    let userCSV = `user id,${questionIds.map( id => 'question ' + id ).join(',')},${choiceIds.map( id => 'choice ' + id ).join(',')},${extraDataFields.join(',')},create date\n`  
     Object.keys(results).forEach((recordId) => {
       let result = results[recordId];
       let userAnswers = questionIds.map ( id => {
@@ -101,7 +102,7 @@ export const ResultButton = function(props) {
         return `${x}/${y}`;
       });
       let userExtraData = extraDataFields.map ( fieldName => result.extraData && result.extraData[fieldName] );
-      userCSV += `${recordId},${userAnswers.join(',')},${userScores.join(',')},${userExtraData.join(',')}\n`  
+      userCSV += `${recordId},${userAnswers.join(',')},${userScores.join(',')},${userExtraData.join(',')},${result.createdAt}\n`  
     });
 
     await downloadCSV(answersCSV, `keuzewijzerresultaten-${props.data.id}-antwoorden`);
@@ -124,3 +125,4 @@ function stringify(value) {
   }
   return value;
 }
+

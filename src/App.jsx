@@ -14,6 +14,8 @@ import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './reso
 import { SiteEdit, SiteIcon } from './resources/site/index.jsx';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
 import { ChoicesGuideList, ChoicesGuideEdit, ChoicesGuideCreate, ChoicesGuideIcon } from './resources/choicesGuide/index.jsx';
+import { ActionList, ActionEdit, ActionCreate, ActionIcon } from './resources/action.jsx';
+
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
@@ -94,6 +96,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.user && resources.user.active ? <Resource name="user" list={UserList} edit={UserEdit} create={UserCreate} icon={UserIcon} options={{menuTitle: 'Gebruikers',userPath: userPath}} /> : <div />}
       {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={ContactMailIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
       {resources.choicesGuide && resources.choicesGuide.active ? <Resource name="choicesGuide" list={ChoicesGuideList} edit={ChoicesGuideEdit} create={ChoicesGuideCreate} icon={ChoicesGuideIcon} options={{menuTitle: 'Keuzewijzers'}} /> : <div />}
+      {resources.action && resources.action.active ? <Resource name="action" list={ActionList} edit={ActionEdit} create={ActionCreate} icon={ActionIcon} options={{menuTitle: 'Acties'}} /> : <div />}
     </Admin>
   );
 }

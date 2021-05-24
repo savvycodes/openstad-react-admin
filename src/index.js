@@ -64,6 +64,9 @@ ReactDOM.render(
         tag: {
           active: true
         },
+        action: {
+          active: true
+        },
       }}
     />
   </React.StrictMode>,

@@ -65,7 +65,7 @@ const FormFields = (props) => {
                 ]}
             />
 
-            {values.type === 'once' && <DateTimeInput label="Run update at" source="runDate" />}
+            {values.type === 'once' && <DateTimeInput label="Run action at" source="runDate" />}
 
             <br />
 
@@ -106,17 +106,30 @@ const FormFields = (props) => {
  * @constructor
  */
 const UpdateModelActionFields = () => {
+    const { values } = useFormState();
+
+    const booleanKeys = ['config.ideas.canAddNewIdeas','config.votes.isViewable', 'config.votes.isActive'];
+
     return (
-        <div>
-            Set: <SelectInput label="Key" source="settings.keyToUpdate" choices={[
+        <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            verticalAlign: 'middle'
+        }}>
+            Set:
+            <SelectInput label="Key" source="settings.keyToUpdate" choices={[
                 { id: 'config.ideas.canAddNewIdeas', name: 'Can add new ideas' },
                 { id: 'config.votes.isViewable', name: 'Voting count publicly available' },
                 { id: 'config.votes.isActive', name: 'Voting is open' },
-                { id: 'mail', name: 'Email' },
             ]}
             />
-            to:  <TextInput label="Value" source="settings.valueToUpdate" />
-        </div>
+            to:
+            {values.settings && values.settings.keyToUpdate && booleanKeys.includes(values.settings.keyToUpdate) ?
+                <BooleanInput label="Value" source="settings.newValue"/>
+                :
+                <TextInput label="Value" source="settings.newValue"/>
+            }
+         </div>
     )
 }
 

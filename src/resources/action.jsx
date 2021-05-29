@@ -7,20 +7,41 @@ import {
     Edit,
     Create,
     SimpleForm,
-    DateTimeInput,
     BooleanInput,
     SelectInput,
     TextField,
     EditButton,
     TextInput,
-    DateInput,
-    ReferenceInput
+    DateTimeInput
 } from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
 import {CustomList as List} from '../components/CustomList/index.jsx';
 import { useFormState } from 'react-final-form';
 
 export const ActionIcon = BookIcon;
+
+/**
+ * Convert date to dutch timezone.
+ * Need to find a more global solution for this
+ */
+const dateFormatter = v => {
+    // v is a `Date` object
+    if (!(v instanceof Date) || isNaN(v)) return;
+    const pad = '00';
+    const yy = v.getFullYear().toString();
+    const mm = (v.getMonth() + 1).toString();
+    const dd = v.getDate().toString();
+    return `${yy}-${(pad + mm).slice(-2)}-${(pad + dd).slice(-2)}`;
+};
+
+const dateParser = v => {
+    // v is a string of "YYYY-MM-DD" format
+    const match = /(\d{4})-(\d{2})-(\d{2})/.exec(v);
+    if (match === null) return;
+    const d = new Date(match[1], parseInt(match[2], 10) - 1, match[3]);
+    if (isNaN(d)) return;
+    return d;
+};
 
 const ActionFilters = (props) => (
     <Filter {...props}>
@@ -61,17 +82,23 @@ const FormFields = (props) => {
 
             <SelectInput source="type" choices={[
                 { id: 'once', name: 'Once' },
-                { id: 'continuously', name: 'Continuously' },
+           //     { id: 'continuously', name: 'Continuously' },
                 ]}
             />
 
-            {values.type === 'once' && <DateTimeInput label="Run action at" source="runDate" />}
+            {values.type === 'once' &&
+                <div>
+                    <DateTimeInput label="Run action at" source="runDate" />
+                    <br />
+                    <em> Timezone currently in UTC </em>
+                </div>
+            }
 
             <br />
 
             <SelectInput source="action" choices={[
                 { id: 'updateModel', name: 'Update Resource' },
-                { id: 'mail', name: 'Email' },
+           //     { id: 'mail', name: 'Email' },
             ]}
             />
 
@@ -91,7 +118,13 @@ const FormFields = (props) => {
 
             {values.action === 'updateModel' && <UpdateModelActionFields />}
 
-            <BooleanInput source="finished" />
+            {values.type === 'once' && <div>
+                <BooleanInput source="finished" />
+                <em>If finished is true, the action has run, turn it back off to run again.</em>
+            </div>
+            }
+
+
         </>
     )
 }
@@ -116,16 +149,21 @@ const UpdateModelActionFields = () => {
             flexDirection: 'row',
             verticalAlign: 'middle'
         }}>
-            Set:
+            <div style={{
+                padding: '20px 20px 20px 0'
+            }}> Set:</div>
+
             <SelectInput label="Key" source="settings.keyToUpdate" choices={[
                 { id: 'config.ideas.canAddNewIdeas', name: 'Can add new ideas' },
                 { id: 'config.votes.isViewable', name: 'Voting count publicly available' },
                 { id: 'config.votes.isActive', name: 'Voting is open' },
             ]}
             />
-            to:
+            <div style={{
+                padding: '20px'
+            }}> to:</div>
             {values.settings && values.settings.keyToUpdate && booleanKeys.includes(values.settings.keyToUpdate) ?
-                <BooleanInput label="Value" source="settings.newValue"/>
+                <BooleanInput label="On" source="settings.newValue" style={{marginTop: '14px'}}/>
                 :
                 <TextInput label="Value" source="settings.newValue"/>
             }
@@ -170,7 +208,6 @@ export const ActionCreate = (props) => (
         <SimpleForm>
             <TextInput disabled source="id" />
             <FormFields />
-
         </SimpleForm>
     </Create>
 );

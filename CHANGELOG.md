@@ -2,6 +2,7 @@
 
 ## 0.1.31
 * Add action resources
+* Add voting on theme config 
 
 ## 0.1.30
 * Fixing build issues, update react admin to latest version

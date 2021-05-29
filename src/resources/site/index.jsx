@@ -4,7 +4,9 @@ import { Edit, SelectInput, TextInput, TabbedForm,
   BooleanInput,
   NumberInput,
   Toolbar,
-  SaveButton
+  SaveButton,
+  ArrayInput,
+  SimpleFormIterator
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import JsonInput from '../../form-fields/JsonInput.jsx';
@@ -46,6 +48,9 @@ const useStyles = makeStyles(theme => ({
 
 export const SiteEdit = (props) => {
   console.log('SiteEdit init');
+  //          {values.config && values.config.votes && values.config.votes.voteType === 'budgeting-per-theme' && <div>
+  // const { values } = useFormState();
+
   return (<Edit mutationMode="pessimistic" title="Edit site" {...props}>
       <TabbedForm redirect="edit" toolbar={<SaveToolbar />}>
         <FormTab label="Info" >
@@ -103,10 +108,20 @@ export const SiteEdit = (props) => {
               },
             ]}
           />
+
           <NumberInput source="config.votes.maxIdeas" label='What is max amount of ideas users can vote for?' fullWidth variant="outlined" />
           <NumberInput source="config.votes.minIdeas" label='What is min amount of ideas users can vote for?' fullWidth variant="outlined" />
           <NumberInput source="config.votes.minBudget" label='What is min budget users can vote for?' fullWidth variant="outlined" />
           <NumberInput source="config.votes.maxBudget" label='What is max budget users can vote for?' fullWidth variant="outlined" />
+          <ArrayInput label="Themes configuration for budget voting" source="config.votes.themes">
+            <SimpleFormIterator>
+              <TextInput label="Name of theme" source="value" />
+              <NumberInput label="Minimum ideas to vote for, (for theme)" source="minIdeas" />
+              <NumberInput label="Maximum ideas to vote for (for theme)" source="maxIdeas" />
+              <NumberInput label="Budget (for theme)" source="budget" />
+            </SimpleFormIterator>
+          </ArrayInput>
+
         </FormTab>
         <FormTab label="Notifications">
           <h4>Where to send adminstrator notifications?</h4>

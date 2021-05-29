@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.31
+* Add action resources
+
 ## 0.1.30
 * Fixing build issues, update react admin to latest version
 

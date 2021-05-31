@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.32
+* Adjust incorrect timezone message in actions edit field
+
 ## 0.1.31
 * Add action resources
 * Add voting on theme config 

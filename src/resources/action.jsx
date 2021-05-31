@@ -72,7 +72,8 @@ const ActionTitle = ({ record }) => {
 
 const FormFields = (props) => {
     const { values } = useFormState();
-
+    const today = new Date();
+    const time = today.getHours() + ":" + today.getMinutes(); // + ":" + today.getSeconds();
 
     return (
         <>
@@ -90,7 +91,7 @@ const FormFields = (props) => {
                 <div>
                     <DateTimeInput label="Run action at" source="runDate" />
                     <br />
-                    <em> Timezone currently in UTC </em>
+                    <em> Timezone is taken from your browser settings. (Time according to your browser: {time}.) </em>
                 </div>
             }
 

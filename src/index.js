@@ -64,6 +64,9 @@ ReactDOM.render(
         tag: {
           active: true
         },
+        organisation: {
+          active: true
+        }
       }}
     />
   </React.StrictMode>,

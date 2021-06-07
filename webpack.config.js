@@ -32,10 +32,10 @@ module.exports = {
   ],
 
   optimization: {
-		minimize: true,
-		minimizer: [new TerserPlugin({
-			test: /\.jsx?$/,
-		})],
+//  	minimize: true,
+//  	minimizer: [new TerserPlugin({
+//  		test: /\.jsx?$/,
+//  	})],
   },
 
 	module: {

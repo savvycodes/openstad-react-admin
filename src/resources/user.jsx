@@ -10,7 +10,7 @@ import {
     EditButton,
     TextInput,
     Filter,
-    useNotify, useRefresh, useRedirect
+    useNotify, useRefresh, useRedirect, CheckboxGroupInput, BooleanInput, BooleanField
 } from 'react-admin';
 import PersonIcon from '@material-ui/icons/Person';
 import {CustomList as List} from '../components/CustomList/index.jsx';
@@ -30,6 +30,7 @@ export const UserList = (props) => (
             <TextField source="firstName" />
             <TextField source="lastName" />
             <DateField source="createdAt" />
+            <BooleanField source="isEventProvider" />
             <EditButton basePath="/user" />
         </Datagrid>
     </List>
@@ -48,6 +49,7 @@ export const UserEdit = (props) => (
             <TextInput source="lastName" variant="outlined" fullWidth  />
             <TextInput source="email" variant="outlined" fullWidth  />
             <TextInput source="zipCode" variant="outlined" fullWidth  />
+            <IsEventProvider />
         </SimpleForm>
     </Edit>
 );
@@ -64,11 +66,21 @@ export const UserCreate = (props) => {
     }}>
         <SimpleForm>
             <TextInput disabled source="id" variant="outlined" fullWidth/>
-            <TextInput disabled source="role" variant="outlined" fullWidth/>
+            <TextInput disabled source="role" variant="outlined" fullWidth />
             <TextInput source="firstName" variant="outlined" fullWidth/>
             <TextInput source="lastName" variant="outlined" fullWidth/>
             <TextInput source="email" variant="outlined" fullWidth/>
             <TextInput source="zipCode" variant="outlined" fullWidth/>
+            <IsEventProvider />
         </SimpleForm>
     </Create>
 };
+
+/**
+ * This fields adds an array of permissions to the local site user. This is done to allow
+ * providers to sign up and manage there own events.
+ * @returns 
+ */
+function IsEventProvider() {
+    return <BooleanInput label="Is event provider (aanbieder)" source="isEventProvider" />
+}

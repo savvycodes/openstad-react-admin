@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.33
+* Set default true value for actions new value, instead of undefined
+
 ## 0.1.32
 * Adjust incorrect timezone message in actions edit field
 

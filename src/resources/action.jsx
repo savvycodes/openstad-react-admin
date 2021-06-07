@@ -120,7 +120,7 @@ const FormFields = (props) => {
             {values.action === 'updateModel' && <UpdateModelActionFields />}
 
             {values.type === 'once' && <div>
-                <BooleanInput source="finished" />
+                <BooleanInput source="finished"  />
                 <em>If finished is true, the action has run, turn it back off to run again.</em>
             </div>
             }
@@ -164,7 +164,7 @@ const UpdateModelActionFields = () => {
                 padding: '20px'
             }}> to:</div>
             {values.settings && values.settings.keyToUpdate && booleanKeys.includes(values.settings.keyToUpdate) ?
-                <BooleanInput label="On" source="settings.newValue" style={{marginTop: '14px'}}/>
+                <BooleanInput label="On" source="settings.newValue" style={{marginTop: '14px'}} defaultValue={true}/>
                 :
                 <TextInput label="Value" source="settings.newValue"/>
             }

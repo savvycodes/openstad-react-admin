@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.34
+* Make actions fields required
+* Set correct minBudget and maxBudget for theme
+
 ## 0.1.33
 * Set default true value for actions new value, instead of undefined
 

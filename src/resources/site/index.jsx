@@ -118,7 +118,8 @@ export const SiteEdit = (props) => {
               <TextInput label="Name of theme" source="value" />
               <NumberInput label="Minimum ideas to vote for, (for theme)" source="minIdeas" />
               <NumberInput label="Maximum ideas to vote for (for theme)" source="maxIdeas" />
-              <NumberInput label="Budget (for theme)" source="budget" />
+              <NumberInput label="Min budget (for theme)" source="minBudget" />
+              <NumberInput label="Max budget (for theme)" source="maxBudget" />
             </SimpleFormIterator>
           </ArrayInput>
 

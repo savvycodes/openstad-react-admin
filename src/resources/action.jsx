@@ -12,7 +12,8 @@ import {
     TextField,
     EditButton,
     TextInput,
-    DateTimeInput
+    DateTimeInput,
+    required
 } from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
 import {CustomList as List} from '../components/CustomList/index.jsx';
@@ -77,11 +78,11 @@ const FormFields = (props) => {
 
     return (
         <>
-            <TextInput source="name" />
+            <TextInput source="name" validate={[required()]}  />
 
             <br />
 
-            <SelectInput source="type" choices={[
+            <SelectInput validate={[required()]} source="type" choices={[
                 { id: 'once', name: 'Once' },
            //     { id: 'continuously', name: 'Continuously' },
                 ]}
@@ -89,7 +90,7 @@ const FormFields = (props) => {
 
             {values.type === 'once' &&
                 <div>
-                    <DateTimeInput label="Run action at" source="runDate" />
+                    <DateTimeInput validate={[required()]} label="Run action at" source="runDate" />
                     <br />
                     <em> Timezone is taken from your browser settings. (Time according to your browser: {time}.) </em>
                 </div>
@@ -97,7 +98,7 @@ const FormFields = (props) => {
 
             <br />
 
-            <SelectInput source="action" choices={[
+            <SelectInput validate={[required()]} source="action" choices={[
                 { id: 'updateModel', name: 'Update Resource' },
            //     { id: 'mail', name: 'Email' },
             ]}
@@ -108,6 +109,7 @@ const FormFields = (props) => {
              <SelectInput
                 source="conditions.model"
                 label="Resource to select"
+                validate={[required()]}
                 choices={[
                     { id: 'Site', name: 'Site  (update active site)' },
                     //     { id: 'Idea', name: 'Idea' },
@@ -154,7 +156,7 @@ const UpdateModelActionFields = () => {
                 padding: '20px 20px 20px 0'
             }}> Set:</div>
 
-            <SelectInput label="Key" source="settings.keyToUpdate" choices={[
+            <SelectInput validate={[required()]} label="Key" source="settings.keyToUpdate" choices={[
                 { id: 'config.ideas.canAddNewIdeas', name: 'Can add new ideas' },
                 { id: 'config.votes.isViewable', name: 'Voting count publicly available' },
                 { id: 'config.votes.isActive', name: 'Voting is open' },

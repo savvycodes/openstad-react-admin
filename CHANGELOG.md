@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.35
+* Export fixes for choice guides
+
 ## 0.1.34
 * Make actions fields required
 * Set correct minBudget and maxBudget for theme

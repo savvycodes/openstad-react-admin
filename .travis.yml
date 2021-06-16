@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "12.13"
+  - "10.21"
 
 install:
   - npm i
@@ -8,12 +8,33 @@ install:
 script:
   - npm run test
   - npm run build-lib
+  - npm run set-publish-version
 
 deploy:
-  provider: npm
-  skip_cleanup: true
-  email: $NPM_EMAIL
-  api_key: $NPM_AUTH_TOKEN
-  tag: latest
-  on:
-    branch: master
+#  - provider: npm
+#    skip_cleanup: true
+#    local_dir: dist
+#    email: $NPM_EMAIL
+#    api_key: $NPM_AUTH_TOKEN
+#    overwrite: true
+#    tag: alpha
+#    on:
+#      branch: development
+#  - provider: npm
+#    skip_cleanup: true
+#    local_dir: dist
+#    email: $NPM_EMAIL
+#    api_key: $NPM_AUTH_TOKEN
+#    overwrite: true
+#    tag: beta
+#    on:
+#      branch: release
+#  - provider: npm
+#    skip_cleanup: true
+#    local_dir: dist
+#    email: $NPM_EMAIL
+#    api_key: $NPM_AUTH_TOKEN
+#    overwrite: true
+#    tag: latest
+#    on:
+#      branch: master

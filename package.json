@@ -76,7 +76,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "watch": "webpack --watch --mode development",
-    "build-lib": "webpack"
+    "build-lib": "webpack",
+    "set-publish-version": "node ./scripts/set-publish-version.js"
   },
   "eslintConfig": {
     "extends": "react-app"

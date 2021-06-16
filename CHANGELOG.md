@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.2.0
+* Introduce release and development branches
 * Shift version numbering
 
 ## 0.1.35

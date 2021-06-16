@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0
+* Shift version numbering
+
 ## 0.1.35
 * Export fixes for choice guides
 
@@ -15,7 +18,7 @@
 
 ## 0.1.31
 * Add action resources
-* Add voting on theme config 
+* Add voting on theme config
 
 ## 0.1.30
 * Fixing build issues, update react admin to latest version

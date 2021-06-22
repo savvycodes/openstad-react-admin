@@ -3,7 +3,7 @@
 ## 0.2.0
 * Introduce release and development branches
 * Move from travis-ci.org to travis-ci.com
-* Shift version numbering
+* Shift version numbering to be compatible with other repo's
 
 ## 0.1.35
 * Export fixes for choice guides

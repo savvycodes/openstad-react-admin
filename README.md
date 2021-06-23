@@ -26,6 +26,7 @@ A travis script is added in the root, this runs test on every commit.
 
 It needs the following ENV values set in the Travis interface:
 
+
 ```
 NPM_EMAIL
 NPM_AUTH_TOKEN

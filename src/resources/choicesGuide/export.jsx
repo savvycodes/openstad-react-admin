@@ -43,6 +43,7 @@ export const ExportButton = function(props) {
 
     // choicesGuide
     body.push({
+      choicesGuide_id: stringify(choicesGuide.choicesGuideId),
       choicesGuide_title: stringify(choicesGuide.title),
       choicesGuide_description: stringify(choicesGuide.description),
       choicesGuide_images: stringify(choicesGuide.images),
@@ -53,6 +54,7 @@ export const ExportButton = function(props) {
       choicesGuide.questionGroups.forEach(questiongroup => {
 
         body.push({
+          questionGroup_id: stringify(questiongroup.id),
           questionGroup_answerDimensions: stringify(questiongroup.answerDimensions),
           questionGroup_title: stringify(questiongroup.title),
           questionGroup_description: stringify(questiongroup.description),
@@ -63,6 +65,7 @@ export const ExportButton = function(props) {
         if (questiongroup.questions && questiongroup.questions.forEach) {
           questiongroup.questions.forEach(question => {
             body.push({
+              question_id: stringify(question.id),
               question_title: stringify(question.title),
               question_description: stringify(question.description),
               question_images: stringify(question.images),
@@ -77,6 +80,7 @@ export const ExportButton = function(props) {
         if (questiongroup.choices && questiongroup.choices.forEach) {
           questiongroup.choices.forEach(choice => {
             body.push({
+              choice_id: stringify(choice.id),
               choice_title: stringify(choice.title),
               choice_description: stringify(choice.description),
               choice_images: stringify(choice.images),
@@ -92,10 +96,8 @@ export const ExportButton = function(props) {
     }
 
     jsonExport(body, {headers: [
-      'choicesGuide_title', 'choicesGuide_description', 'choicesGuide_images', 'choicesGuide_config', 'questionGroup_answerDimensions', 'questionGroup_title', 'questionGroup_description', 'questionGroup_images', 'questionGroup_seqnr', 'question_title', 'question_description', 'question_images', 'question_type', 'question_dimensions', 'question_values', 'question_seqnr',
+      'choicesGuide_id', 'choicesGuide_title', 'choicesGuide_description', 'choicesGuide_images', 'choicesGuide_config', 'questionGroup_id', 'questionGroup_answerDimensions', 'questionGroup_title', 'questionGroup_description', 'questionGroup_images', 'questionGroup_seqnr', 'question_id', 'question_title', 'question_description', 'question_images', 'question_type', 'question_dimensions', 'question_values', 'question_seqnr',
     ]}, (err, csv) => {
-      console.log('++++');
-      console.log(csv);
       downloadCSV(csv, `keuzewijzer-${choicesGuide.choicesGuideId}-${choicesGuide.title}`);
     });
 

@@ -51,6 +51,7 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
       let group = source.questionGroups[0];
       if (group && group.questions) {
         group.questions.push({
+          old_id: line.question_id,
           title: line.question_title,
           description: line.question_description,
           images: line.question_images,
@@ -98,10 +99,7 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
   })
   let CHOICESGUIDE_ID = result.json.id;
 
-  console.log(result)
-  console.log(CHOICESGUIDE_ID);
-
-  source.questionGroups.forEach(async (questiongroup) => {
+  for ( let questiongroup of source.questionGroups ) {
 
     let result = await httpClient(`${apiUrl}/choicesguide/${CHOICESGUIDE_ID}/questiongroup`, {
       method: 'POST',
@@ -116,7 +114,9 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
     })
     let QUESTIONGROUP_ID = result.json.id;
 
-    questiongroup.questions.forEach(async (question) => {
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+
+    for ( let question of questiongroup.questions ) {
 
       let result = await httpClient(`${apiUrl}/choicesguide/${CHOICESGUIDE_ID}/questiongroup/${QUESTIONGROUP_ID}/question`, {
         method: 'POST',
@@ -134,9 +134,30 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
         }),
       })
 
-    });
-    questiongroup.choices.forEach(async (choice) => {
+      console.log(result.json.id);
+      question.new_id = result.json.id;
 
+    }
+    for ( let choice of questiongroup.choices ) {
+
+      // update question_ids in choices_answers
+
+      console.log('STRING?', typeof choice.answers == 'string');
+      if ( typeof choice.answers == 'string' ) {
+        choice.answers = JSON.parse(choice.answers);
+      }
+
+      for ( let question of questiongroup.questions ) {
+        console.log('QUESTION', question.old_id, question.new_id);
+        if (choice.answers[question.old_id]) {
+          choice.answers[question.new_id] = choice.answers[question.old_id];
+          delete choice.answers[question.old_id];
+        }
+      }
+
+      console.log('---');
+      console.log(choice.answers);
+      
       let result = await httpClient(`${apiUrl}/choicesguide/${CHOICESGUIDE_ID}/questiongroup/${QUESTIONGROUP_ID}/choice`, {
         method: 'POST',
         body: JSON.stringify({
@@ -150,9 +171,9 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
         }),
       })
       
-    });
+    }
 
-  });
+  }
   
   return {
     data: Object.assign(Object.assign({}, params.data), { id: CHOICESGUIDE_ID }),

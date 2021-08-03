@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.31.0
+* Fix choices guide import/export
+
 ## 0.30.0
 * Introduce release and development branches
 * Move from travis-ci.org to travis-ci.com

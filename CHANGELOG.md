@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.36.0
+## 0.30.0
 * Introduce release and development branches
 * Move from travis-ci.org to travis-ci.com
 * Shift version numbering to be compatible with other repo's

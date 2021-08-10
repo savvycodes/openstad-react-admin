@@ -102,6 +102,12 @@ export const SiteEdit = (props) => {
           <NumberInput source="config.ideas.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
           <AutomaticallyUpdateStatusInput source="config.ideas.automaticallyUpdateStatus"/>
         </FormTab>
+        <FormTab label="Arguments">
+          <BooleanInput source="config.arguments.isClosed" label="Adding of arguments is closed?" fullWidth initialValue={false} variant="outlined" />
+          <TextInput source="config.arguments.closedText" label="Text to show when arguments are closed" variant="outlined"/>
+          <NumberInput source="config.arguments.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="30" variant="outlined"  />
+          <NumberInput source="config.arguments.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="500" variant="outlined" />
+        </FormTab>
         <FormTab label="Voting">
           <BooleanInput source="config.votes.isViewable" label="Is the vote count publicly available?" fullWidth variant="outlined" />
           <BooleanInput source="config.votes.isActive" label="Is voting active?" fullWidth variant="outlined"  />

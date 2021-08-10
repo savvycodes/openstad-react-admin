@@ -2,6 +2,7 @@
 
 ## 0.32.0
 * Add automaticallyUpdateStatus to site config
+* Add 'Project has ended' to site configuration
 
 ## 0.31.0
 * Fix choices guide import/export

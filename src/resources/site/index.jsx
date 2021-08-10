@@ -90,6 +90,9 @@ export const SiteEdit = (props) => {
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />
+          {/* Het wordt tijd voor een taal switch... */}
+          <div fullWidth>Setting the 'Project has ended' parameter will automatically update 'Can add new ideas', 'Votes are active', etc.</div>
+          <BooleanInput source="config.projectHasEnded" label="Project has ended" fullWidth initialValue={false} variant="outlined" />
         </FormTab>
         <FormTab label="Ideas">
           <BooleanInput source="config.ideas.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />
@@ -102,12 +105,16 @@ export const SiteEdit = (props) => {
           <NumberInput source="config.ideas.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
           <AutomaticallyUpdateStatusInput source="config.ideas.automaticallyUpdateStatus"/>
         </FormTab>
+        {/*
+        * Currently only used by ideas-on-map component and editable in the CMS
+        * The reactions component should replace the current widgets and then these params can be added here
         <FormTab label="Arguments">
           <BooleanInput source="config.arguments.isClosed" label="Adding of arguments is closed?" fullWidth initialValue={false} variant="outlined" />
           <TextInput source="config.arguments.closedText" label="Text to show when arguments are closed" variant="outlined"/>
           <NumberInput source="config.arguments.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="30" variant="outlined"  />
           <NumberInput source="config.arguments.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="500" variant="outlined" />
         </FormTab>
+        */}
         <FormTab label="Voting">
           <BooleanInput source="config.votes.isViewable" label="Is the vote count publicly available?" fullWidth variant="outlined" />
           <BooleanInput source="config.votes.isActive" label="Is voting active?" fullWidth variant="outlined"  />

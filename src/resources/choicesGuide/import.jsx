@@ -7,7 +7,15 @@ export default ImportButton;
 export const importChoicesGuide = async function(apiUrl, httpClient, params) {
 
   let data = params.data || [];
-  let file = params.data.csvFile;
+
+  // replace string 'null' by null
+  try {
+    data = JSON.stringify(data);
+    data = data.replace(/"null"/g, 'null');
+    data = JSON.parse(data);
+  } catch(err) {
+    console.log(err); 
+  }
 
   // parse incoming data to source
   let source = {}
@@ -114,8 +122,6 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
     })
     let QUESTIONGROUP_ID = result.json.id;
 
-    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
     for ( let question of questiongroup.questions ) {
 
       let result = await httpClient(`${apiUrl}/choicesguide/${CHOICESGUIDE_ID}/questiongroup/${QUESTIONGROUP_ID}/question`, {
@@ -134,7 +140,6 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
         }),
       })
 
-      console.log(result.json.id);
       question.new_id = result.json.id;
 
     }
@@ -142,22 +147,17 @@ export const importChoicesGuide = async function(apiUrl, httpClient, params) {
 
       // update question_ids in choices_answers
 
-      console.log('STRING?', typeof choice.answers == 'string');
       if ( typeof choice.answers == 'string' ) {
         choice.answers = JSON.parse(choice.answers);
       }
 
       for ( let question of questiongroup.questions ) {
-        console.log('QUESTION', question.old_id, question.new_id);
         if (choice.answers[question.old_id]) {
           choice.answers[question.new_id] = choice.answers[question.old_id];
           delete choice.answers[question.old_id];
         }
       }
 
-      console.log('---');
-      console.log(choice.answers);
-      
       let result = await httpClient(`${apiUrl}/choicesguide/${CHOICESGUIDE_ID}/questiongroup/${QUESTIONGROUP_ID}/choice`, {
         method: 'POST',
         body: JSON.stringify({

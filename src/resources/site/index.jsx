@@ -1,5 +1,5 @@
 import React from 'react';
-import { Edit, SelectInput, TextInput, TabbedForm,
+import { Edit, SelectInput, TextInput, TabbedForm, TextField,
   FormTab,
   BooleanInput,
   NumberInput,
@@ -69,30 +69,48 @@ const AutomaticallyUpdateStatusInput = ({source, record}) => {
     );
 
   }
+
+}
+
+const ProjectHasEndedInput = ({source, record}) => {
+
+  let warningsHTML = null;
+  if (record.config.projectHasEnded) {
+    let warnings = [];
+    if (record.config.votes.isActive !== false) warnings.push( 'votes.isActive is not false' );
+    if (record.config.ideas.canAddNewIdeas !== false) warnings.push( 'ideas.canAddNewIdeas is not false' );
+    if (record.config.articles.canAddNewArticles !== false) warnings.push( 'articles.canAddNewArticles is not false' );
+    if (record.config.arguments.isClosed !== true) warnings.push( 'arguments.isClosed is not true' );
+    if (record.config.polls.canAddPolls !== false) warnings.push( 'polls.canAddPolls is not false' );
+    if (record.config.users.canCreateNewUsers !== false) warnings.push( 'users.canCreateNewUsers is not false' );
+    if (warnings.length) {
+      warningsHTML = (
+        <div fullWidth style={{color: 'rgba(196, 78, 71, 1)'}}>
+          Warning: the project has ended but some settings are not is expected: {warnings.join(', ')}.
+        </div>
+      );
+    }
+  }
   
   return (
     <div fullWidth>
       {/* Het wordt tijd voor een taal switch... */}
-      <BooleanInput source="config.ideas.automaticallyUpdateStatus.isActive" label="Automatically update status from OPEN to CLOSED when an idea is a given number of days old" fullWidth initialValue={false} variant="outlined" onChange={handleChange}/>
-      {afterXDaysHTML}
+      <div fullWidth>Setting the 'Project has ended' parameter will automatically update 'Can add new ideas', 'Votes are active', etc.</div>
+      {warningsHTML}
+      <BooleanInput source="config.projectHasEnded" label="Project has ended" fullWidth initialValue={false} variant="outlined" />
     </div>
   );
+
 }
 
-
 export const SiteEdit = (props) => {
-  console.log('SiteEdit init');
-  //          {values.config && values.config.votes && values.config.votes.voteType === 'budgeting-per-theme' && <div>
-  // const { values } = useFormState();
-
+  
   return (<Edit mutationMode="pessimistic" title="Edit site" {...props}>
       <TabbedForm redirect="edit" toolbar={<SaveToolbar />}>
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />
-          {/* Het wordt tijd voor een taal switch... */}
-          <div fullWidth>Setting the 'Project has ended' parameter will automatically update 'Can add new ideas', 'Votes are active', etc.</div>
-          <BooleanInput source="config.projectHasEnded" label="Project has ended" fullWidth initialValue={false} variant="outlined" />
+          <ProjectHasEndedInput source="config.ideas.canAddNewIdeas"/>
         </FormTab>
         <FormTab label="Ideas">
           <BooleanInput source="config.ideas.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />
@@ -189,4 +207,5 @@ export const SiteEdit = (props) => {
       </TabbedForm>
     </Edit>
   )
-};
+
+}

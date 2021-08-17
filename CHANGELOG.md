@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.32.0
+* Add automaticallyUpdateStatus to site config
+
 ## 0.31.0
 * Fix choices guide import/export
 

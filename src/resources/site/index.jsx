@@ -46,6 +46,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+let currentAutomaticallyUpdateStatusIsActiveValue;
+const AutomaticallyUpdateStatusInput = ({source, record}) => {
+
+  const [value, setValue] = React.useState('toggleIsActive');
+
+  if (typeof currentAutomaticallyUpdateStatusIsActiveValue === 'undefined') {
+    currentAutomaticallyUpdateStatusIsActiveValue = record.config.ideas.automaticallyUpdateStatus && record.config.ideas.automaticallyUpdateStatus.isActive || false;
+  }
+
+  const handleChange = value=> {
+    currentAutomaticallyUpdateStatusIsActiveValue = value;
+    setValue(value); // force update
+  };
+  
+  let afterXDaysHTML = null;
+  if (currentAutomaticallyUpdateStatusIsActiveValue) {
+    afterXDaysHTML = (
+      <div fullWidth style={{'font-size': 'small', 'font-weight': 'normal'}}>
+        <NumberInput source="config.ideas.automaticallyUpdateStatus.afterXDays" label="Number of days after which the status is updated" fullWidth initialValue="90" variant="outlined"/>
+      </div>
+    );
+
+  }
+  
+  return (
+    <div fullWidth>
+      {/* Het wordt tijd voor een taal switch... */}
+      <BooleanInput source="config.ideas.automaticallyUpdateStatus.isActive" label="Automatically update status from OPEN to CLOSED when an idea is a given number of days old" fullWidth initialValue={false} variant="outlined" onChange={handleChange}/>
+      {afterXDaysHTML}
+    </div>
+  );
+}
+
+
 export const SiteEdit = (props) => {
   console.log('SiteEdit init');
   //          {values.config && values.config.votes && values.config.votes.voteType === 'budgeting-per-theme' && <div>
@@ -66,6 +100,7 @@ export const SiteEdit = (props) => {
           <NumberInput source="config.ideas.summaryMaxLength" label="Maximum length of summary" fullWidth initialValue="140" variant="outlined"  />
           <NumberInput source="config.ideas.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="140" variant="outlined"  />
           <NumberInput source="config.ideas.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
+          <AutomaticallyUpdateStatusInput source="config.ideas.automaticallyUpdateStatus"/>
         </FormTab>
         <FormTab label="Voting">
           <BooleanInput source="config.votes.isViewable" label="Is the vote count publicly available?" fullWidth variant="outlined" />

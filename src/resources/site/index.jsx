@@ -70,6 +70,14 @@ const AutomaticallyUpdateStatusInput = ({source, record}) => {
 
   }
 
+  return (
+    <div fullWidth>
+      {/* Het wordt tijd voor een taal switch... */}
+      <BooleanInput source="config.ideas.automaticallyUpdateStatus.isActive" label="Automatically update status from OPEN to CLOSED when an idea is a given number of days old" fullWidth initialValue={false} variant="outlined" onChange={handleChange}/>
+      {afterXDaysHTML}
+    </div>
+  );
+
 }
 
 const ProjectHasEndedInput = ({source, record}) => {
@@ -86,14 +94,14 @@ const ProjectHasEndedInput = ({source, record}) => {
     if (warnings.length) {
       warningsHTML = (
         <div fullWidth style={{color: 'rgba(196, 78, 71, 1)'}}>
-          Warning: the project has ended but some settings are not is expected: {warnings.join(', ')}.
+          Warning: the project has ended but some settings are not as expected: {warnings.join(', ')}.
         </div>
       );
     }
   }
   
   return (
-    <div fullWidth>
+    <div fullWidth style={{'font-size': 'small', 'font-weight': 'normal'}}>
       {/* Het wordt tijd voor een taal switch... */}
       <div fullWidth>Setting the 'Project has ended' parameter will automatically update 'Can add new ideas', 'Votes are active', etc.</div>
       {warningsHTML}

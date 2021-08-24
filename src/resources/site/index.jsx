@@ -131,16 +131,15 @@ export const SiteEdit = (props) => {
           <NumberInput source="config.ideas.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
           <AutomaticallyUpdateStatusInput source="config.ideas.automaticallyUpdateStatus"/>
         </FormTab>
-        {/*
-        * Currently only used by ideas-on-map component and editable in the CMS
-        * The reactions component should replace the current widgets and then these params can be added here
         <FormTab label="Arguments">
           <BooleanInput source="config.arguments.isClosed" label="Adding of arguments is closed?" fullWidth initialValue={false} variant="outlined" />
-          <TextInput source="config.arguments.closedText" label="Text to show when arguments are closed" variant="outlined"/>
+          <div fullWidth style={{ fontSize: 'smaller', fontWeight: 'normal', marginTop: -20, marginBottom: 30 }}>
+            Note: adding of arguments is never closed for Administrators
+          </div>
+          <TextInput source="config.arguments.closedText" label="Text to show when adding of arguments is closed" fullWidth variant="outlined"/>
           <NumberInput source="config.arguments.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="30" variant="outlined"  />
           <NumberInput source="config.arguments.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="500" variant="outlined" />
         </FormTab>
-        */}
         <FormTab label="Voting">
           <BooleanInput source="config.votes.isViewable" label="Is the vote count publicly available?" fullWidth variant="outlined" />
           <BooleanInput source="config.votes.isActive" label="Is voting active?" fullWidth variant="outlined"  />

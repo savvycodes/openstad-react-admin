@@ -15,6 +15,7 @@ import { SiteEdit, SiteIcon } from './resources/site/index.jsx';
 import { NewsletterSignupList, NewsletterSignupIcon } from './resources/newslettersignup.jsx';
 import { ChoicesGuideList, ChoicesGuideEdit, ChoicesGuideCreate, ChoicesGuideIcon } from './resources/choicesGuide/index.jsx';
 import { ActionList, ActionEdit, ActionCreate, ActionIcon } from './resources/action.jsx';
+import { TargetAudienceList, TargetAudienceEdit, TargetAudienceCreate, TargetAudienceIcon } from './resources/target-audience.jsx';
 
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
@@ -40,6 +41,7 @@ import { resolveBrowserLocale, useLocale } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import englishMessages from "ra-language-english";
 import * as domainMessages from "react-admin-import-csv/lib/i18n";
+
 const locale = 'en';
 const messages = {
   en: { ...englishMessages, ...domainMessages.en },
@@ -97,6 +99,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.newsletterSignup && resources.newsletterSignup.active ? <Resource name="newslettersignup" list={NewsletterSignupList} icon={ContactMailIcon}  options={{menuTitle: 'Nieuwsbrief'}} /> : <div />}
       {resources.choicesGuide && resources.choicesGuide.active ? <Resource name="choicesGuide" list={ChoicesGuideList} edit={ChoicesGuideEdit} create={ChoicesGuideCreate} icon={ChoicesGuideIcon} options={{menuTitle: 'Keuzewijzers'}} /> : <div />}
       {resources.action && resources.action.active ? <Resource name="action" list={ActionList} edit={ActionEdit} create={ActionCreate} icon={ActionIcon} options={{menuTitle: 'Acties'}} /> : <div />}
+      {resources.targetAudience && resources.targetAudience.active ? <Resource name="target-audience" list={TargetAudienceList} edit={TargetAudienceEdit} create={TargetAudienceCreate} icon={TargetAudienceIcon} options={{menuTitle: 'Doelgroepen'}} /> : <div /> }
     </Admin>
   );
 }

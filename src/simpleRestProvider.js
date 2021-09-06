@@ -96,7 +96,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
         url = apiUrl;
       } else {
         // add include tags always
-        url = `${apiUrl}/${resource}/${params.id}?includeTags=1&includeVoteCount=1`;
+        url = `${apiUrl}/${resource}/${params.id}?includeTags=1&includeVoteCount=1&includeTargetAudiences=1`;
       }
 
       return httpClient(url)
@@ -107,6 +107,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
           json = {
             ...json,
             tags: json.tags ? json.tags.map(tag => tag.id) : [],
+            targetAudiences: json.targetAudiences ? json.targetAudiences.map(tag => tag.id) : [],
           }
 
           return { data: json }
@@ -136,6 +137,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
         json.record = json.records ? json.records.map((record) => {
           return {
             tags: record.tags ? record.tags.map(tag => tag.id) : [],
+            targetAudiences: record.targetAudiences ? record.targetAudiences.map(tag => tag.id) : [],
             ...record
           }
         }) : [];

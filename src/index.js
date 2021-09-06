@@ -67,6 +67,9 @@ ReactDOM.render(
         action: {
           active: true
         },
+        targetAudience: {
+          active: true
+        }
       }}
     />
   </React.StrictMode>,

@@ -69,7 +69,10 @@ ReactDOM.render(
         },
         targetAudience: {
           active: true
-        }
+        },
+        grants: {
+          active: true
+        },
       }}
     />
   </React.StrictMode>,

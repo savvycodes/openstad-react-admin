@@ -67,6 +67,9 @@ const Form = (props) => (
       <ReferenceArrayInput label="Doelgroepen" source="targetAudiences" reference="target-audience" variant="outlined">
         <SelectArrayInput optionText="name"/>
       </ReferenceArrayInput>
+      <ReferenceArrayInput label="Subsidies" source="grants" reference="grant" variant="outlined">
+        <SelectArrayInput optionText="name"/>
+      </ReferenceArrayInput>
       <FileUpload resourceProps={props} imageApiUrl={props.options.imageApiUrl}/>
     </FormTab>
     <FormTab label=" Extradata">

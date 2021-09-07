@@ -41,6 +41,7 @@ import { resolveBrowserLocale, useLocale } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import englishMessages from "ra-language-english";
 import * as domainMessages from "react-admin-import-csv/lib/i18n";
+import { GrantCreate, GrantEdit, GrantIcon, GrantList } from './resources/grants.jsx';
 
 const locale = 'en';
 const messages = {
@@ -100,6 +101,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.choicesGuide && resources.choicesGuide.active ? <Resource name="choicesGuide" list={ChoicesGuideList} edit={ChoicesGuideEdit} create={ChoicesGuideCreate} icon={ChoicesGuideIcon} options={{menuTitle: 'Keuzewijzers'}} /> : <div />}
       {resources.action && resources.action.active ? <Resource name="action" list={ActionList} edit={ActionEdit} create={ActionCreate} icon={ActionIcon} options={{menuTitle: 'Acties'}} /> : <div />}
       {resources.targetAudience && resources.targetAudience.active ? <Resource name="target-audience" list={TargetAudienceList} edit={TargetAudienceEdit} create={TargetAudienceCreate} icon={TargetAudienceIcon} options={{menuTitle: 'Doelgroepen'}} /> : <div /> }
+      {resources.grants && resources.grants.active ? <Resource name="grant" list={GrantList} edit={GrantEdit} create={GrantCreate} icon={GrantIcon} options={{menuTitle: 'Subsidies'}} /> : <div /> }
     </Admin>
   );
 }

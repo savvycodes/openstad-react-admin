@@ -87,10 +87,10 @@ const ProjectHasEndedInput = ({source, record}) => {
     let warnings = [];
     if (record.config.votes.isActive !== false) warnings.push( 'votes.isActive is not false' );
     if (record.config.ideas.canAddNewIdeas !== false) warnings.push( 'ideas.canAddNewIdeas is not false' );
-    if (record.config.articles.canAddNewArticles !== false) warnings.push( 'articles.canAddNewArticles is not false' );
+    // if (record.config.articles.canAddNewArticles !== false) warnings.push( 'articles.canAddNewArticles is not false' );
     if (record.config.arguments.isClosed !== true) warnings.push( 'arguments.isClosed is not true' );
-    if (record.config.polls.canAddPolls !== false) warnings.push( 'polls.canAddPolls is not false' );
-    if (record.config.users.canCreateNewUsers !== false) warnings.push( 'users.canCreateNewUsers is not false' );
+    // if (record.config.polls.canAddPolls !== false) warnings.push( 'polls.canAddPolls is not false' );
+    // if (record.config.users.canCreateNewUsers !== false) warnings.push( 'users.canCreateNewUsers is not false' );
     if (warnings.length) {
       warningsHTML = (
         <div fullWidth style={{color: 'rgba(196, 78, 71, 1)'}}>

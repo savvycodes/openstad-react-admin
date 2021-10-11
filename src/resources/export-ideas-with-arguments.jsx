@@ -58,7 +58,7 @@ export const ExportButton = function(props) {
         idea.argumentsFor.sort( (a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() ).forEach((arg) => {
           let argLine = ideaLine || {};
           ideaLine = undefined;
-          argLine.argument_sentiment = arg.sentiment,
+          argLine.argument_sentiment = arg.sentiment;
           argLine.argument_description = arg.description.replace(/\r|\n/g, '\\n');
           argLine.argument_username = arg.user.firstName + ' ' + arg.user.lastName;
           if (arg.reactions && arg.reactions.length) {
@@ -80,7 +80,7 @@ export const ExportButton = function(props) {
         idea.argumentsAgainst.sort( (a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() ).forEach((arg) => {
           let argLine = ideaLine || {};
           ideaLine = undefined;
-          argLine.argument_sentiment = arg.sentiment,
+          argLine.argument_sentiment = arg.sentiment;
           argLine.argument_description = arg.description.replace(/\r|\n/g, '\\n');
           argLine.argument_username = arg.user.firstName + ' ' + arg.user.lastName;
           if (arg.reactions && arg.reactions.length) {

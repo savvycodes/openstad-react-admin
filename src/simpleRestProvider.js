@@ -213,6 +213,21 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => (
       method: 'DELETE',
     }))).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
+    // Ideas-with-Arguments specific calls ----------------------------------------------------------------------------------------------------
+
+    getIdeasWithArguments: (params) => {
+      const url = `${apiUrl}/idea?includeVoteCount=1&includeArguments=1&includeUser=1`;
+      return httpClient(url).then(({ headers, json }) => {
+        let result = {
+          data: json,
+          total: json.length
+        };;
+        return result;
+      });
+    },
+    
+    // end Ideas-with-Arguments specific calls ----------------------------------------------------------------------------------------------------
+
     // ChoicesgGuide specific calls ----------------------------------------------------------------------------------------------------
 
     getCompleteChoicesgGuide: (params) => {

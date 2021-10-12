@@ -67,6 +67,9 @@ ReactDOM.render(
         action: {
           active: true
         },
+        submission: {
+          active: true
+        }
       }}
     />
   </React.StrictMode>,

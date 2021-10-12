@@ -8,6 +8,7 @@ import { TagList, TagEdit, TagCreate, TagIcon } from './resources/tag.jsx';
 import { OrderList, OrderEdit, OrderCreate, OrderIcon } from './resources/order.jsx';
 import { UserList, UserEdit, UserCreate, UserIcon } from './resources/user.jsx';
 import { IdeaList, IdeaEdit, IdeaCreate, IdeaIcon } from './resources/idea/index.jsx';
+import { SubmissionList, SubmissionShow } from "./resources/submission/index.jsx";
 import { ProductList, ProductEdit, ProductCreate, ProductIcon } from './resources/product.jsx';
 import { VoteList, VoteIcon } from './resources/vote/index.jsx';
 import { ArgumentList, ArgumentEdit, ArgumentCreate, ArgumentIcon } from './resources/argument.jsx';
@@ -21,6 +22,7 @@ import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import HowToVoteIcon from '@material-ui/icons/HowToVote';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
+import ChatIcon from '@material-ui/icons/Chat';
 import { SettingsForm } from './profile.jsx';
 
 /* presentation elements */
@@ -88,6 +90,7 @@ export const OpenstadReactAdmin = (props) => {
       {resources.product && resources.product.active ? <Resource name="product" list={ProductList} edit={ProductEdit} create={ProductCreate} icon={ProductIcon} options={{menuTitle: 'Producten', imageApiUrl: props.imageApi.url}} /> : <div />}
       {resources.order && resources.order.active ? <Resource name="order" list={OrderList} edit={OrderEdit} create={OrderCreate} icon={OrderIcon} options={{menuTitle: 'Bestellingen'}} /> : <div />}
       {resources.idea && resources.idea.active ?  <Resource name="idea" list={IdeaList} edit={IdeaEdit} create={IdeaCreate} icon={SpeakerNotesIcon} options={{menuTitle: 'Plannen', imageApiUrl: props.imageApi.url}} />  : <div />}
+      {resources.submission && resources.submission.active ?  <Resource name="submission" list={SubmissionList} show={SubmissionShow} icon={ChatIcon} options={{menuTitle: 'Inzendingen' }} />  : <div />}
       {resources.area && resources.area.active ?  <Resource name="area" list={AreaList} edit={AreaEdit} create={AreaCreate} icon={ChangeHistoryIcon} options={{menuTitle: 'Polygonen'}} />  : <div />}
       {resources.article && resources.article.active ?  <Resource name="article" list={ArticleList} edit={ArticleEdit} create={ArticleCreate} icon={ArticleIcon} options={{menuTitle: 'Artikelen'}} />  : <div />}
       {resources.tag && resources.tag.active ?  <Resource name="tag" list={TagList} edit={TagEdit} create={TagCreate} icon={LocalOfferIcon} options={{menuTitle: 'Tags'}}  />  : <div />}

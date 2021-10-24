@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {cloneElement} from 'react';
 import {
   List,
   NumberInput,
@@ -12,6 +12,11 @@ import {
   TextField,
   EditButton,
   TextInput, Pagination,
+  TopToolbar,
+  useListContext,
+  ExportButton,
+  CreateButton,
+  sanitizeListRestProps
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ApproveField from '../../components/ApproveField/index.jsx';
@@ -23,6 +28,21 @@ export const VoteIcon = ListAltIcon;
 
 const VotePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
+const ListActions = (props) => {
+  const {
+    className,
+    filters,
+    ...rest
+  } = props;
+  const {
+    total,
+  } = useListContext();
+  return (
+    <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
+      <ExportButton disabled={total === 0} maxResults={100000} />
+    </TopToolbar>
+  );
+};
 
 export const VoteList = (props) => {
   const dataProvider = useDataProvider();
@@ -48,7 +68,7 @@ export const VoteList = (props) => {
   };
 
   return (
-    <List {...props} title="Vote" pagination={<VotePagination />}>
+    <List {...props} title="Vote" pagination={<VotePagination />} actions={<ListActions />}>
       <Datagrid>
         <TextField source="id"/>
         <TextField source="opinion"/>

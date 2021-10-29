@@ -125,6 +125,7 @@ export const ListActions = props => {
             <ExportButton
                 exporter={exporter}
                 disabled={total === 0}
+                maxResults={100000}
                 resource={resource}
                 sort={currentSort}
                 filter={{...filterValues, ...permanentFilter}}

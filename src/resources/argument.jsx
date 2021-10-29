@@ -10,7 +10,7 @@ const EditTopToolbar = function({ basePath, data, resource }) {
   return (
   <TopToolbar>
     <CreateButton basePath={basePath} record={data} />
-    <ExportButton basePath={basePath} record={data} />
+    <ExportButton basePath={basePath} record={data} maxResults={100000} />
     <EportExtendedButton
       data={data}
     />

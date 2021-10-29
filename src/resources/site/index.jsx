@@ -87,10 +87,10 @@ const ProjectHasEndedInput = ({source, record}) => {
     let warnings = [];
     if (record.config.votes.isActive !== false) warnings.push( 'votes.isActive is not false' );
     if (record.config.ideas.canAddNewIdeas !== false) warnings.push( 'ideas.canAddNewIdeas is not false' );
-    // if (record.config.articles.canAddNewArticles !== false) warnings.push( 'articles.canAddNewArticles is not false' );
+    if (record.config.articles.canAddNewArticles !== false) warnings.push( 'articles.canAddNewArticles is not false' );
     if (record.config.arguments.isClosed !== true) warnings.push( 'arguments.isClosed is not true' );
-    // if (record.config.polls.canAddPolls !== false) warnings.push( 'polls.canAddPolls is not false' );
-    // if (record.config.users.canCreateNewUsers !== false) warnings.push( 'users.canCreateNewUsers is not false' );
+    if (record.config.polls.canAddPolls !== false) warnings.push( 'polls.canAddPolls is not false' );
+    if (record.config.users.canCreateNewUsers !== false) warnings.push( 'users.canCreateNewUsers is not false' );
     if (warnings.length) {
       warningsHTML = (
         <div fullWidth style={{color: 'rgba(196, 78, 71, 1)'}}>
@@ -118,7 +118,9 @@ export const SiteEdit = (props) => {
         <FormTab label="Info" >
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />
-          <ProjectHasEndedInput source="config.ideas.canAddNewIdeas"/>
+          <BooleanInput source="config.users.canCreateNewUsers" label="New users can log in?" fullWidth initialValue={true}  variant="outlined" />
+          <BooleanInput source="config.articles.canAddNewArticles" label="Possible to send in articles?" fullWidth initialValue={true}  variant="outlined" />
+          <ProjectHasEndedInput source="config.projectHasEnded"/>
         </FormTab>
         <FormTab label="Ideas">
           <BooleanInput source="config.ideas.canAddNewIdeas" label="Possible to send in ideas?" fullWidth initialValue={true}  variant="outlined" />
@@ -129,6 +131,7 @@ export const SiteEdit = (props) => {
           <NumberInput source="config.ideas.summaryMaxLength" label="Maximum length of summary" fullWidth initialValue="140" variant="outlined"  />
           <NumberInput source="config.ideas.descriptionMinLength" label="Minimum length of description" fullWidth initialValue="140" variant="outlined"  />
           <NumberInput source="config.ideas.descriptionMaxLength" label="Maximum length of description" fullWidth initialValue="5000" variant="outlined" />
+          <BooleanInput source="config.polls.canAddPolls" label="Possible to add polls? (currently only available in 'Ideas on map')" fullWidth initialValue={true}  variant="outlined" />
           <AutomaticallyUpdateStatusInput source="config.ideas.automaticallyUpdateStatus"/>
         </FormTab>
         <FormTab label="Arguments">

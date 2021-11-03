@@ -1,9 +1,9 @@
 # Changelog
 
-## UNRELEASED
-* Add submission resource
+## 0.34.0
 
 ## 0.33.0
+* Add submission resource
 * Add export ideas-with-arguments
 
 ## 0.32.0

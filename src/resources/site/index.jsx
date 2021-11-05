@@ -119,6 +119,7 @@ export const SiteEdit = (props) => {
           <TextInput disabled source="id" fullWidth variant="outlined" />
           <TextInput source="title" fullWidth variant="outlined" />
           <BooleanInput source="config.users.canCreateNewUsers" label="New users can log in?" fullWidth initialValue={true}  variant="outlined" />
+          <BooleanInput source="config.users.allowUseOfNicknames" label="Can users create an alias?" fullWidth initialValue={true}  variant="outlined" />
           <BooleanInput source="config.articles.canAddNewArticles" label="Possible to send in articles?" fullWidth initialValue={true}  variant="outlined" />
           <ProjectHasEndedInput source="config.projectHasEnded"/>
         </FormTab>

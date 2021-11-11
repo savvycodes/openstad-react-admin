@@ -6,6 +6,7 @@ import {
     Filter,
     Edit,
     Create,
+    TopToolbar,
     SimpleForm,
     BooleanInput,
     SelectInput,
@@ -52,7 +53,7 @@ const ActionFilters = (props) => (
 );
 
 export const ActionList = (props) => (
-    <List {...props} filters={<ActionFilters />} sort={{field: 'id', order: 'DESC'}}>
+    <List {...props} filters={<ActionFilters />} sort={{field: 'id', order: 'DESC'}} actions={<TopToolbar/>}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />

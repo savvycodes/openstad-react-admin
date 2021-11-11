@@ -14,7 +14,6 @@ import {
   TextInput, Pagination,
   TopToolbar,
   useListContext,
-  ExportButton,
   CreateButton,
   sanitizeListRestProps
 } from 'react-admin';
@@ -23,6 +22,7 @@ import ApproveField from '../../components/ApproveField/index.jsx';
 import { useDataProvider } from 'react-admin';
 import { useDispatch } from 'react-redux';
 import { CRUD_UPDATE_SUCCESS, FETCH_END, UPDATE } from 'react-admin';
+import { exporter, ExportButtons } from '../../utils/export-buttons.jsx';
 
 export const VoteIcon = ListAltIcon;
 
@@ -31,6 +31,7 @@ const VotePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100
 const ListActions = (props) => {
   const {
     className,
+    data,
     filters,
     ...rest
   } = props;
@@ -39,7 +40,7 @@ const ListActions = (props) => {
   } = useListContext();
   return (
     <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
-      <ExportButton disabled={total === 0} maxResults={100000} />
+      <ExportButtons total={total} data={data} filename='votes'/>
     </TopToolbar>
   );
 };

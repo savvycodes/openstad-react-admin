@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {cloneElement} from 'react';
 
 import {
     Filter,
     Datagrid,
     Edit,
     Create,
+    CreateButton,
+    TopToolbar,
     SimpleForm,
     TextField,
     EditButton,
@@ -13,8 +15,18 @@ import {
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {CustomList as List} from '../components/CustomList/index.jsx';
+import { exporter, ExportButtons } from '../utils/export-buttons.jsx';
 
 export const TagIcon = ListAltIcon;
+
+const ListTopToolbar = props => {
+  const { data, basePath, resource, total } = props;
+  return (
+    <TopToolbar>
+      <CreateButton basePath={basePath}/>
+      <ExportButtons total={total} data={data} filename='tags'/>
+    </TopToolbar>);
+}
 
 const TagFilters = (props) => (
   <Filter {...props}>
@@ -26,7 +38,7 @@ const TagFilters = (props) => (
 const TagPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
 export const TagList = (props) => (
-    <List {...props} filters={<TagFilters />} title="Tags" pagination={<TagPagination />} sort={{field: 'id', order: 'DESC'}}>
+  <List {...props} filters={<TagFilters />} title="Tags" pagination={<TagPagination />} sort={{field: 'id', order: 'DESC'}} actions={<ListTopToolbar/>}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />

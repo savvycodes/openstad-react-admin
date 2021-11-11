@@ -35,7 +35,8 @@
     "react-router": "^5.2.0",
     "react-router-redux": "^4.0.8",
     "react-scripts": "^4.0.3",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "xlsx": "^0.17.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

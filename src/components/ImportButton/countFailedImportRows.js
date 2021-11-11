@@ -1,5 +1,5 @@
-export default (csvValidationNotifications) => {
-  const apiValidationErrors = csvValidationNotifications.filter(notification => notification['messageType'] === 'apiValidationError');
+export default (fileValidationNotifications) => {
+  const apiValidationErrors = fileValidationNotifications.filter(notification => notification['messageType'] === 'apiValidationError');
 
   if(apiValidationErrors){
     return apiValidationErrors.length;

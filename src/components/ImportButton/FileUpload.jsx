@@ -8,13 +8,13 @@ export default (props) => {
 
   return (<div>
     <Button variant='contained' component='label'>
-      <span>{'chooseFile'}</span>
+      <span>Choose File</span>
       <GetAppIcon style={{ transform: 'rotate(180deg)', fontSize: '20' }}/>
       <input
         type='file'
         style={{ display: 'none' }}
         onChange={onFileAdded}
-        accept='.csv,.tsv,.txt'
+        accept='.csv,.tsv,.xls,.xlsx,.txt'
       />
     </Button>
     <span style={{

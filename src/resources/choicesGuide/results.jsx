@@ -3,12 +3,13 @@ import { Button, downloadCSV } from 'react-admin';
 import jsonExport from 'jsonexport/dist';
 import Icon from "@material-ui/icons/ImportExport";
 import { useDataProvider } from 'react-admin';
+import XLSX from 'xlsx';
 
 export const ResultButton = function(props) {
 
   const dataProvider = useDataProvider();
 
-  let exporter = async function(data, id) {
+  let exporter = async function(data, id, type) {
 
     let json = await dataProvider.getCompleteChoicesgGuide({ id: props.data && props.data.id })
     let choicesGuide = json.data || {};
@@ -51,7 +52,7 @@ export const ResultButton = function(props) {
     let dimensions = choicesGuide.questiongroups[0].answerDimensions;
     let choices = choicesGuide.questiongroups[0].choices;
 
-    let answersCSV = 'question id, question title, question description, average answer\n';
+    let answersCSV = '"question id","question title","question description","average answer"\n';
     Object.keys(answers).forEach((answerId) => {
       let question = questions.find( q => q.id == answerId );
       if (!question) return;
@@ -62,7 +63,7 @@ export const ResultButton = function(props) {
       answersCSV += `"${answerId}","${question.title}","${question.description && question.description.substring(0, 50).replace(/\r|\n/, '')}","${avg}"\n`
     });
 
-    let scoresCSV = 'choice id, choice title, average score\n';
+    let scoresCSV = '"choice id","choice title","average score"\n';
     Object.keys(scores).forEach((scoreId) => {
       let match = scoreId.match(/(\d+)$/);
       let choice = choices.find( c => c.id == ( match && match[1] ) );
@@ -86,7 +87,7 @@ export const ResultButton = function(props) {
     });
     extraDataFields = Object.keys(extraDataFields);
     
-    let userCSV = `user id,${questionIds.map( id => 'question ' + id ).join(',')},${choiceIds.map( id => 'choice ' + id ).join(',')},${extraDataFields.join(',')},create date\n`  
+    let userCSV = `"user id",${questionIds.map( id => 'question ' + id ).map(x => '"'+x+'"').join(',')},${choiceIds.map( id => 'choice ' + id ).map(x => '"'+x+'"').join(',')},${extraDataFields.map(x => '"'+x+'"').join(',')}${extraDataFields.length ? ',' : ''}"create date"\n`  
     Object.keys(results).forEach((recordId) => {
       let result = results[recordId];
       let userAnswers = questionIds.map ( id => {
@@ -102,19 +103,54 @@ export const ResultButton = function(props) {
         return `${x}/${y}`;
       });
       let userExtraData = extraDataFields.map ( fieldName => result.extraData && result.extraData[fieldName] );
-      userCSV += `${recordId},${userAnswers.join(',')},${userScores.join(',')},${userExtraData.join(',')},${result.createdAt}\n`  
+      userCSV += `"${recordId}",${userAnswers.map(x => '"'+x+'"').join(',')},${userScores.map(x => '"'+x+'"').join(',')},${userExtraData.map(x => '"'+x+'"').join(',')}${userExtraData.length ? ',' : ''}"${result.createdAt}"\n`  
     });
 
-    await downloadCSV(answersCSV, `keuzewijzerresultaten-${props.data.id}-antwoorden`);
-    await downloadCSV(scoresCSV, `keuzewijzerresultaten-${props.data.id}-scores`);
-    await downloadCSV(userCSV, `keuzewijzerresultaten-${props.data.id}-gebruikers`);
+
+    if (type == 'xlsx') {
+
+      let wb = XLSX.utils.book_new()
+
+      let answersAoa = answersCSV.split(/\n/).map(line => { let fields = line.split(/","|^"|"$/); return  fields.slice(1, fields.length - 1) })
+      let ws_name_1 = "antwoorden";
+      let ws_1 = XLSX.utils.aoa_to_sheet( answersAoa );
+      XLSX.utils.book_append_sheet(wb, ws_1, ws_name_1);
+
+      console.log(scoresCSV);
+      let scoresAoa = scoresCSV.split(/\n/).map(line => { let fields = line.split(/","|^"|"$/); return  fields.slice(1, fields.length - 1) })
+      console.log(scoresAoa);
+      let ws_name_2 = "scores";
+      let ws_2 = XLSX.utils.aoa_to_sheet( scoresAoa );
+      XLSX.utils.book_append_sheet(wb, ws_2, ws_name_2);
+
+      console.log(userCSV);
+      let usersAoa = userCSV.split(/\n/).map(line => { let fields = line.split(/","|^"|"$/); return  fields.slice(1, fields.length - 1) })
+      console.log(usersAoa);
+      let ws_name_3 = "gebruikers";
+      let ws_3 = XLSX.utils.aoa_to_sheet( usersAoa );
+      XLSX.utils.book_append_sheet(wb, ws_3, ws_name_3);
+
+      XLSX.writeFile(wb, `keuzewijzerresultaten-${props.data.id}.xlsx`);
+      
+    } else {
+
+      await downloadCSV(answersCSV, `keuzewijzerresultaten-${props.data.id}-antwoorden`);
+      await downloadCSV(scoresCSV, `keuzewijzerresultaten-${props.data.id}-scores`);
+      await downloadCSV(userCSV, `keuzewijzerresultaten-${props.data.id}-gebruikers`);
+
+    }
 
   }
 
   return (
-    <Button label="Export resultaten (3x csv)" onClick={data => exporter(data, props.id)}>
-      <Icon/>
-    </Button>);
+    <>
+      <Button label="Export resultaten (3x csv)" onClick={data => exporter(data, props.id, 'csv')}>
+        <Icon/>
+      </Button>
+      <Button label="Export resultaten (xlsx)" onClick={data => exporter(data, props.id, 'xlsx')}>
+        <Icon/>
+      </Button>
+    </>);
 }
 
 function stringify(value) {

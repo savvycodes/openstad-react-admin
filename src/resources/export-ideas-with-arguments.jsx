@@ -4,12 +4,13 @@ import { Button, downloadCSV } from 'react-admin';
 import jsonExport from 'jsonexport/dist';
 import Icon from "@material-ui/icons/ImportExport";
 import { useDataProvider } from 'react-admin';
+import XLSX from 'xlsx';
 
-export const ExportButton = function(props) {
+export const ExportButtons = function(props) {
 
   const dataProvider = useDataProvider();
 
-  let exporter = async function(data, id) {
+  let exporter = async function(data, id, type) {
 
     let json = await dataProvider.getIdeasWithArguments({})
     let ideas = json.data;
@@ -103,19 +104,43 @@ export const ExportButton = function(props) {
       
     });
 
-    let idea_headers = exportHeaders.map( header => header.key );
-    jsonExport(body, {headers: [
-      ...idea_headers, 'argument_sentiment', 'argument_description', 'argument_username', 'reaction_description', 'reaction_username' 
-    ]}, (err, csv) => {
-      downloadCSV(csv, `ideas-with-arguments`);
-    });
+    let filename = 'ideas-with-arguments';
+    if (type == 'xlsx') {
+
+      if (!filename.match(/\.(?:${type})/)) {
+        console.log('No extension');
+        filename = `${filename}.${type}`;
+      }
+      
+      let ws_name = "plannen";
+      let wb = XLSX.utils.book_new()
+      let ws = XLSX.utils.json_to_sheet( body );
+      XLSX.utils.book_append_sheet(wb, ws, ws_name);
+
+      XLSX.writeFile(wb, filename);
+      
+    } else {
+
+      let idea_headers = exportHeaders.map( header => header.key );
+      jsonExport(body, {headers: [
+        ...idea_headers, 'argument_sentiment', 'argument_description', 'argument_username', 'reaction_description', 'reaction_username' 
+      ]}, (err, csv) => {
+        downloadCSV(csv, `ideas-with-arguments`);
+      });
+
+    }
 
   }
 
   return (
-    <Button label="Export ideas with arguments" onClick={data => exporter(data, props.id)}>
-      <Icon/>
-    </Button>);
+    <>
+      <Button label="Export ideas with arguments csv" onClick={data => exporter(data, props.id, 'csv')}>
+        <Icon/>
+      </Button>
+      <Button label="Export ideas with arguments xlsx" onClick={data => exporter(data, props.id, 'xlsx')}>
+        <Icon/>
+      </Button>
+    </>);
 }
 
 function stringify(value) {

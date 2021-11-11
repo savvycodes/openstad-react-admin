@@ -4,12 +4,13 @@ import { Button, downloadCSV } from 'react-admin';
 import jsonExport from 'jsonexport/dist';
 import Icon from "@material-ui/icons/ImportExport";
 import { useDataProvider } from 'react-admin';
+import XLSX from 'xlsx';
 
-export const ExportButton = function(props) {
+export const ExportButtons = function(props) {
 
   const dataProvider = useDataProvider();
 
-  let exporter = async function(data, id) {
+  let exporter = async function(data, id, type) {
 
     let json = await dataProvider.getCompleteChoicesgGuide({ id: props.data && props.data.id })
 
@@ -95,18 +96,41 @@ export const ExportButton = function(props) {
       });      
     }
 
-    jsonExport(body, {headers: [
-      'choicesGuide_id', 'choicesGuide_title', 'choicesGuide_description', 'choicesGuide_images', 'choicesGuide_config', 'questionGroup_id', 'questionGroup_answerDimensions', 'questionGroup_title', 'questionGroup_description', 'questionGroup_images', 'questionGroup_seqnr', 'question_id', 'question_title', 'question_description', 'question_images', 'question_type', 'question_dimensions', 'question_values', 'question_seqnr',
-    ]}, (err, csv) => {
-      downloadCSV(csv, `keuzewijzer-${choicesGuide.choicesGuideId}-${choicesGuide.title}`);
-    });
+    let filename = `keuzewijzer-${choicesGuide.choicesGuideId}-${choicesGuide.title}`;
+    if (type == 'xlsx') {
+
+      if (!filename.match(/\.(?:${type})/)) {
+        filename = `${filename}.${type}`;
+      }
+      
+      let ws_name = "plannen";
+      let wb = XLSX.utils.book_new()
+      let ws = XLSX.utils.json_to_sheet( body );
+      XLSX.utils.book_append_sheet(wb, ws, ws_name);
+
+      XLSX.writeFile(wb, filename);
+      
+    } else {
+
+      jsonExport(body, {headers: [
+        'choicesGuide_id', 'choicesGuide_title', 'choicesGuide_description', 'choicesGuide_images', 'choicesGuide_config', 'questionGroup_id', 'questionGroup_answerDimensions', 'questionGroup_title', 'questionGroup_description', 'questionGroup_images', 'questionGroup_seqnr', 'question_id', 'question_title', 'question_description', 'question_images', 'question_type', 'question_dimensions', 'question_values', 'question_seqnr',
+      ]}, (err, csv) => {
+        downloadCSV(csv, filename);
+      });
+
+    }
 
   }
 
   return (
-    <Button label="Export keuzewijzer" onClick={data => exporter(data, props.id)}>
-      <Icon/>
-    </Button>);
+    <>
+      <Button label="Export keuzewijzer csv" onClick={data => exporter(data, props.id, 'csv')}>
+        <Icon/>
+      </Button>
+      <Button label="Export keuzewijzer xlsx" onClick={data => exporter(data, props.id, 'xlsx')}>
+        <Icon/>
+      </Button>
+    </>);
 }
 
 function stringify(value) {

@@ -5,7 +5,7 @@ import LightTooltip from '../LightTooltip/index.jsx';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
 
 export default (props) => {
-  const { csvValidationNotifications, dialogStatus } = props;
+  const { fileValidationNotifications, dialogStatus } = props;
 
   if (dialogStatus === 'importFinished') {
     return (
@@ -13,7 +13,7 @@ export default (props) => {
         <Typography color="inherit">
           <ul>
           {
-            csvValidationNotifications.map((validationError, index) => {
+            fileValidationNotifications.map((validationError, index) => {
               return (
                 <li
                   key={index}
@@ -29,24 +29,24 @@ export default (props) => {
       </React.Fragment>);
   }
 
-  if (!csvValidationNotifications || csvValidationNotifications.length < 1) {
+  if (!fileValidationNotifications || fileValidationNotifications.length < 1) {
     return <></>;
   }
 
-  const color = csvValidationNotifications.filter(notification => notification['color'] === 'red').length > 0 ?
+  const color = fileValidationNotifications.filter(notification => notification['color'] === 'red').length > 0 ?
     'red' : 'blue';
 
   return (
     <div style={{ marginBottom: '0px', color }}>
       <span>
-        {'Import validation alerts'}: <strong>{csvValidationNotifications.length}</strong>
+        {'Import validation alerts'}: <strong>{fileValidationNotifications.length}</strong>
       </span>
       <LightTooltip title={
         <React.Fragment>
           <Typography color="inherit">
           <ul>
             {
-              csvValidationNotifications.map((validationError, index) => {
+              fileValidationNotifications.map((validationError, index) => {
                 return (
                   <li
                     key={index}

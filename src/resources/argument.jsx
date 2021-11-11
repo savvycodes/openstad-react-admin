@@ -2,18 +2,16 @@ import React from 'react';
 import { ReferenceInput, SelectInput, NumberInput, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput, ImageInput, ImageField, FunctionField, TopToolbar, CreateButton, ExportButton } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {CustomList as List} from '../components/CustomList/index.jsx';
-import { ExportButton as EportExtendedButton } from './export-ideas-with-arguments.jsx'
+import { ExportButtons as EportExtendedButtons } from './export-ideas-with-arguments.jsx'
+import { exporter, ExportButtons } from '../utils/export-buttons.jsx';
 
 export const ArgumentIcon = ListAltIcon;
 
-const EditTopToolbar = function({ basePath, data, resource }) {
+const EditTopToolbar = function({ basePath, total, data, resource }) {
   return (
   <TopToolbar>
-    <CreateButton basePath={basePath} record={data} />
-    <ExportButton basePath={basePath} record={data} maxResults={100000} />
-    <EportExtendedButton
-      data={data}
-    />
+    <ExportButtons total={total} data={data} filename='tags'/>
+    <EportExtendedButtons data={data}/>
   </TopToolbar>);
 }
 

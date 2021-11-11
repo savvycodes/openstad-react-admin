@@ -7,23 +7,19 @@ const setObjectValue = (object, path, value) => {
   return over(lensPathFunction, () => value, object || {});
 };
 
-export async function processCsvFile(
-  file,
-  parseConfig= {}
-) {
+export async function processCsvFile( file, parseConfig = {} ) {
+
   if (!file) {
     return;
   }
 
   const csvData = await getCsvData(file, parseConfig);
-
   return processCsvData(csvData);
+
 }
 
-export async function getCsvData(
-  file,
-  inputConfig = {}
-) {
+export async function getCsvData( file, inputConfig = {} ) {
+
   let config = {};
 
   const isObject = !!inputConfig && typeof inputConfig === "object";
@@ -32,7 +28,7 @@ export async function getCsvData(
     config = inputConfig;
   }
 
-  return new Promise((resolve, reject) =>
+  return new Promise((resolve, reject) => 
     convertFromCSV(file, {
       // Defaults
       delimiter: ",",
@@ -57,6 +53,9 @@ export function processCsvData(data) {
         value = setObjectValue(value, key, row[index]);
       });
 
+      console.log('+++++==');
+      console.log(typeof value.extraData, value.extraData);
+
       return value;
     });
   } else {
@@ -67,7 +66,7 @@ export function processCsvData(data) {
         for (let key in obj) value = setObjectValue(value, key, obj[key]);
         dataRows.push(value);
     });
-
+    
     return dataRows;
   }
 }

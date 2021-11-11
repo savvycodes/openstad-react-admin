@@ -5,38 +5,22 @@ import {CustomList as List} from '../components/CustomList/index.jsx';
 import PersonIcon from '@material-ui/icons/Person';
 //import EditableDatagrid from './react-data-grid/index.jsx';
 import jsonExport from 'jsonexport/dist';
-import {ExportButton} from 'ra-ui-materialui';
+import { exporter, ExportButtons } from '../utils/export-buttons.jsx';
 
+import XLSX from 'xlsx';
 
 export const NewsletterSignupIcon = PersonIcon;
 
-const EditTopToolbar = function({ basePath, data, resource }) {
+const ListTopToolbar = props => {
+  const { data, basePath, resource, total } = props;
   return (
     <TopToolbar>
-      <ExportButton exporter={exporter} basePath={basePath} record={data} maxResults={100000} />
+      <ExportButtons total={total} data={data} filename='newsletersignups' fields={['id', 'email', 'firstName', 'lastName', 'createdAt']}/>
     </TopToolbar>);
 }
 
-const exporter = posts => {
-
-  let headerKeys = ['id', 'email', 'firstName', 'lastName', 'createdAt'];
-
-  const postsForExport = posts.map(post => {
-    const formattedData = {};
-
-    headerKeys.forEach((headerKey) => {
-      formattedData[headerKey] = post[headerKey] ? post[headerKey] : '';
-    });
-
-    return formattedData;
-  });
-
-  jsonExport(postsForExport, {headers: headerKeys, rowDelimiter: ';'}, (err, csv) => {
-    downloadCSV(csv, 'submissions');
-  });
-};
 export const NewsletterSignupList = (props) => (
-    <List {...props} sort={{field: 'id', order: 'DESC'}} actions={<EditTopToolbar />}>
+    <List {...props} sort={{field: 'id', order: 'DESC'}} actions={<ListTopToolbar />}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="email" />

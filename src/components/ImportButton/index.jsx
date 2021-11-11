@@ -3,6 +3,7 @@ import {Button as RAButton, useRefresh} from 'react-admin';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useDataProvider } from 'react-admin';
 import { processCsvFile } from './csvExtractor';
+import { processXlsFile } from './xlsExtractor';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +11,7 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import { ideaSchema } from '../../resources/idea/schema';
-import validateCsv from './validateCsv';
+import validateFileData from './validateFileData';
 import ActionButtonsLine from './ActionButtonsLine.jsx';
 import FileUpload from './FileUpload.jsx';
 import ImportNotifications from './ImportNotificationsLine.jsx';
@@ -33,7 +34,7 @@ export const ImportButton = (props) => {
   const [delimiter, setDelimiter] = React.useState('');
   const [useId, setUseId] = React.useState(true);
   const [dialogStatus, setDialogStatus] = React.useState('base');
-  const [csvValidationNotifications, setCsvValidationNotifications] = React.useState([]);
+  const [fileValidationNotifications, setFileValidationNotifications] = React.useState([]);
   const dataProvider = useDataProvider();
   const refresh = useRefresh()
 
@@ -46,7 +47,7 @@ export const ImportButton = (props) => {
     setImporting(false);
     setFileName('');
     setValues([]);
-    setCsvValidationNotifications([]);
+    setFileValidationNotifications([]);
   };
 
   const handleClose = () => {
@@ -78,7 +79,7 @@ export const ImportButton = (props) => {
         });
       })),
     ).then(() => {
-      setCsvValidationNotifications(apiValidationErrors);
+      setFileValidationNotifications(apiValidationErrors);
       setImporting(false);
       setDialogStatus('importFinished');
       refresh();
@@ -152,12 +153,22 @@ export const ImportButton = (props) => {
 
     setFileName(file.name);
 
-    const values = await processCsvFile(file, { delimiter });
+    let match = file.name.match(/\.(csv|tsv|xlsx?)$/);
+    if (!match) throw new Error('File type not recognized')
+    let ext = match[1];
 
+    let values;
+    if (ext =='csv' || ext == 'tsv') {
+      values = await processCsvFile(file, { delimiter });
+    } else {
+      values = await processXlsFile(file, {});
+    }
+    
     setValues(values);
-    setCsvValidationNotifications(await validateCsv(values, ideaSchema));
-
+    setFileValidationNotifications(await validateFileData(values, ideaSchema));
+    
     target.value = '';
+
   };
 
   const totalRows = values ? values.length : 0;
@@ -188,29 +199,29 @@ export const ImportButton = (props) => {
               <>
                 <h3>Import complete!</h3>
                 <p>
-                  Imported <b>{totalRows - countFailedImportRows(csvValidationNotifications)}</b> from a total
+                  Imported <b>{totalRows - countFailedImportRows(fileValidationNotifications)}</b> from a total
                   of <b>{totalRows}</b> rows
                 </p>
-                <h5 style={{ color: 'red' }}>{countFailedImportRows(csvValidationNotifications)} failed rows:</h5>
-                <ImportNotifications {...{ csvValidationNotifications, dialogStatus }} />
+                <h5 style={{ color: 'red' }}>{countFailedImportRows(fileValidationNotifications)} failed rows:</h5>
+                <ImportNotifications {...{ fileValidationNotifications, dialogStatus }} />
               </>
               :
               <>
-                <p>Upload a csv or tsv file for bulk editing or creation. </p>
+                <p>Upload a csv, tsv or xls(x) file for bulk editing or creation. </p>
                 <ul>
                   <li>For creating: use a file without 'id' column.</li>
                   <li>For editing: use a file with 'id' column. (for instance export here, edit in excel and upload again)</li>
                 </ul>
                 <p style={{ margin: '0px' }}>{'Data file requirements'}</p>
                 <ol>
-                  <li>{'Must be a \'.csv\' or \'.tsv\' file'}</li>
+                  <li>{'Must be a \'.csv\', \'.tsv\' or \'.xls(x)\' file'}</li>
                   <li>{'Only columns corresponding to the data model will be imported, columns with user or aggregated data etc. will be ignored.'}</li>
                   <li>{'For setting a specific user to a row use a header named userId in your csv.'}</li>
                 </ol>
                 <ImportDelimiter {...{ delimiter, handleImportDelimiterChange }} />
                 <ImportUseIdCheckboxLine {...{ checked: useId, handleCheckBoxChange }}/>
                 <FileUpload  {...{ onFileAdded, clear, fileName }} />
-                <ImportNotifications {...{ csvValidationNotifications }} />
+                <ImportNotifications {...{ fileValidationNotifications }} />
                 <ImportRowCount {...{ values }} />
               </>
             }
@@ -226,10 +237,11 @@ export const ImportButton = (props) => {
             importing,
             dialogStatus,
             useId,
-            idPresent: csvValidationNotifications.some(notification => notification['messageType'] === 'idColumnPresent'),
+            idPresent: fileValidationNotifications.some(notification => notification['messageType'] === 'idColumnPresent'),
           }} />
         </DialogActions>
       </Dialog>
     </>
   );
+
 };

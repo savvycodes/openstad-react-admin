@@ -7,6 +7,7 @@ import Inbox from '@material-ui/icons/Inbox';
 import {ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
 import {CustomList as List} from '../../components/CustomList/index.jsx';
+import { exporter, ExportButtons } from '../../utils/export-buttons.jsx';
 
 const SubmissionPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
@@ -33,39 +34,30 @@ const useStyles = makeStyles(
     {name: 'RaEmpty'}
 );
 
-const exporter = posts => {
+const submissionsExporter = ( rows, type ) => {
+  
+  let rowsForExport = rows.map(row => {
+    const {backlinks, author, ...rowForExport} = row; // omit backlinks and author
+    if (rowForExport.can) {
+      delete rowForExport.can;
+    }
     
-    let headerKeys = ['id', 'formId', 'status', 'createdAt'];
+    const submittedData = rowForExport.submittedData;
     
-    const postsForExport = posts.map(post => {
-        const {backlinks, author, ...postForExport} = post; // omit backlinks and author
-        if (postForExport.can) {
-            delete postForExport.can;
-        }
-        
-        postForExport.location = postForExport.location ? JSON.stringify(postForExport.location) : ''; // add a field
-        
-        const submittedData = postForExport.submittedData;
-        
-        if (submittedData) {
-            // Set every key in the submittedData as its' own column in the CSV data
-            Object.keys(submittedData).forEach(key => {
-                if (!headerKeys.includes(key)) {
-                    headerKeys.push(key);
-                }
-                
-                postForExport[key] = submittedData[key];
-            })
-        }
-        
-        delete postForExport.submittedData;
-        
-        return postForExport;
-    });
+    if (submittedData) {
+      // Set every key in the submittedData as its' own column in the CSV data
+      Object.keys(submittedData).forEach(key => {
+        rowForExport[key] = submittedData[key];
+      })
+    }
     
-    jsonExport(postsForExport, {headers: headerKeys, rowDelimiter: ';'}, (err, csv) => {
-        downloadCSV(csv, 'submissions');
-    });
+    delete rowForExport.submittedData;
+    
+    return rowForExport;
+  });
+
+  exporter({ rowsForExport, fields: ['id', 'formId', 'status', 'createdAt'], filename: 'submissions', type })    
+
 };
 
 const Empty = (props) => {
@@ -98,6 +90,7 @@ export const ListActions = props => {
               filterValues,
               basePath,
               showFilter,
+      data,
               total,
           } = props;
     
@@ -110,14 +103,7 @@ export const ListActions = props => {
                 filterValues,
                 context: 'button',
             })}
-            <ExportButton
-                exporter={exporter}
-                disabled={total === 0}
-                maxResults={100000}
-                resource={resource}
-                sort={currentSort}
-                filter={{...filterValues, ...permanentFilter}}
-            />
+          <ExportButtons total={total} data={data} exporter={submissionsExporter}/>
         </TopToolbar>
     );
 };

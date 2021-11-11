@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.34.0
+* Add excel import/export 
 
 ## 0.33.0
 * Add submission resource

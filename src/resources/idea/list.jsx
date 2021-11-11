@@ -122,6 +122,7 @@ const Empty = (props) => {
 export const ListActions = props => {
   const {
     className,
+    currentSort,
     basePath,
     filters,
     permanentFilter,

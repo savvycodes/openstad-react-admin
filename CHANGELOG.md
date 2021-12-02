@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.36.0
+* Fix default names of csv export
+
+## 0.35.0
+* Exists only as vesion bump
+
 ## 0.34.0
 * Add excel import/export 
 

@@ -98,7 +98,7 @@ export const ImportButton = (props) => {
     const arrayKeys = ['images'];
 
     const cleanUp = function (value, key, parentValues) {
-      if (typeof value === 'object' && !exceptionsObjectKeys.includes(key)) {
+      if (value && typeof value === 'object' && !exceptionsObjectKeys.includes(key)) {
 
         Object.keys(value).forEach((key) => {
           // in case value is empty ont send it, many values will fail on empty string

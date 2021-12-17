@@ -22,7 +22,7 @@ import ApproveField from '../../components/ApproveField/index.jsx';
 import { useDataProvider } from 'react-admin';
 import { useDispatch } from 'react-redux';
 import { CRUD_UPDATE_SUCCESS, FETCH_END, UPDATE } from 'react-admin';
-import { exporter, ExportButtons } from '../../utils/export-buttons.jsx';
+import { exporter, ExportButtons } from '../../utils/export.jsx';
 
 export const VoteIcon = ListAltIcon;
 

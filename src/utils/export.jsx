@@ -2,22 +2,18 @@ import React from 'react';
 
 import {ExportButton} from 'ra-ui-materialui';
 import { downloadCSV } from 'react-admin';
-import { unparse as convertToCSV } from 'papaparse/papaparse.min';
+import jsonExport from 'jsonexport/dist';
 import XLSX from 'xlsx';
 
 export function exporter({ rows, fields, filename = 'data', type = 'csv' }) {
 
-  console.log(rows, fields, filename, type);
-  
-  fields = fields || Object.keys( rows[0] );
+  rows = [...rows];
+
+  fields = [...fields] || Object.keys( rows[0] );
   let index = fields.indexOf('site'); // 'site' may be included in the object, but should generally not be included in the export
-  if (index > -1) {
-    fields.splice(index, 1);
-  }
+  if (index > -1) fields.splice(index, 1);
   index = fields.indexOf('can'); // 'can' may be included in the object, but should never be included in the export
-  if (index > -1) {
-    fields.splice(index, 1);
-  }
+  if (index > -1) fields.splice(index, 1);
 
   if (rows.length > 0) {
 
@@ -27,9 +23,15 @@ export function exporter({ rows, fields, filename = 'data', type = 'csv' }) {
         rowForExport[field] = row[field] ? row[field] : '';
       });
       if (fields.includes('location') && rowForExport.location) rowForExport.location = JSON.stringify(rowForExport.location);
-      if (fields.includes('extraData') && rowForExport.extraData) rowForExport.extraData = JSON.stringify(rowForExport.extraData);
+      // if (fields.includes('extraData') && rowForExport.extraData) rowForExport.extraData = JSON.stringify(rowForExport.extraData);
       return rowForExport;
     });
+    let parsed = parseRowsForExport(rowsForExport);
+    rowsForExport = parsed.rowsForExport;
+    parsed.deletedKeys.forEach(key => {
+      let index = fields.indexOf(key);
+      if (index > -1) fields.splice(index, 1);
+    });;
 
     if (type == 'xlsx') {
 
@@ -46,17 +48,38 @@ export function exporter({ rows, fields, filename = 'data', type = 'csv' }) {
       
     } else {
 
-      const csv = convertToCSV({
-        data: rowsForExport,
-        fields,
+      jsonExport(rowsForExport, {headers: fields}, (err, csv) => {
+        downloadCSV(csv, 'filename');
       });
-
-      downloadCSV(csv, filename);
 
     }
   }
 
 };
+
+
+export function parseRowsForExport(rows) {
+  let deletedKeys = {};
+  rows = rows.map(row => {
+    Object.keys(row).forEach(key => {
+      let field = row[key]
+      if (field && typeof field == 'object') {
+        Object.keys(field).forEach(fieldkey => {
+          let value = field[fieldkey];
+          if (typeof value == 'object') {
+            value = JSON.stringify(value);
+          }
+          row[`${key}.${fieldkey}`] = value;
+        });
+        delete row[key];
+        deletedKeys[key] = true;
+      }
+    });
+    return row;
+  });
+  return { rowsForExport: rows, deletedKeys: Object.keys(deletedKeys) }
+}
+
 
 export function ExportButtons(props) {
 

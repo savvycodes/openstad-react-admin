@@ -24,6 +24,7 @@ import {
 import {CreateButton, ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
 import {CustomList as List} from '../../components/CustomList/index.jsx';
+import { parseRowsForExport } from '../../utils/export.jsx';
 
 import XLSX from 'xlsx';
 
@@ -54,7 +55,10 @@ const useStyles = makeStyles(
 
 const exporter = ( rows, type = 'csv' ) => {
 
-  const rowsForExport = rows.map(row => {
+  rows = [...rows];
+
+  let rowsForExport = rows.map(row => {
+
     const {backlinks, author, ...rowForExport} = row; // omit backlinks and author
     if (rowForExport.can) {
       delete rowForExport.can;
@@ -65,14 +69,16 @@ const exporter = ( rows, type = 'csv' ) => {
     }
 
     rowForExport.location = rowForExport.location ? JSON.stringify(rowForExport.location) : ''; // add a field
-    rowForExport.extraData = JSON.stringify(rowForExport.extraData || {})
+    // rowForExport.extraData = JSON.stringify(rowForExport.extraData || {})
 
     return rowForExport;
 
   });
-
+  let parsed = parseRowsForExport(rowsForExport);
+  rowsForExport = parsed.rowsForExport;
+  
   if (type == 'xlsx') {
-
+    
     let filename = "ideas.xlsx";
     let ws_name = "plannen";
     

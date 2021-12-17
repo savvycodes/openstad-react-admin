@@ -15,7 +15,7 @@ import {
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {CustomList as List} from '../components/CustomList/index.jsx';
-import { exporter, ExportButtons } from '../utils/export-buttons.jsx';
+import { exporter, ExportButtons } from '../utils/export.jsx';
 
 export const TagIcon = ListAltIcon;
 

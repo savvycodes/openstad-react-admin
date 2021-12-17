@@ -16,7 +16,7 @@ import {
 } from 'react-admin';
 import PersonIcon from '@material-ui/icons/Person';
 import {CustomList as List} from '../components/CustomList/index.jsx';
-import { exporter, ExportButtons } from '../utils/export-buttons.jsx';
+import { exporter, ExportButtons } from '../utils/export.jsx';
 
 const ListTopToolbar = props => {
   const { data, basePath, resource, total } = props;

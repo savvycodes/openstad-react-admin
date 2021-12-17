@@ -2,6 +2,7 @@
 
 ## 0.36.0
 * Fix default names of csv export
+* Fix imort and export of exttended fields
 
 ## 0.35.0
 * Exists only as vesion bump

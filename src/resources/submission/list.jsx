@@ -7,7 +7,7 @@ import Inbox from '@material-ui/icons/Inbox';
 import {ExportButton} from 'ra-ui-materialui';
 import jsonExport from 'jsonexport/dist';
 import {CustomList as List} from '../../components/CustomList/index.jsx';
-import { exporter, ExportButtons } from '../../utils/export-buttons.jsx';
+import { exporter, ExportButtons } from '../../utils/export.jsx';
 
 const SubmissionPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 

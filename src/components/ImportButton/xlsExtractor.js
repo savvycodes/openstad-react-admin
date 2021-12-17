@@ -13,7 +13,8 @@ export async function processXlsFile( file, parseConfig = {} ) {
   }
 
   const xlsData = await getXlsData(file, parseConfig);
-  return processXlsData(xlsData);
+  let result = processXlsData(xlsData);
+  return result;
 
 }
 
@@ -46,11 +47,41 @@ export async function getXlsData( file, inputConfig = {} ) {
 export function processXlsData(data) {
 
   data.forEach(row => {
-    try {
-      row.extraData = JSON.parse(row.extraData);
-    } catch (err) {}
+    row = processXlsRow(row)
   });
   
   return data;
+
+}
+
+export function processXlsRow(row) {
+
+  Object.keys(row).forEach(key => {
+    let match = key.match(/^(\w+)\.(\w+)$/);
+    if (match) {
+
+      let value = row[key];
+      
+      if (!row[match[1]]) row[match[1]] = {};
+      row[match[1]][match[2]] = processXlsValue(value);
+
+      delete row[key];
+      
+    } else {
+      row[key] = processXlsValue(row[key]);
+    }
+  });
+
+  return row;
+
+}
+
+export function processXlsValue(value) {
+
+  try {
+    value = JSON.parse(value);
+  } catch (err) {}
+
+  return value;
 
 }

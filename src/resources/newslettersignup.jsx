@@ -15,7 +15,7 @@ const ListTopToolbar = props => {
   const { data, basePath, resource, total } = props;
   return (
     <TopToolbar>
-      <ExportButtons total={total} data={data} filename='newsletersignups' fields={['id', 'email', 'firstName', 'lastName', 'createdAt']}/>
+      <ExportButtons total={total} data={data} filename='newsletersignups' fields={['id', 'email', 'firstName', 'lastName', 'extraData', 'createdAt']}/>
     </TopToolbar>);
 }
 

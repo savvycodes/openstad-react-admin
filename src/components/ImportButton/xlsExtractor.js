@@ -5,10 +5,6 @@
 import XLSX from 'xlsx';
 
 
-const setObjectValue = (object, path, value) => {
-  const lensPathFunction = lensPath(path.split("."));
-  return over(lensPathFunction, () => value, object || {});
-};
 
 export async function processXlsFile( file, parseConfig = {} ) {
 

@@ -53,8 +53,9 @@ export function processCsvData(data) {
         value = setObjectValue(value, key, row[index]);
       });
 
-      console.log('+++++==');
-      console.log(typeof value.extraData, value.extraData);
+      try {
+        if (typeof value.extraData == "string") value.extraData = JSON.parse(value.extraData)
+      } catch (err) {}
 
       return value;
     });

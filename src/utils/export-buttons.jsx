@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {ExportButton} from 'ra-ui-materialui';
 import { downloadCSV } from 'react-admin';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min';
@@ -66,14 +68,14 @@ export function ExportButtons(props) {
   return (
     <>
       <ExportButton
-        exporter={rows => exportFunction({ rows, fields, type: 'csv', filename: 'tags' })}
+        exporter={rows => exportFunction({ rows, fields, type: 'csv', filename })}
         disabled={total === 0}
         maxResults={100000}
         record={data}
         label="Export csv"
       />
       <ExportButton
-        exporter={rows => exportFunction({ rows, fields, type: 'xlsx', filename: 'tags' })}
+        exporter={rows => exportFunction({ rows, fields, type: 'xlsx', filename })}
         disabled={total === 0}
         maxResults={100000}
         record={data}

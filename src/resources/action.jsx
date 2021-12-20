@@ -53,7 +53,10 @@ const ActionFilters = (props) => (
 );
 
 export const ActionList = (props) => (
-    <List {...props} filters={<ActionFilters />} sort={{field: 'id', order: 'DESC'}} actions={<TopToolbar/>}>
+    <List {...props}
+          filters={<ActionFilters />}
+          sort={{field: 'id', order: 'DESC'}}
+    >
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />

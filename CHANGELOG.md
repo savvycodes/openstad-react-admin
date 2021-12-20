@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.36.0
+## 0.36.1
 * Fix default names of csv export
 * Fix imort and export of exttended fields
 

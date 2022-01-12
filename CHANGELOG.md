@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.37.0
-
+* Add configuration for like buttons
 
 ## 0.36.0
 * Fix default names of csv export

@@ -6,7 +6,8 @@ import { Edit, SelectInput, TextInput, TabbedForm, TextField,
   Toolbar,
   SaveButton,
   ArrayInput,
-  SimpleFormIterator
+  SimpleFormIterator,
+  FormDataConsumer
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import JsonInput from '../../form-fields/JsonInput.jsx';
@@ -112,7 +113,8 @@ const ProjectHasEndedInput = ({source, record}) => {
 }
 
 export const SiteEdit = (props) => {
-  
+
+
   return (<Edit mutationMode="pessimistic" title="Edit site" {...props}>
       <TabbedForm redirect="edit" toolbar={<SaveToolbar />}>
         <FormTab label="Info" >
@@ -185,6 +187,32 @@ export const SiteEdit = (props) => {
               },
             ]}
           />
+
+          <FormDataConsumer subscription={{ values: true }}>
+            {({ formData, ...rest }) => {
+              return formData.config.votes.voteType == 'likes' &&
+                <ArrayInput label="Like buttons" source="config.votes.voteValues">
+                  <SimpleFormIterator>
+                    <TextInput label="Text on the button" source="label" />
+                    <SelectInput
+                      source="value"
+                      label="Value of the button"
+                      variant="outlined"
+                      choices={[
+                        {
+                          id: 'yes',
+                          name: 'yes'
+                        },
+                        {
+                          id: 'no',
+                          name: 'no'
+                        },
+                      ]}
+                    />
+                  </SimpleFormIterator>
+                </ArrayInput>
+            }}
+          </FormDataConsumer>
 
           <NumberInput source="config.votes.maxIdeas" label='What is max amount of ideas users can vote for?' fullWidth variant="outlined" />
           <NumberInput source="config.votes.minIdeas" label='What is min amount of ideas users can vote for?' fullWidth variant="outlined" />

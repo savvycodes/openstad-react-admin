@@ -1,8 +1,13 @@
 # Changelog
 
-## 0.36.1
+## 0.37.0
+* Add configuration for like buttons
+* Fix sourcemaps
+* Remove 'finished' from create Action form
+
+## 0.36.0
 * Fix default names of csv export
-* Fix imort and export of exttended fields
+* Fix imort and export of extended fields
 
 ## 0.35.0
 * Exists only as vesion bump

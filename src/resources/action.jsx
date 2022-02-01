@@ -4,6 +4,7 @@ import {
     BooleanField,
     Datagrid,
     Filter,
+    CreateButton, 
     Edit,
     Create,
     TopToolbar,
@@ -52,11 +53,14 @@ const ActionFilters = (props) => (
     </Filter>
 );
 
+const ListActions = (props) => (
+    <TopToolbar>
+      <CreateButton/>
+    </TopToolbar>
+);
+
 export const ActionList = (props) => (
-    <List {...props}
-          filters={<ActionFilters />}
-          sort={{field: 'id', order: 'DESC'}}
-    >
+    <List {...props} filters={<ActionFilters />} sort={{field: 'id', order: 'DESC'}} actions={<ListActions/>}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
@@ -125,11 +129,11 @@ const FormFields = (props) => {
 
             {values.action === 'updateModel' && <UpdateModelActionFields />}
 
-            {values.type === 'once' && <div>
+            {/* values.type === 'once' && <div>
                 <BooleanInput source="finished"  />
                 <em>If finished is true, the action has run, turn it back off to run again.</em>
             </div>
-            }
+            */}
 
 
         </>

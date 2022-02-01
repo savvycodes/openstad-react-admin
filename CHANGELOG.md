@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.37.1
+* Move build from travis to github actions
+
 ## 0.37.0
 * Add configuration for like buttons
 * Fix sourcemaps

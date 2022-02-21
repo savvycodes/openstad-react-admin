@@ -5,7 +5,7 @@ import {CustomList as List} from '../components/CustomList/index.jsx';
 import PersonIcon from '@material-ui/icons/Person';
 //import EditableDatagrid from './react-data-grid/index.jsx';
 import jsonExport from 'jsonexport/dist';
-import { exporter, ExportButtons } from '../utils/export-buttons.jsx';
+import { exporter, ExportButtons } from '../utils/export.jsx';
 
 import XLSX from 'xlsx';
 

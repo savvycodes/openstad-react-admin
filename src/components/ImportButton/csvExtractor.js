@@ -3,6 +3,7 @@ import lensPath from "ramda/src/lensPath";
 import over from "ramda/src/over";
 
 const setObjectValue = (object, path, value) => {
+  value = processCsvValue(value);
   const lensPathFunction = lensPath(path.split("."));
   return over(lensPathFunction, () => value, object || {});
 };
@@ -14,7 +15,8 @@ export async function processCsvFile( file, parseConfig = {} ) {
   }
 
   const csvData = await getCsvData(file, parseConfig);
-  return processCsvData(csvData);
+  let result = processCsvData(csvData);
+  return result;
 
 }
 
@@ -53,13 +55,11 @@ export function processCsvData(data) {
         value = setObjectValue(value, key, row[index]);
       });
 
-      try {
-        if (typeof value.extraData == "string") value.extraData = JSON.parse(value.extraData)
-      } catch (err) {}
-
       return value;
     });
+
   } else {
+
     const dataRows = [];
 
     data.forEach( (obj) => {
@@ -70,4 +70,14 @@ export function processCsvData(data) {
     
     return dataRows;
   }
+}
+
+export function processCsvValue(value) {
+
+  try {
+    value = JSON.parse(value);
+  } catch (err) {}
+
+  return value;
+
 }

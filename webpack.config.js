@@ -4,16 +4,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 
-  // devtool: 'eval-source-map',
-	devtool: 'none',
-  //mode: 'development',
-	mode: 'production',
+  devtool: 'source-map',
+  mode: 'production',
 	entry: ['babel-polyfill', './src/index.jsx'],
 
 	output: {
 	  path: __dirname + '/dist',
 		filename: 'js/index.js',
-	//	filename: 'js/openstad-component.js',
     library: 'OpenstadReactAdmin',
     libraryTarget: 'window',
 	},
@@ -32,8 +29,8 @@ module.exports = {
   ],
 
   optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
+	  minimize: true,
+	  minimizer: [new TerserPlugin()],
   },
 
 	module: {

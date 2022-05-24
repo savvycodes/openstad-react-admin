@@ -23,7 +23,7 @@ export default (props) => {
   return (
     <div style={{ margin: '10px 0' }}>
       <FormControl className={classes.formControl}>
-      <span htmlFor="demo-simple-select-label">Delimiter: </span>
+        <span htmlFor="demo-simple-select-label">Delimiter (csv/tsv only): </span>
       <br />
       <Select
         labelId="demo-simple-select-label"

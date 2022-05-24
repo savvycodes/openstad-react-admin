@@ -1,5 +1,6 @@
-export default async (csvRows, schema) => {
-  if (!csvRows.length > 0) {
+export default async (dataRows, schema) => {
+
+  if (!dataRows.length > 0) {
     return [{
       messageType: 'zeroRows',
       color: 'blue',
@@ -12,7 +13,7 @@ export default async (csvRows, schema) => {
   /**
    * Check for id
    */
-  if(csvRows[0].hasOwnProperty('id')) {
+  if(dataRows[0].hasOwnProperty('id')) {
     validationMessages.push({
       messageType: 'idColumnPresent',
       color: 'blue',
@@ -32,7 +33,7 @@ export default async (csvRows, schema) => {
    * Validate schema
    */
   Object.keys(schema).forEach((key) => {
-    if (!csvRows[0].hasOwnProperty(key))
+    if (!dataRows[0].hasOwnProperty(key))
       schemaValidationMessages.push({
         messageType: 'schemaError',
         color: 'red',
@@ -47,9 +48,9 @@ export default async (csvRows, schema) => {
     schemaValidationMessages.push({
       messageType: 'faultyImport',
       color: 'red',
-      message: 'It seems the import provided scrambled results. Are you sure you used the right delimiter for your csv?',
+      message: 'It seems the import provided scrambled results.',
     });
   }
-
+  
   return schemaValidationMessages.concat(validationMessages);
 };

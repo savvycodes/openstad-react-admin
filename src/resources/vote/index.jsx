@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {cloneElement} from 'react';
 import {
   List,
   NumberInput,
@@ -12,17 +12,38 @@ import {
   TextField,
   EditButton,
   TextInput, Pagination,
+  TopToolbar,
+  useListContext,
+  CreateButton,
+  sanitizeListRestProps
 } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ApproveField from '../../components/ApproveField/index.jsx';
 import { useDataProvider } from 'react-admin';
 import { useDispatch } from 'react-redux';
 import { CRUD_UPDATE_SUCCESS, FETCH_END, UPDATE } from 'react-admin';
+import { exporter, ExportButtons } from '../../utils/export.jsx';
 
 export const VoteIcon = ListAltIcon;
 
 const VotePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
+const ListActions = (props) => {
+  const {
+    className,
+    data,
+    filters,
+    ...rest
+  } = props;
+  const {
+    total,
+  } = useListContext();
+  return (
+    <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
+      <ExportButtons total={total} data={data} filename='votes'/>
+    </TopToolbar>
+  );
+};
 
 export const VoteList = (props) => {
   const dataProvider = useDataProvider();
@@ -48,7 +69,7 @@ export const VoteList = (props) => {
   };
 
   return (
-    <List {...props} title="Vote" pagination={<VotePagination />}>
+    <List {...props} title="Vote" pagination={<VotePagination />} actions={<ListActions />}>
       <Datagrid>
         <TextField source="id"/>
         <TextField source="opinion"/>

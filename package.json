@@ -1,7 +1,7 @@
 {
   "name": "@savvycodes/openstad-react-admin",
   "homepage": "https://github.com/Amsterdam/openstad-react-admin",
-  "version": "0.33.0-beta.1",
+  "version": "0.40.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -13,7 +13,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.21.1",
+    "axios": "^0.23.0",
     "babel-preset-react": "^6.24.1",
     "filepond": "^4.13.4",
     "filepond-plugin-file-poster": "^2.2.0",
@@ -34,8 +34,9 @@
     "react-redux-router": "0.0.14",
     "react-router": "^5.2.0",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "3.4.1",
-    "recharts": "^1.8.5"
+    "react-scripts": "^4.0.3",
+    "recharts": "^1.8.5",
+    "xlsx": "^0.17.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -86,7 +87,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not ie <= 10"
     ],
     "development": [
       "last 1 chrome version",

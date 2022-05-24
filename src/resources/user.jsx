@@ -4,6 +4,8 @@ import {
     Datagrid,
     Edit,
     Create,
+    CreateButton,
+    TopToolbar,
     SimpleForm,
     DateField,
     TextField,
@@ -14,6 +16,16 @@ import {
 } from 'react-admin';
 import PersonIcon from '@material-ui/icons/Person';
 import {CustomList as List} from '../components/CustomList/index.jsx';
+import { exporter, ExportButtons } from '../utils/export.jsx';
+
+const ListTopToolbar = props => {
+  const { data, basePath, resource, total } = props;
+  return (
+    <TopToolbar>
+      <CreateButton basePath={basePath}/>
+      <ExportButtons total={total} data={data} filename='users'/>
+    </TopToolbar>);
+}
 
 export const UserIcon = PersonIcon;
 const UserFilter = (props) => (
@@ -23,7 +35,7 @@ const UserFilter = (props) => (
 );
 
 export const UserList = (props) => (
-    <List {...props} filters={<UserFilter />} sort={{field: 'id', order: 'DESC'}}>
+  <List {...props} filters={<UserFilter />} sort={{field: 'id', order: 'DESC'}} actions={<ListTopToolbar/>}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="role" />

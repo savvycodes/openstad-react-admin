@@ -1,5 +1,34 @@
 # Changelog
 
+## v0.40.0
+Update version number
+
+## 0.37.1
+* Move build from travis to github actions
+
+## 0.37.0
+* Add configuration for like buttons
+* Fix sourcemaps
+* Remove 'finished' from create Action form
+
+## 0.36.0
+* Fix default names of csv export
+* Fix imort and export of extended fields
+
+## 0.35.0
+* Exists only as vesion bump
+
+## 0.34.0
+* Add excel import/export 
+
+## 0.33.0
+* Add submission resource
+* Add export ideas-with-arguments
+
+## 0.32.0
+* Add automaticallyUpdateStatus to site config
+* Add 'Project has ended' to site configuration
+
 ## 0.31.0
 * Fix choices guide import/export
 

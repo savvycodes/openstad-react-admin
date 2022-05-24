@@ -1,7 +1,7 @@
 import React from 'react';
 import { Edit, Create, SimpleForm, TextField, EditButton, TextInput, TopToolbar, required } from 'react-admin';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import { ExportButton } from './export.jsx'
+import { ExportButtons } from './export.jsx'
 import { ResultButton } from './results.jsx'
 import {CustomList as List} from '../../components/CustomList/index.jsx';
 
@@ -10,8 +10,9 @@ export const ChoicesGuideIcon = ListAltIcon;
 const EditTopToolbar = function({ basePath, data, resource }) {
   return (
   <TopToolbar>
-    <ExportButton
+    <ExportButtons
       data={data}
+      maxResults={100000}
     />
     <ResultButton
       data={data}

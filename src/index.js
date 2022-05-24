@@ -73,6 +73,9 @@ ReactDOM.render(
         grants: {
           active: true
         },
+        submission: {
+          active: true
+        },
       }}
     />
   </React.StrictMode>,

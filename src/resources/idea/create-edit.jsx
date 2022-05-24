@@ -118,14 +118,14 @@ const mapStateToProps = (state) => {
   const siteResource = resources.find(resource => resource.name === 'site');
 
   return {
-    siteId: siteResource.options.siteId
+    siteId: siteResource && siteResource.options ? siteResource.options.siteId : false
   }
 };
 
 
 export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
 
-  const { data, loading, error } = useQuery({
+  /*const { data, loading, error } = useQuery({
       type: 'getOne',
       resource: 'site',
       payload: { id: props.siteId }
@@ -134,7 +134,7 @@ export const IdeaEdit = withRouter(connect(mapStateToProps)((props) => {
   if (loading) return <Loading />;
   if (error) return <Error />;
   if (!data) return null;
-
+*/
   // @TODO, in site.config.ideas is validation rules for
   // form pass to form and add it, maybe move entire logic to form component?
 

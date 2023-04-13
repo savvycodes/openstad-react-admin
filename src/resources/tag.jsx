@@ -30,6 +30,7 @@ export const TagList = (props) => (
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
+            <TextField source="type" label="Type" />
             <EditButton basePath="/tag" />
         </Datagrid>
     </List>
@@ -43,6 +44,7 @@ export const TagEdit = (props) => (
     <Edit title={<TagTitle />} {...props}>
         <SimpleForm>
           <TextInput source="name" label="Tag name" variant="outlined" />
+          <TextInput source="type" label="Type" variant="outlined" />
         </SimpleForm>
     </Edit>
 );
